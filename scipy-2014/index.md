@@ -102,3 +102,29 @@ plt.imshow(lena)
 
 As we will see, this opens up many lines of analysis for free.
 
+## Exercise: draw an H
+
+Define a function that takes as input an RGB image and a pair of coordinates
+(row, column), and returns the image (optionally a copy) with green letter H
+overlaid at those coordinates. The coordinates should point to the top-left
+corner of the H.
+
+The arms and strut of the H should have a width of 2 pixels, and the H itself
+should have a height of 12 pixels and width of 10 pixels.
+
+```python
+def draw_h(image, coords, in_place=True):
+    pass # code goes here
+```
+
+Test your function like so:
+
+```
+lena_h = draw_h(lena, (50, -60), in_place=False)
+plt.imshow(lena)
+```
+
+## Bonus points: RGB intensity plot
+
+Plot the intensity of each channel of the image along some row.
+
