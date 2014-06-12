@@ -96,7 +96,8 @@ These are _just numpy arrays_. making a red square is easy using just array
 slicing and manipulation:
 
 ```
-lena[100:200, 100:200, :] = [255, 0, 0]
+lena[100:200, 100:200, :] = [255, 0, 0] # [red, green, blue]
+plt.imshow(lena)
 ```
 
 As we will see, this opens up many lines of analysis for free.
