@@ -128,3 +128,28 @@ plt.imshow(lena)
 
 Plot the intensity of each channel of the image along some row.
 
+# Image analysis fundamentals 0: colors, exposure, and contrast (Tony)
+
+# Image analysis fundamentals 1: filters and convolution (Juan)
+
+Explain filters (slides or drawing on board): simple difference filter. Sobel
+filter. Gradient magnitude. Since filters produce floating point values, take
+opportunity to introduce data types used by scikit-image.
+
+# Image analysis fundamentals 2: morphological operations (Juan)
+
+- Demonstrate erosion, dilation, opening, closing on tiny example images
+
+# Image analysis fundamentals 3: segmentation (Tony)
+
+# Image analysis fundamentals 4: registration (Tony)
+
+# Advanced examples 0: measuring fluorescence intensity on chromosomes (Juan)
+
+# Advanced examples 1: measuring line profile intensity (Juan)
+
+# Advanced examples 2: interactive analysis with the viewer (Tony)
+
+- Make sure to mention the new overlay/data output function in 0.10!
+
+# Advanced examples 3: BYO!
