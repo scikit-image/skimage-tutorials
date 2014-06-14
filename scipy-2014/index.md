@@ -130,19 +130,21 @@ Plot the intensity of each channel of the image along some row.
 
 # Image analysis fundamentals 0: colors, exposure, and contrast (Tony)
 
-# Image analysis fundamentals 1: filters and convolution (Juan)
+# Image analysis fundamentals 1: filters and convolution (Tony)
 
 Explain filters (slides or drawing on board): simple difference filter. Sobel
 filter. Gradient magnitude. Since filters produce floating point values, take
 opportunity to introduce data types used by scikit-image.
 
-# Image analysis fundamentals 2: morphological operations (Juan)
+# Image analysis fundamentals 2: feature detection (Tony)
+
+- Canny filter, Corner detection, Hough transforms
+
+# Image analysis fundamentals 3: morphological operations (Juan)
 
 - Demonstrate erosion, dilation, opening, closing on tiny example images
 
-# Image analysis fundamentals 3: segmentation (Tony)
-
-# Image analysis fundamentals 4: registration (Tony)
+# Image analysis fundamentals 4: segmentation (Juan)
 
 # Advanced examples 0: measuring fluorescence intensity on chromosomes (Juan)
 
