@@ -18,3 +18,11 @@ major, minor = map(int, mplver[:2])
 if major < 1 or (major >= 1 and minor < 2):
     print("ERROR: matplotlib version 1.2 or higher required. You have %s." %
           mplver_str)
+
+# Check IPython
+import IPython as IP
+ipver_str = IP.__version__
+ipver = int(ipver_str.split('.')[0])
+if ipver < 2:
+    print("ERROR: IPython version 2.0 or higher required. You have %s." %
+          ipver_str)
