@@ -1,8 +1,7 @@
 # Check skimage along with major dependencies: numpy, scipy, PyQt
 import skimage
 test_failed = bool(skimage.test_verbose())
-doctest_failed = bool(skimage.doctest_verbose())
-if test_failed or doctest_failed:
+if test_failed:
     print("There were errors running scikit-image tests. "
           "See test output for more details.")
 skimver = int(skimage.__version__.split('.')[1].rstrip('dev'))
