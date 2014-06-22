@@ -18,8 +18,9 @@ information from their images in Python.
 # Prerequisites
 
 All of the below packages, including the non-Python ones, can be found in the
-[Anaconda]() Python distribution, which can (and should) be obtained for free.
-(Though some may need `conda install`ing.)
+[Anaconda](https://store.continuum.io/cshop/anaconda/) Python distribution,
+which can (and should) be obtained for free. (Though some may need
+`conda install`ing.)
 
 ## Required packages
 
