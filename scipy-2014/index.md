@@ -145,6 +145,79 @@ opportunity to introduce data types used by scikit-image.
 
 - Demonstrate erosion, dilation, opening, closing on tiny example images
 
+Morphology is the study of shapes. In image processing, some simple operations
+can get you a long way. The first thing to learn is *erosion* and *dilation*.
+In erosion, we look at a pixel's local neighborhood and replace the value of
+that pixel with the minimum value of that neighborhood. In dilation, we instead
+choose the maximum.
+
+```python
+import numpy as np
+image = np.array([[0, 0, 0, 0, 0],
+                  [0, 1, 1, 1, 0],
+                  [0, 1, 1, 1, 0],
+                  [0, 1, 1, 1, 0],
+                  [0, 0, 0, 0, 0]], dtype=np.uint8)
+from skimage import morphology
+```
+
+The documentation for scikit-image's morphology module is
+[here](http://scikit-image.org/docs/0.10.x/api/skimage.morphology.html).
+
+Importantly, we must use a *structuring element*, which defines the local
+neighborhood of each pixel. To get every neighbor (up, down, left, right, and
+diagonals), use `morphology.square`; to avoid diagonals, use
+`morphology.diamond`:
+
+```python
+sq = morphology.square(width=3)
+dia = morphology.diamond(radius=1)
+```
+
+The central value of the structuring element represents the pixel being
+considered, and the surrounding values are the neighbors: a 1 value means that
+pixel counts as a neighbor, while a 0 value does not. So:
+
+```python
+morphology.erosion(image, sq)
+```
+
+and
+
+```python
+morphology.dilation(image, sq)
+```
+
+and
+
+```python
+morphology.dilation(image, dia)
+```
+
+Erosion and dilation can be combined into two slightly more sophisticated
+operations, *opening* and *closing*. Here's an example:
+
+```python
+image = np.array([[0, 0, 0, 0, 0, 0, 0, 0],
+                  [0, 1, 1, 1, 1, 1, 1, 0],
+                  [0, 1, 1, 1, 1, 1, 1, 0],
+                  [0, 1, 1, 1, 1, 1, 1, 0],
+                  [0, 1, 1, 1, 0, 0, 1, 0],
+                  [0, 1, 1, 1, 0, 0, 1, 0],
+                  [0, 1, 1, 1, 0, 0, 1, 0],
+                  [0, 1, 1, 1, 1, 1, 1, 0],
+                  [0, 1, 1, 1, 1, 1, 1, 0],
+                  [0, 1, 1, 1, 1, 1, 1, 0],
+                  [0, 0, 0, 0, 0, 0, 0, 0]], np.uint8)
+```
+
+What happens when run an erosion followed by a dilation of this image?
+
+What about the reverse?
+
+Exercise: use morphological operations to remove speckle from an image of a
+galaxy.
+
 # Image analysis fundamentals 4: segmentation (Juan)
 
 # Advanced examples 0: measuring fluorescence intensity on chromosomes (Juan)
