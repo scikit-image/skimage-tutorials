@@ -96,7 +96,7 @@ plt.imshow(lena, interpolation='nearest')
 These are _just numpy arrays_. making a red square is easy using just array
 slicing and manipulation:
 
-```
+```python
 lena[100:200, 100:200, :] = [255, 0, 0] # [red, green, blue]
 plt.imshow(lena)
 ```
@@ -120,7 +120,7 @@ def draw_h(image, coords, in_place=True):
 
 Test your function like so:
 
-```
+```python
 lena_h = draw_h(lena, (50, -60), in_place=False)
 plt.imshow(lena)
 ```
