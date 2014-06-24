@@ -87,6 +87,11 @@ def imshow_all(*images, **kwargs):
 def imshow_with_histogram(image, **kwargs):
     """ Plot an image side-by-side with its histogram.
 
+    - Plot the image next to the histogram
+    - Plot each RGB channel separately (if input is color)
+    - Automatically flatten channels
+    - Select reasonable bins based on the image's dtype
+
     See `plot_histogram` for information on how the histogram is plotted.
     """
     width, height = plt.rcParams['figure.figsize']
@@ -122,7 +127,7 @@ def match_axes_height(ax_src, ax_dst):
 def plot_cdf(image, ax=None):
     img_cdf, bins = exposure.cumulative_distribution(image)
     ax.plot(bins, img_cdf, 'r')
-    ax.set_ylabel("Fraction of total intensity")
+    ax.set_ylabel("Fraction of pixels below intensity")
 
 
 def plot_histogram(image, ax=None, **kwargs):
