@@ -8,32 +8,17 @@ from skimage import exposure
 from skimage.util.dtype import dtype_limits
 
 
+__all__ = ['imshow_all', 'imshow_with_histogram', 'mean_filter_demo',
+           'mean_filter_interactive_demo', 'plot_cdf', 'plot_histogram']
+
+
+# Gray-scale images should actually be gray!
+plt.rcParams['image.cmap'] = 'gray'
+
+
 #--------------------------------------------------------------------------
 #  Custom `imshow` functions
 #--------------------------------------------------------------------------
-
-def imshow(image, ax=None, show_ticks=False, **kwargs):
-    """ Plot image with intensity limits set to the image dtype's limits.
-
-    Additional keyword arguments are passed to `plt.imshow`. In addition,
-    set the default color map to gray-scale.
-
-    Parameters
-    ----------
-    image : array
-        Image to display.
-    ax : matplotlib `Axes`
-        The axes where the image should be displayed.
-    """
-    ax = ax if ax is not None else plt.gca()
-
-    kwargs.setdefault('cmap', plt.cm.gray)
-    vmin, vmax = dtype_limits(image)
-
-    if not show_ticks:
-        ax.set_axis_off()
-    ax.imshow(image, vmin=vmin, vmax=vmax, **kwargs)
-
 
 def imshow_rgb_shifted(rgb_image, shift=100, ax=None):
     """Plot each RGB layer with an x, y shift."""
@@ -59,14 +44,23 @@ def imshow_all(*images, **kwargs):
 
     Convert all images to float so that images have a common intensity range.
 
-    The parameter, `limits`, can be set to control the intensity limits. By
-    default, 'image' is used set the min/max intensities to the min/max of all
-    images. Setting `limits` to 'dtype' can also be used if you want to
-    preserve the image exposure.
+    Parameters
+    ----------
+    limits : str
+        Control the intensity limits. By default, 'image' is used set the
+        min/max intensities to the min/max of all images. Setting `limits` to
+        'dtype' can also be used if you want to preserve the image exposure.
+    titles : list of str
+        Titles for subplots. If the length of titles is less than the number
+        of images, empty strings are appended.
+    kwargs : dict
+        Additional keyword-arguments passed to `imshow`.
     """
     images = [img_as_float(img) for img in images]
 
-    kwargs.setdefault('cmap', plt.cm.gray)
+    titles = kwargs.pop('titles', [])
+    if len(titles) != len(images):
+        titles = list(titles) + [''] * (len(images) - len(titles))
 
     limits = kwargs.pop('limits', 'image')
     if limits == 'image':
@@ -80,8 +74,9 @@ def imshow_all(*images, **kwargs):
     size = kwargs.pop('size', 5)
     width = size * len(images)
     fig, axes = plt.subplots(ncols=len(images), figsize=(width, size))
-    for ax, img in zip(axes, images):
+    for ax, img, label in zip(axes, images, titles):
         ax.imshow(img, **kwargs)
+        ax.set_title(label)
 
 
 def imshow_with_histogram(image, **kwargs):
@@ -167,14 +162,13 @@ def iter_channels(color_image):
 #  Convolution Demo
 #--------------------------------------------------------------------------
 
-def mean_filter_demo(image, vmax=0.5):
+def mean_filter_demo(image, vmax=1):
     mean_factor = 1.0 / 9.0  # This assumes a 3x3 kernel.
     iter_kernel_and_subimage = iter_kernel(image)
 
     image_cache = []
 
     def mean_filter_step(i_step):
-
         while i_step >= len(image_cache):
             filtered = image if i_step == 0 else image_cache[-1][1]
             filtered = filtered.copy()
@@ -184,6 +178,7 @@ def mean_filter_demo(image, vmax=0.5):
                                              colors=('yellow', 'red'))
             filtered[i, j] = np.sum(mean_factor * subimage)
             image_cache.append((filter_overlay, filtered))
+
         imshow_all(*image_cache[i_step], vmax=vmax)
         plt.show()
     return mean_filter_step
