@@ -1,3 +1,4 @@
+from __future__ import division
 import numpy as np
 import matplotlib.pyplot as plt
 from scipy.ndimage import grey_dilation
@@ -71,10 +72,14 @@ def imshow_all(*images, **kwargs):
         kwargs.setdefault('vmin', vmin)
         kwargs.setdefault('vmax', vmax)
 
-    size = kwargs.pop('size', 5)
+    nrows, ncols = kwargs.get('shape', (1, len(images)))
+
+    size = nrows * kwargs.pop('size', 5)
     width = size * len(images)
-    fig, axes = plt.subplots(ncols=len(images), figsize=(width, size))
-    for ax, img, label in zip(axes, images, titles):
+    if nrows > 1:
+        width /= nrows * 1.33
+    fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(width, size))
+    for ax, img, label in zip(axes.ravel(), images, titles):
         ax.imshow(img, **kwargs)
         ax.set_title(label)
 
