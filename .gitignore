@@ -1,1 +1,3 @@
 build
+*.html
+*.ipynb_checkpoints
