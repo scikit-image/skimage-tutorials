@@ -1,6 +1,6 @@
 # Check skimage along with major dependencies: numpy, scipy, PyQt
 import skimage
-test_failed = bool(skimage.test_verbose())
+test_failed = bool(skimage.test())
 if test_failed:
     print("There were errors running scikit-image tests. "
           "See test output for more details.")
