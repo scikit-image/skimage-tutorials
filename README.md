@@ -4,7 +4,12 @@ scikit-image tutorials
 
 A collection of tutorials for the [scikit-image](http://skimage.org) package.
 
-To build the tutorial pages, you'll need [Sphinx](http://sphinx-doc.org)
-installed. From the root directory of this repository, just type the following:
+SciPy 2014
+----------
 
-    make html
+To run the SciPy 2014 scikit-image tutorial, navigate to the scipy-2104
+directory and start the ipython notebook server using:
+
+    ipython notebook
+
+Open up the index notebook labeled `000_index.ipynb` to start the tutorial.
