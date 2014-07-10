@@ -24,5 +24,6 @@ The videos of these talks are linked below:
 - [Part 4](http://youtu.be/pWnYjqudKHs)
 
 
-Note that exercise solution are not included within the notebooks for sections
-0, 1, and 2. These are found in the notebook named `solutions_012.ipynb`.
+Find solved notebooks in the "solved" directory. Exercise solutions for
+sections 0, 1, and 2 are not included in completed notebooks but rather
+compiled in the `solutions_012.ipynb` notebook.
