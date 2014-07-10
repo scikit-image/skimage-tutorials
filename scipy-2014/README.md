@@ -2,8 +2,9 @@ scikit-image tutorial at SciPy 2014
 ===================================
 
 This directory contains the materials for the scikit-image tutorial given
-at SciPy 2014, but Juan Nunez-Iglesias and Tony Yu, titled "Image analysis in
-Python with scipy and scikit-image".
+at [SciPy 2014](https://conference.scipy.org/scipy2014/schedule/tutorials/) by
+Juan Nunez-Iglesias and Tony Yu, titled "Image analysis in Python with scipy
+and scikit-image".
 
 After cloning or downloading this repo, start an IPython notebook server in
 this directory. For example, in a command terminal, type:
@@ -13,7 +14,7 @@ this directory. For example, in a command terminal, type:
 
 
 Then, open up the notebook title `000_index.ipynb`, which gives links to the
-tutorials in order.
+notebooks for each section.
 
 The videos of these talks are linked below:
 
