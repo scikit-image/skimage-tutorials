@@ -1,15 +1,16 @@
 scikit-image tutorials
 ======================
 
-
 A collection of tutorials for the [scikit-image](http://skimage.org) package.
 
-SciPy 2014
-----------
-
-To run the SciPy 2014 scikit-image tutorial, navigate to the scipy-2014
-directory and start the ipython notebook server using:
+Start the notebook server with:
 
     ipython notebook
 
-Open up the index notebook labeled `000_index.ipynb` to start the tutorial.
+Then select the lecture notes that you are interested in.
+
+See the ``viewer_examples`` directory for GUI demos.
+
+Refer to [the gallery](http://scikit-image.org/docs/dev/auto_examples/) as
+well as [scikit-image demos](https://github.com/scikit-image/skimage-demos)
+for more examples.

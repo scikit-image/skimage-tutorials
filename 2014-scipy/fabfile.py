@@ -1,14 +1,18 @@
 import fabric.api as fabric
+import os
 
 
 NBCONVERT = 'ipython nbconvert {}'
 
 BUILD_SLIDES =  NBCONVERT.format('--to slides {}')
 
-NOTEBOOKS = ['0_color_and_exposure.ipynb',
-             '1_image_filters.ipynb',
-             '2_feature_detection.ipynb']
+LECTURES = '../lectures'
 
+NOTEBOOKS = ['color_and_exposure.ipynb',
+             'image_filters.ipynb',
+             'feature_detection.ipynb']
+
+NOTEBOOKS = [os.path.join(LECTURES, nb) for nb in NOTEBOOKS]
 
 @fabric.task
 def build_slides(exclude=None):
