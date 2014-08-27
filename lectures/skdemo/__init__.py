@@ -1,1 +1,1 @@
-from _skdemo import *
+from ._skdemo import *
