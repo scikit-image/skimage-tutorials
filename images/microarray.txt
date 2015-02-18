@@ -1,0 +1,14 @@
+Yeast microarrays for genome wide parallel genetic and gene
+expression analysis
+
+Two-color fluorescent scan of a yeast microarray containing 2,479 elements
+(ORFs). The center-to-center distance between elements is 345 μm. A probe
+mixture consisting of cDNA from yeast extract/peptone (YEP) galactose (green
+pseudocolor) and YEP glucose (red pseudocolor) grown yeast cultures was
+hybridized to the array. Intensity per element corresponds to ORF expression,
+and pseudocolor per element corresponds to relative ORF expression between the
+two cultures. 
+
+Deval A. Lashkari
+
+http://www.pnas.org/content/94/24/13057/F1.expansion

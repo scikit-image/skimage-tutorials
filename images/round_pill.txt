@@ -1,0 +1,2 @@
+NLM Pill Image Recognition Pilot (PIR Pilot)
+http://pir.nlm.nih.gov/pilot/instructions.html
