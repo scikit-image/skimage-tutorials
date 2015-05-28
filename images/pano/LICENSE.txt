@@ -5,3 +5,15 @@ Creative Commons Attribution 3.0 Unported License.
 
 You should have received a copy of the license along with this
 work.  If not, see <http://creativecommons.org/licenses/by/3.0/>.
+
+
+All files with the prefix "JDW_" are (c) 2014 by Joshua D. Warner.
+
+They were taken, handheld, with a Nikon D7000 digital camera in 
+Arches National Park, Utah, USA. 
+
+These Arches photos are licensed under a
+Creative Commons Attribution 4.0 International (CC BY 4.0) License.
+
+You should have received a copy of the license along with this
+work.  If not, see <http://creativecommons.org/licenses/by/4.0/>
