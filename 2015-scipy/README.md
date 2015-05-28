@@ -2,7 +2,7 @@ scikit-image tutorial at SciPy 2015
 ===================================
 
 This directory contains the materials for the ``scikit-image`` tutorial given
-at [SciPy 2015](https://conference.scipy.org/scipy2014/schedule/tutorials/) by
+at [SciPy 2015](http://scipy2015.scipy.org/ehome/115969/289057) by
 Stéfan van der Walt, Joshua Warner, and Steven Silvester, titled "Image
 Analysis in Python with SciPy and Scikit-Image".
 
