@@ -3,7 +3,7 @@ scikit-image tutorials
 
 A collection of tutorials for the [scikit-image](http://skimage.org) package.
 
-Start the notebook server with:
+Start the notebook server *from the same directory as this README* with:
 
     ipython notebook
 
