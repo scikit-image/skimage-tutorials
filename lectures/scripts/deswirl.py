@@ -133,7 +133,7 @@ def swirl(image, center=None, strength=1, radius=100, rotation=0):
 # Read the input image, and compute its center
 mona = io.imread('../../images/mona_lisa.jpg')
 h, w, d = mona.shape
-center = [w/2, h/2]
+center = np.array([w/2, h/2])
 
 # Construct three outputs: input image, swirled and deswirled
 f, (ax0, ax1, ax2) = plt.subplots(1, 3)
@@ -153,7 +153,8 @@ deswirled = ax2.imshow(mona_swirled, interpolation='nearest')
 ax2.set_xlabel('Restored using\nyour choice of\nparameters')
 
 # Plot a dot to indicate the center-point of the reverse transform
-center_dot, = ax0.plot(center[0] + 10, center[1] - 5, 'ro')
+center += [10, -5]
+center_dot, = ax0.plot(center[0], center[1], 'ro')
 ax0.axis('image')
 
 def update(event=None):
