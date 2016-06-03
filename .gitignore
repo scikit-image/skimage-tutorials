@@ -1,3 +1,6 @@
+\#*
+.#*
+_requirements.installed
 build
 *.DS_Store
 *.html
@@ -5,3 +8,4 @@ build
 *.pyc
 *~
 *pano-advanced-output.png
+book/lessons
