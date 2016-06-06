@@ -1,7 +1,3 @@
-[📂 Download lesson notebook](./0_installation.ipynb)
-
----
-
 # Images as arrays
 
 Let's check the version of `scikit-image`:
