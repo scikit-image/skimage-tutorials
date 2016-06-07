@@ -29,9 +29,9 @@ Schedule
 --------
 
 - 09:30—10:00  :doc:`Introduction <lessons/0_introduction>` & :doc:`preparation <lessons/0_preparation>`
-- 10:00—10:45  :doc:`NumPy <lessons/???numpy???>`
+- 10:00—10:45  :doc:`Advanced NumPy <lessons/1_advanced_numpy>`
 - 10:45—11:00  Coffee break
-- 11:00—11:30  Advanced NumPy
+- 11:00—11:30  :doc:`Advanced NumPy <lessons/1_advanced_numpy>`
 - 11:30—12:15  `Matplotlib <http://cbio.ensmp.fr/~nvaroquaux/teaching/2016-image-xd/intro/matplotlib/matplotlib.html>`_
 
 ----
@@ -56,7 +56,7 @@ Schedule
 
    lessons/0_introduction
    lessons/0_preparation
+   lessons/1_advanced_numpy
    Matplotlib <lessons/matplotlib/matplotlib>
    lessons/0_images_are_arrays
    lessons/1_ransac
-   lessons/1_advanced_numpy
