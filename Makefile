@@ -24,7 +24,7 @@ $(GENERATED_LESSONS_DIR)/%.ipynb:$(LESSONS_DIR)/%.md book/lessons
 %.md:%.ipynb
 	jupyter nbconvert --to=mdoutput --output="$(notdir $@)" --output-dir=$(GENERATED_LESSONS_DIR) $<
 #	$(eval NBSTRING := [📂 Download lesson notebook](.\/$(basename $(notdir $@)).ipynb)\n\n)
-#	sed -i '1s/^/$(NBSTRING)/' $@
+#	sed -i'.bak' '1s/^/$(NBSTRING)/' $@
 
 
 book/lessons:
