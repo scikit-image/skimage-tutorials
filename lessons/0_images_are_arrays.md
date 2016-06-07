@@ -1,5 +1,3 @@
-Jupyter notebook users, please execute:
-
 ```python
 %matplotlib inline
 ```

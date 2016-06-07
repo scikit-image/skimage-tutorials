@@ -16,12 +16,14 @@ NOTEBOOKS = $(patsubst %.md, %.ipynb, $(MD_OUTPUTS))
 .SECONDARY: MD_OUTPUTS
 
 $(GENERATED_LESSONS_DIR)/%.ipynb:$(LESSONS_DIR)/%.md book/lessons
+        # This does not work, due to bug in notedown; see https://github.com/aaren/notedown/issues/53
+	#notedown --match=python --precode='%matplotlib inline' $< > $@
 	notedown --match=python $< > $@
 	jupyter nbconvert --execute --inplace $@ --ExecutePreprocessor.timeout=-1
 
 %.md:%.ipynb
 	jupyter nbconvert --to=mdoutput --output="$(notdir $@)" --output-dir=$(GENERATED_LESSONS_DIR) $<
-	$(eval NBSTRING := [📂 Download lesson notebook](.\/$(basename $(notdir $@)).ipynb)\n\n---\n)
+	$(eval NBSTRING := [📂 Download lesson notebook](.\/$(basename $(notdir $@)).ipynb)\n\n)
 	sed -i '1s/^/$(NBSTRING)/' $@
 
 
@@ -33,4 +35,4 @@ html: | _requirements.installed $(NOTEBOOKS) $(MD_OUTPUTS)
 	cp $(GENERATED_LESSONS_DIR)/*.ipynb book/build/html/lessons/
 
 clean:
-	rm -f $(GENERATED_LESSONS_DIR)/*
+	rm -rf $(GENERATED_LESSONS_DIR)/*
