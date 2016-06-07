@@ -27,7 +27,7 @@ How we measure it:
 |        | Cell type A | Cell type B | Cell type C | Cell type D |
 |--------|-------------|-------------|-------------|-------------|
 | Gene 0 | 100         | 200         | 50          | 400         |
-a Gene 1 | 50          | 0           | 0           | 100         |
+| Gene 1 | 50          | 0           | 0           | 100         |
 | Gene 2 | 350         | 100         | 50          | 200         |
 
 
