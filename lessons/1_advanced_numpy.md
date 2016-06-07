@@ -12,15 +12,15 @@ FIRST...
 
 How genes work:
 
-![central dogma](_images/centraldogma.png)
+<img src="_images/centraldogma.png" width="600">
 
 What this means:
 
-![gene expression](_images/gene-expression.png)
+<img src="_images/gene-expression.png" width="600">
 
 How we measure it:
 
-![RNA seq](_images/rnaseq.png)
+<img src="_images/rnaseq.png" width="600">
 
 ## some fake data
 
