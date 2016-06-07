@@ -51,7 +51,7 @@ for module in (np, sp, mpl, skimage, sklearn):
     print(module.__name__, module.__version__)
 ```
 
-E.g., on my computer, I see:
+On my computer, I see (but your version numbers may differ):
 
 ```
 numpy 1.11.0
@@ -65,17 +65,10 @@ sklearn 0.17.1
 We have a limited number of hosted online accounts available for
 attendees.**
 
-## Downloading lecture material
+## Download lecture material
 
 There are two ways of downloading the lecture materials:
 
-a) Get the `ZIP file from GitHub
-   <https://github.com/scikit-image/skimage-tutorials/archive/master.zip>`__
-b) Clone the repository at
-   https://github.com/scikit-image/skimage-tutorial
-
-## Conversation
-
-During the tutorial, there will be an open Etherpad at
-https://public.etherpad-mozilla.org/p/imagexd where you can make notes
-and communicate with classmates.
+1. Get the [ZIP file from GitHub](https://github.com/scikit-image/skimage-tutorials/archive/master.zip)
+2. Clone the repository at
+    [https://github.com/scikit-image/skimage-tutorials](https://github.com/scikit-image/skimage-tutorials)

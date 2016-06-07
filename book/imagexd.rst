@@ -18,20 +18,17 @@ California at Berkeley.
 
   - Wifi is available via the CalVisitor hotspot.
 
-Course content
---------------
+Conversation
+````````````
+During the tutorial, there will be an open Etherpad at
+https://public.etherpad-mozilla.org/p/imagexd where you can make notes
+and communicate with classmates.
 
-.. toctree::
-   :maxdepth: 1
-
-   Installation <lessons/0_installation>
-   Matplotlib <lessons/matplotlib/matplotlib>
-   lessons/0_images_are_arrays
 
 Schedule
 --------
 
-- 09:30—10:00  Introduction & :doc:`installation <lessons/0_installation>`
+- 09:30—10:00  :doc:`Introduction <lessons/0_introduction>` & :doc:`preparation <lessons/0_preparation>`
 - 10:00—10:45  :doc:`NumPy <lessons/???numpy???>`
 - 10:45—11:00  Coffee break
 - 11:00—11:30  Advanced NumPy
@@ -44,7 +41,7 @@ Schedule
 ----
 
 - 13:15—14:00  SciPy overview
-- 14:00—14:30  scikit-image: images are arrays
+- 14:00—14:30  :doc:`scikit-image: images are arrays <lessons/0_images_are_arrays>`
 - 14:30—14:45  Coffee break
 - 14:45—15:45  scikit-image: segmentation
 - 15:45—16:15  scikit-image: RANSAC
@@ -52,3 +49,12 @@ Schedule
 - 16:25—16:30  Panorama demo
 - 16:30—17:00  Introduction to scikit-learn
 - 17:00—17:30  Demo: scikit-learn with scikit-image
+
+.. toctree::
+   :hidden:
+   :maxdepth: 1
+
+   lessons/0_introduction
+   lessons/0_preparation
+   Matplotlib <lessons/matplotlib/matplotlib>
+   lessons/0_images_are_arrays
