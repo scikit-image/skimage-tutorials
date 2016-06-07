@@ -15,7 +15,7 @@ NOTEBOOKS = $(patsubst %.md, %.ipynb, $(MD_OUTPUTS))
 
 .SECONDARY: $(MD_OUTPUTS) $(NOTEBOOKS)
 
-$(GENERATED_LESSONS_DIR)/%.ipynb:$(LESSONS_DIR)/%.md book/lessons
+$(GENERATED_LESSONS_DIR)/%.ipynb:$(LESSONS_DIR)/%.md book/lessons book/lessons/images
         # This does not work, due to bug in notedown; see https://github.com/aaren/notedown/issues/53
 	#notedown --match=python --precode='%matplotlib inline' $< > $@
 	notedown --match=python $< > $@
@@ -29,6 +29,9 @@ $(GENERATED_LESSONS_DIR)/%.ipynb:$(LESSONS_DIR)/%.md book/lessons
 
 book/lessons:
 	mkdir -p book/lessons
+
+book/lessons/images:
+	ln -s ${PWD}/lessons/images ${PWD}/book/lessons/images
 
 html: | _requirements.installed $(NOTEBOOKS) $(MD_OUTPUTS)
 	@export SPHINXOPTS=-W; make -C book html

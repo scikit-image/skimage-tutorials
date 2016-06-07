@@ -59,3 +59,4 @@ Schedule
    Matplotlib <lessons/matplotlib/matplotlib>
    lessons/0_images_are_arrays
    lessons/1_ransac
+   lessons/1_advanced_numpy
