@@ -13,7 +13,7 @@ MARKDOWNS = $(wildcard $(LESSONS_DIR)/*.md)
 MD_OUTPUTS = $(patsubst $(LESSONS_DIR)/%.md, $(GENERATED_LESSONS_DIR)/%.md, $(MARKDOWNS))
 NOTEBOOKS = $(patsubst %.md, %.ipynb, $(MD_OUTPUTS))
 
-.SECONDARY: MD_OUTPUTS
+.SECONDARY: $(MD_OUTPUTS) $(NOTEBOOKS)
 
 $(GENERATED_LESSONS_DIR)/%.ipynb:$(LESSONS_DIR)/%.md book/lessons
         # This does not work, due to bug in notedown; see https://github.com/aaren/notedown/issues/53

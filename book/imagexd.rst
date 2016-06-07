@@ -44,7 +44,7 @@ Schedule
 - 14:00—14:30  :doc:`scikit-image: images are arrays <lessons/0_images_are_arrays>`
 - 14:30—14:45  Coffee break
 - 14:45—15:45  scikit-image: segmentation
-- 15:45—16:15  scikit-image: RANSAC
+- 15:45—16:15  :doc:`scikit-image: RANSAC <lessons/1_ransac>`
 - 16:15—16:25  Coffee break
 - 16:25—16:30  Panorama demo
 - 16:30—17:00  Introduction to scikit-learn
@@ -58,3 +58,4 @@ Schedule
    lessons/0_preparation
    Matplotlib <lessons/matplotlib/matplotlib>
    lessons/0_images_are_arrays
+   lessons/1_ransac

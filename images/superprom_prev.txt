@@ -1,0 +1,12 @@
+SOHO: Solar and Heliospheric Observatory
+
+http://sohowww.nascom.nasa.gov/gallery/images/superprom.html
+
+EIT 304Å image of a huge, handle-shaped prominence taken on Sept. 14, 1999 --
+Prominences are huge clouds of relatively cool dense plasma suspended in the
+Sun's hot, thin corona. At times, they can erupt, escaping the Sun's
+atmosphere. Emission in this spectral line shows the upper chromosphere at a
+temperature of about 60,000 degrees K. Every feature in the image traces
+magnetic field structure. The hottest areas appear almost white, while the
+darker red areas indicate cooler temperatures.
+
