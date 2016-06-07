@@ -143,7 +143,7 @@ a[0, 0] = 100
 
 
 ```python
-expr = np.load('data/expr.npy')
+expr = np.load('../../data/expr.npy')
 ```
 
 
@@ -205,7 +205,7 @@ Finally, longer genes are more likely to produce reads. So we normalize by the g
 
 
 ```python
-gene_len = np.load('data/gene-lens.npy')
+gene_len = np.load('../../data/gene-lens.npy')
 print(gene_len.shape)
 ```
 
