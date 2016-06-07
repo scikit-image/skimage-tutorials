@@ -253,12 +253,12 @@ plt.style.use('ggplot')
 
 
 ```python
-plot_col_density(np.log(expr+1))
+plot_col_density(np.log(expr+1)[:, :20])
 ```
 
 
 ```python
-plot_col_density(np.log(rpkm + 1), xlim=(0, 250))
+plot_col_density(np.log(rpkm + 1)[:, :20], xlim=(0, 250))
 ```
 
 ### Exercise: 3D broadcasting
@@ -324,11 +324,11 @@ logrpkmn = qnorm(logrpkm)
 
 
 ```python
-plot_col_density(logexprn)
+plot_col_density(logexprn[:, :20])
 ```
 
 
 ```python
-plot_col_density(logrpkmn, xlim=(0, 0.25))
+plot_col_density(logrpkmn[:, :20], xlim=(0, 0.25))
 ```
 
