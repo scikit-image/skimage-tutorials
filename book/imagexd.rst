@@ -43,7 +43,10 @@ Schedule
 - 13:15—14:00  `SciPy overview <http://cbio.ensmp.fr/~nvaroquaux/teaching/2016-image-xd/intro/scipy.html>`_
 - 14:00—14:30  :doc:`scikit-image: images are arrays <lessons/0_images_are_arrays>`
 - 14:30—14:45  Coffee break
-- 14:45—15:45  scikit-image: segmentation
+- 14:45—15:45  scikit-image: `filtering
+  <http://nbviewer.jupyter.org/github/scikit-image/skimage-tutorials/blob/master/book/lessons/1_image_filters.ipynb>`__
+  and `segmentation
+  <http://nbviewer.jupyter.org/github/scikit-image/skimage-tutorials/blob/master/book/lessons/4_segmentation.ipynb>`__
 - 15:45—16:15  :doc:`scikit-image: RANSAC <lessons/1_ransac>`
 - 16:15—16:25  Coffee break
 - 16:25—16:30  Panorama demo
