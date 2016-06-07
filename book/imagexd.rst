@@ -32,7 +32,7 @@ Schedule
 - 10:00—10:45  :doc:`NumPy <lessons/???numpy???>`
 - 10:45—11:00  Coffee break
 - 11:00—11:30  Advanced NumPy
-- 11:30—12:15  Matplotlib
+- 11:30—12:15  `Matplotlib <http://cbio.ensmp.fr/~nvaroquaux/teaching/2016-image-xd/intro/matplotlib/matplotlib.html>`_
 
 ----
 
@@ -40,7 +40,7 @@ Schedule
 
 ----
 
-- 13:15—14:00  SciPy overview
+- 13:15—14:00  `SciPy overview <http://cbio.ensmp.fr/~nvaroquaux/teaching/2016-image-xd/intro/scipy.html>`_
 - 14:00—14:30  :doc:`scikit-image: images are arrays <lessons/0_images_are_arrays>`
 - 14:30—14:45  Coffee break
 - 14:45—15:45  scikit-image: segmentation
