@@ -36,7 +36,6 @@ required packages installed in order to participate fully.
   4.1.0
   ```
 
-
 ## Test your setup
 
 Please run the following commands inside of Python:
@@ -65,3 +64,18 @@ sklearn 0.17.1
 **If you do not have a working setup, please contact the instructors.
 We have a limited number of hosted online accounts available for
 attendees.**
+
+## Downloading lecture material
+
+There are two ways of downloading the lecture materials:
+
+a) Get the `ZIP file from GitHub
+   <https://github.com/scikit-image/skimage-tutorials/archive/master.zip>`__
+b) Clone the repository at
+   https://github.com/scikit-image/skimage-tutorial
+
+## Conversation
+
+During the tutorial, there will be an open Etherpad at
+https://public.etherpad-mozilla.org/p/imagexd where you can make notes
+and communicate with classmates.

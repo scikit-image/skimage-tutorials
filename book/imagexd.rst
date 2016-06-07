@@ -26,6 +26,7 @@ Course content
 
    Installation <lessons/0_installation>
    Matplotlib <lessons/matplotlib/matplotlib>
+   lessons/0_images_are_arrays
 
 Schedule
 --------
@@ -43,7 +44,7 @@ Schedule
 ----
 
 - 13:15—14:00  SciPy overview
-- 14:00—14:30  scikit-image: images as arrays
+- 14:00—14:30  scikit-image: images are arrays
 - 14:30—14:45  Coffee break
 - 14:45—15:45  scikit-image: segmentation
 - 15:45—16:15  scikit-image: RANSAC
