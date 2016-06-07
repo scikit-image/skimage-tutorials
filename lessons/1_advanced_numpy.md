@@ -12,22 +12,22 @@ FIRST...
 
 How genes work:
 
-<img src="_images/centraldogma.png" width="600">
+<img src="../../_images/centraldogma.png" width="600">
 
 What this means:
 
-<img src="_images/gene-expression.png" width="600">
+<img src="../../_images/gene-expression.png" width="600">
 
 How we measure it:
 
-<img src="_images/rnaseq.png" width="600">
+<img src="../../_images/rnaseq.png" width="600">
 
 ## some fake data
 
 |        | Cell type A | Cell type B | Cell type C | Cell type D |
 |--------|-------------|-------------|-------------|-------------|
 | Gene 0 | 100         | 200         | 50          | 400         |
-a Gene 1 | 50          | 0           | 0           | 100         |
+| Gene 1 | 50          | 0           | 0           | 100         |
 | Gene 2 | 350         | 100         | 50          | 200         |
 
 
@@ -253,12 +253,12 @@ plt.style.use('ggplot')
 
 
 ```python
-plot_col_density(np.log(expr+1))
+plot_col_density(np.log(expr+1)[:, :20])
 ```
 
 
 ```python
-plot_col_density(np.log(rpkm + 1), xlim=(0, 250))
+plot_col_density(np.log(rpkm + 1)[:, :20], xlim=(0, 250))
 ```
 
 ### Exercise: 3D broadcasting
@@ -324,11 +324,11 @@ logrpkmn = qnorm(logrpkm)
 
 
 ```python
-plot_col_density(logexprn)
+plot_col_density(logexprn[:, :20])
 ```
 
 
 ```python
-plot_col_density(logrpkmn, xlim=(0, 0.25))
+plot_col_density(logrpkmn[:, :20], xlim=(0, 0.25))
 ```
 
