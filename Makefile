@@ -16,7 +16,7 @@ NOTEBOOKS = $(patsubst %.md, %.ipynb, $(MD_OUTPUTS))
 .SECONDARY: MD_OUTPUTS
 
 $(GENERATED_LESSONS_DIR)/%.ipynb:$(LESSONS_DIR)/%.md book/lessons
-	notedown $< > $@
+	notedown --match=fenced $< > $@
 	jupyter nbconvert --execute --inplace $@ --ExecutePreprocessor.timeout=-1
 
 %.md:%.ipynb
