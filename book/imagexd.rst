@@ -47,7 +47,7 @@ Schedule
 - 15:45—16:15  :doc:`scikit-image: RANSAC <lessons/1_ransac>`
 - 16:15—16:25  Coffee break
 - 16:25—16:30  Panorama demo
-- 16:30—17:00  Introduction to scikit-learn
+- 16:30—17:00  `Introduction to scikit-learn <http://cbio.ensmp.fr/~nvaroquaux/teaching/2016-image-xd/intro/sklearn.html>`_
 - 17:00—17:30  Demo: scikit-learn with scikit-image
 
 .. toctree::
