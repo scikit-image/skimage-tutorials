@@ -8,21 +8,21 @@
 
 FIRST...
 
-## even quicker: what is gene expression?
+## Even quicker: what is gene expression?
 
 How genes work:
 
-<img src="../../_images/centraldogma.png" width="600">
+![central dogma](images/centraldogma.png)
 
 What this means:
 
-<img src="../../_images/gene-expression.png" width="600">
+![gene expression](images/gene-expression.png)
 
 How we measure it:
 
-<img src="../../_images/rnaseq.png" width="600">
+![rna sequence](images/rnaseq.png)
 
-## some fake data
+## Some fake data
 
 |        | Cell type A | Cell type B | Cell type C | Cell type D |
 |--------|-------------|-------------|-------------|-------------|
@@ -40,7 +40,7 @@ expression_data = [gene0, gene1, gene2]
 
 Why is this a bad idea?
 
-# Now with NumPy
+## Now with NumPy
 
 
 ```python
@@ -56,7 +56,7 @@ We are going to:
 
 using the awesome power of NumPy
 
-# Inside a numpy ndarray
+## Inside a numpy ndarray
 
 
 ```python
@@ -139,7 +139,7 @@ print(b)
 a[0, 0] = 100
 ```
 
-# Advanced operations: axis-wise evaluation
+## Advanced operations: axis-wise evaluation
 
 
 ```python
@@ -170,7 +170,7 @@ Generate a 10 x 3 array of random numbers. From each row, pick the number closes
 
 ```
 
-# Advanced operations: broadcasting
+## Advanced operations: broadcasting
 
 In order to normalize every column by its corresponding library size, we have to *align* the two arrays' axes: each dimension must be either the same size, or one of the arrays must have size 1. Use `np.newaxis` to match the dimensions.
 
@@ -272,7 +272,7 @@ y = np.random.randint(10, size=8)
 z = x # FIX THIS
 ```
 
-# Fancy indexing
+## Fancy indexing
 
 You can index arrays with slicing, but also with boolean arrays (including broadcasting!), integer arrays, and individual indices along multiple dimensions.
 
@@ -331,4 +331,3 @@ plot_col_density(logexprn[:, :20])
 ```python
 plot_col_density(logrpkmn[:, :20], xlim=(0, 0.25))
 ```
-
