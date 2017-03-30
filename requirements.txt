@@ -1,8 +1,6 @@
-scikit-image >= 0.12
-sphinx
-recommonmark
-sphinx-rtd-theme
-notedown
-nbconvert[execute]>=4.2.0
-ipykernel>=4.2.0
-jupytercontrib>=0.0.5
+scikit-image >= 0.13
+scipy >= 0.19
+matplotlib >= 2.0
+notebook >= 4.0
+scikit-learn >= 0.18
+
