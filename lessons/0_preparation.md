@@ -58,8 +58,6 @@ On my computer, I see (but your version numbers may differ):
 [✓] scikit-learn  0.18.1
 ```
 
-**If you do not have a working setup, please contact the instructors.
-We have a limited number of hosted online accounts available for
-attendees.**
+**If you do not have a working setup, please contact the instructors.**
 
 
