@@ -5,7 +5,7 @@ A collection of tutorials for the [scikit-image](http://skimage.org) package.
 
 Start the notebook server *from the same directory as this README* with:
 
-    ipython notebook
+    jupyter notebook
 
 Then select the lecture notes that you are interested in.
 
