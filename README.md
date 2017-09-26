@@ -35,3 +35,10 @@ derivative works.
 For more information on these guidelines, which are sometimes known as
 CC0 (+BY), see [this blog post](http://www.dancohen.org/2013/11/26/cc0-by/) by
 Dan Cohen.
+
+Contributing
+------------
+
+If you make any modifications to these tutorials that you think would benefit
+the community at large, please
+[create a pull request](http://scikit-image.org/docs/dev/contribute.html)!
