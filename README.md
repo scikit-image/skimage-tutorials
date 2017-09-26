@@ -31,3 +31,7 @@ under a BSD 3-clause license (see LICENSE-CODE.txt).
 However, we request that you actively acknowledge and give
 attribution to this repo and to the authors if you reproduce them or create any
 derivative works.
+
+For more information on these guidelines, which are sometimes known as
+CC0 (+BY), see [this blog post](http://www.dancohen.org/2013/11/26/cc0-by/) by
+Dan Cohen.
