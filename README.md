@@ -23,10 +23,9 @@ These usage guidelines are based on goodwill. They are not a legal contract.
 The scikit-image team requests that you follow these guidelines if you use
 these materials in downstream projects.
 
-All creative materials in this repository are available free of restriction
+All materials in this repository are available free of restriction
 under the Creative Commons CC0 1.0 Universal Public Domain Dedication
-(see LICENSE.txt). Further, all Python code in these tutorials is licensed
-under a BSD 3-clause license (see LICENSE-CODE.txt).
+(see LICENSE.txt).
 
 However, we request that you actively acknowledge and give
 attribution to this repo and to the authors if you reproduce them or create any
