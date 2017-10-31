@@ -12,16 +12,16 @@ required packages installed in order to participate fully.
 
   If you are new to Python, please install the
   [Anaconda distribution](https://www.continuum.io/downloads) for
-  **Python version 3** (available on OSX, Linux and Windows).
+  **Python version 3** (available on OSX, Linux, and Windows).
   Everyone else, feel free to use your favorite distribution, but
   please ensure the requirements below are met:
 
   - `numpy` >= 1.12
   - `scipy` >= 0.19
   - `matplotlib` >= 2.0
-  - `skimage` >= 0.13
-  - `sklearn` >= 0.18
-  
+  - `scikit-image` >= 0.13
+  - `scikit-learn` >= 0.18
+
   Please see "Test your setup" below.
 
 - Jupyter
@@ -37,27 +37,27 @@ required packages installed in order to participate fully.
 
 ## Download lecture material
 
-There are two ways of downloading the lecture materials:
-
-1. Get the [ZIP file from GitHub](https://github.com/scikit-image/skimage-tutorials/archive/master.zip)
+1. [Install Git](https://git-scm.com/downloads)
 2. Clone the repository at
-    [https://github.com/scikit-image/skimage-tutorials](https://github.com/scikit-image/skimage-tutorials)
+   [https://github.com/scikit-image/skimage-tutorials](https://github.com/scikit-image/skimage-tutorials)
+
+We may make editorial corrections to the material until the day before
+the workshop, so please execute `git pull` to update.
 
 ## Test your setup
 
-Please switch into the repository you downloaded in the previous step, and run `check_setup.py`
-to validate your installation.
+Please switch into the repository you downloaded in the previous step,
+and run `check_setup.py` to validate your installation.
 
 On my computer, I see (but your version numbers may differ):
 
 ```
-[✓] scikit-image  0.13.0
-[✓] scipy         0.19.0
-[✓] matplotlib    2.0.0
+[✓] scikit-image  0.13.1
+[✓] numpy         1.13.3
+[✓] scipy         1.0.0
+[✓] matplotlib    2.1.0
 [✓] notebook      5.0.0
-[✓] scikit-learn  0.18.1
+[✓] scikit-learn  0.19.1
 ```
 
 **If you do not have a working setup, please contact the instructors.**
-
-
