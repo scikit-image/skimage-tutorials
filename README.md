@@ -3,7 +3,7 @@ scikit-image tutorials
 
 A collection of tutorials for the [scikit-image](http://skimage.org) package.
 
-1. [Follow the preparation instructions](prepare.md)
+1. [Follow the preparation instructions](preparation.md)
 2. Start the notebook server *from the same directory as this README*
    with `jupyter notebook`
 
