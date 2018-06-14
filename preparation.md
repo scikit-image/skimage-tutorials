@@ -17,9 +17,9 @@ required packages installed in order to participate fully.
   please ensure the requirements below are met:
 
   - `numpy` >= 1.12
-  - `scipy` >= 0.19
-  - `matplotlib` >= 2.0
-  - `scikit-image` >= 0.13
+  - `scipy` >= 1.0
+  - `matplotlib` >= 2.1
+  - `scikit-image` >= 0.14
   - `scikit-learn` >= 0.18
 
   Please see "Test your setup" below.
@@ -32,7 +32,14 @@ required packages installed in order to participate fully.
 
   ```bash
   $ jupyter --version
-  4.1.0
+  4.4.0
+  ```
+
+  Also activate Jupyter Widgets:
+
+  ```
+  pip install -q ipywidgets
+  jupyter nbextension enable --py --sys-prefix widgetsnbextension
   ```
 
 ## Download lecture material
@@ -52,11 +59,11 @@ and run `check_setup.py` to validate your installation.
 On my computer, I see (but your version numbers may differ):
 
 ```
-[✓] scikit-image  0.13.1
-[✓] numpy         1.13.3
-[✓] scipy         1.0.0
-[✓] matplotlib    2.1.0
-[✓] notebook      5.0.0
+[✓] scikit-image  0.14.0
+[✓] numpy         1.14.5
+[✓] scipy         1.1.0
+[✓] matplotlib    2.2.2
+[✓] notebook      5.4.0
 [✓] scikit-learn  0.19.1
 ```
 
