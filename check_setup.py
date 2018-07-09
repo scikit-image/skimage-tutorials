@@ -1,4 +1,5 @@
 import sys
+import os
 from distutils.version import LooseVersion
 
 if sys.version_info.major < 3:
@@ -7,7 +8,7 @@ if sys.version_info.major < 3:
 
     sys.exit(1)
 
-with open('requirements.txt') as f:
+with open(os.path.join(os.path.dirname(__file__), 'requirements.txt')) as f:
     reqs = f.readlines()
 
 reqs = [(pkg, ver) for (pkg, _, ver) in
@@ -39,4 +40,3 @@ for (pkg, version_wanted) in reqs:
     print('[{}] {:<11} {}'.format(
         status, pkg.ljust(13), version_installed)
         )
-
