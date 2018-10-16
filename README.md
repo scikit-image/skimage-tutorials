@@ -3,7 +3,8 @@ scikit-image tutorials
 
 A collection of tutorials for the [scikit-image](http://skimage.org) package.
 
-Launch the tutorial notebooks directly with MyBinder:
+Launch the tutorial notebooks directly with MyBinder now:
+
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/scikit-image/skimage-tutorials/master)
 
 Or you can setup and run on your local machine:
