@@ -5,7 +5,7 @@ A collection of tutorials for the [scikit-image](http://skimage.org) package.
 
 Launch the tutorial notebooks directly with MyBinder now:
 
-[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/scikit-image/skimage-tutorials/master)
+[![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/scikit-image/skimage-tutorials/master?filepath=index.ipynb)
 
 Or you can setup and run on your local machine:
 1. [Follow the preparation instructions](preparation.md)
