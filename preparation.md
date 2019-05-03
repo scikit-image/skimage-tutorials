@@ -19,7 +19,7 @@ required packages installed in order to participate fully.
   - `numpy` >= 1.12
   - `scipy` >= 1.0
   - `matplotlib` >= 2.1
-  - `scikit-image` >= 0.14
+  - `scikit-image` >= 0.15
   - `scikit-learn` >= 0.18
 
   Please see "Test your setup" below.
@@ -59,7 +59,7 @@ and run `check_setup.py` to validate your installation.
 On my computer, I see (but your version numbers may differ):
 
 ```
-[✓] scikit-image  0.14.0
+[✓] scikit-image  0.15.0
 [✓] numpy         1.14.5
 [✓] scipy         1.1.0
 [✓] matplotlib    2.2.2
