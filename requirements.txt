@@ -1,4 +1,4 @@
-scikit-image >= 0.14
+scikit-image >= 0.15
 numpy >= 1.12
 scipy >= 1.0
 matplotlib >= 2.1
