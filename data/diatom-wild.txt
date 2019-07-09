@@ -1,0 +1,24 @@
+These images are from
+https://www.nature.com/articles/s41524-019-0202-3
+
+"Deep data analytics for genetic engineering of diatoms linking
+genotype to phenotype via machine learning", Artem A. Trofimov, Alison
+A. Pawlicki, Nikolay Borodinov, Shovon Mandal, Teresa J. Mathews, Mark
+Hildebrand, Maxim A. Ziatdinov, Katherine A. Hausladen, Paulina
+K. Urbanowicz, Chad A. Steed, Anton V. Ievlev, Alex Belianinov, Joshua
+K. Michener, Rama Vasudevan, and Olga S. Ovchinnikova. NPJ
+Computational Materials 5, 67 (2019).
+
+This article is licensed under a Creative Commons
+Attribution 4.0 International License, which permits use, sharing,
+adaptation, distribution and reproduction in any medium or format, as
+long as you give appropriate credit to the original author(s) and the
+source, provide a link to the Creative Commons license, and indicate
+if changes were made. The images or other third party material in this
+article are included in the article’s Creative Commons license, unless
+indicated otherwise in a credit line to the material. If material is
+not included in the article’s Creative Commons license and your
+intended use is not permitted by statutory regulation or exceeds the
+permitted use, you will need to obtain permission directly from the
+copyright holder. To view a copy of this license, visit
+http://creativecommons.org/licenses/by/4.0/.
