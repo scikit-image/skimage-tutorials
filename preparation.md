@@ -11,7 +11,7 @@ required packages installed in order to participate fully.
 - Python
 
   If you are new to Python, please install the
-  [Anaconda distribution](https://www.continuum.io/downloads) for
+  [Anaconda distribution](https://www.anaconda.com/distribution/) for
   **Python version 3** (available on OSX, Linux, and Windows).
   Everyone else, feel free to use your favorite distribution, but
   please ensure the requirements below are met:
