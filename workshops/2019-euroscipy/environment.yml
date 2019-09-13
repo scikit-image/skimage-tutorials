@@ -1,0 +1,13 @@
+name: euroscipy2019_skimage
+channels:
+  - conda-forge
+dependencies:
+  - python >= 3.6
+  - numpy >= 1.12
+  - scipy >= 1.0
+  - matplotlib >= 2.1
+  - scikit-image >= 0.15
+  - notebook >= 4.0
+  - itk >= 5.0
+  - itkwidgets >= 0.18
+  - joblib >= 0.12
