@@ -28,9 +28,15 @@ All materials in this repository are available free of restriction
 under the Creative Commons CC0 1.0 Universal Public Domain Dedication
 (see LICENSE.txt).
 
-However, we request that you actively acknowledge and give
+However, we ask that you actively acknowledge and give
 attribution to this repo and to the authors if you reproduce them or create any
-derivative works.
+derivative works.  Specifically:
+
+ * Keep the CC0 Public Domain Dedication in tact when re-using large
+   portions of the material (such as an entire lecture), so that
+   others may benefit from the same license you did.
+
+ * Do not represent yourself as the author of re-used material.
 
 For more information on these guidelines, which are sometimes known as
 CC0 (+BY), see [this blog post](http://www.dancohen.org/2013/11/26/cc0-by/) by
