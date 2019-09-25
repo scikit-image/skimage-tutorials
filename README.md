@@ -32,7 +32,7 @@ However, we ask that you actively acknowledge and give
 attribution to this repo and to the authors if you reproduce them or create any
 derivative works.  Specifically:
 
- * Keep the CC0 Public Domain Dedication in tact when re-using large
+ * Keep the CC0 Public Domain Dedication intact when reusing large
    portions of the material (such as an entire lecture), so that
    others may benefit from the same license you did.
 
