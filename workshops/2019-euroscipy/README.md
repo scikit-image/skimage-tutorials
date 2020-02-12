@@ -1,9 +1,5 @@
 # EuroSciPy 2019 - 3D image processing with scikit-image
 
-Alexandre de Siqueira, `alex.desiqueira@igdore.org`
-
-BIDS @ University of California, Berkeley
-
 * Support material for the tutorial _3D image processing with scikit-image_.
 
 Open it using Binder: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/alexdesiqueira/tutorials/master)
@@ -19,7 +15,3 @@ For more info:
   * [[EuroSciPy (all editions)]](https://www.euroscipy.org/)
   * [[EuroSciPy 2019]](https://www.euroscipy.org/2019/)
   * [[scikit-image]](https://scikit-image.org/)
-
-To cite this material, please use the reference below (this is a Chicago-like style):
-
-  * _de Siqueira, Alexandre Fioravante. "Support material for the tutorial 3D image processing with scikit-image." EuroSciPy 2019. 2019, Sep 02. Access date: < ACCESS DATE >_
