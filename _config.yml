@@ -3,4 +3,4 @@ author: The scikit-image contributors
 logo: 'images/logo.png'
 exclude_patterns: ['workshops/*', '*/not_yet_booked/*', '*/solutions/*']
 execute:
-    execute_notebooks : 'off'
+    execute_notebooks : 'auto'
