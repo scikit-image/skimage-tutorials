@@ -1,0 +1,10 @@
+title: Image analysis in Python
+author: The scikit-image contributors
+logo: 'images/logo.png'
+exclude_patterns:
+    - 'workshops/*'
+    - '*/not_yet_booked/*'
+    - '*/solutions/*'
+    - '*/_build/*'
+execute:
+    execute_notebooks : 'auto'
