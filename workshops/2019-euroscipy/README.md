@@ -2,7 +2,7 @@
 
 * Support material for the tutorial _3D image processing with scikit-image_.
 
-Open it using Binder: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/alexdesiqueira/tutorials/master)
+Open it using Binder: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/alexdesiqueira/tutorials/main)
 
 Inside Binder's structure, please point to `/2019/euroscipy2019`.
 
