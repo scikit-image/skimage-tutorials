@@ -75,6 +75,6 @@ attendees.**
 There are two ways of downloading the lecture materials:
 
 a) Get the `ZIP file from GitHub
-   <https://github.com/scikit-image/skimage-tutorials/archive/master.zip>`__
+   <https://github.com/scikit-image/skimage-tutorials/archive/main.zip>`__
 b) Clone the repository at
    https://github.com/scikit-image/skimage-tutorial

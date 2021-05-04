@@ -28,7 +28,7 @@ Then, to activate this environment,
 
 ` $ conda activate euroscipy2019_skimage`
 
-To come back to your master environment,
+To come back to your base environment,
 
 `$ conda activate`
 
