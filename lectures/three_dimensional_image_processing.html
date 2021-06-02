@@ -1,0 +1,917 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to three-dimensional image processing &#8212; Image analysis in Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_customize.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/output_cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/badge_only.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/docversions.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/underscore-1.3.1.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/random.js"></script>
+    <script src="../_static/jquery-1.11.1.js"></script>
+    <script src="../_static/websupport.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <script src="../_static/js/modernizr.min.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Segmentation" href="4_segmentation.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Image analysis in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="00_images_are_arrays.html">
+   Images are numpy arrays
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_image_filters.html">
+   Image filtering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3_morphological_operations.html">
+   Morphological operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4_segmentation.html">
+   Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Introduction to three-dimensional image processing
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/lectures/three_dimensional_image_processing.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/lectures/three_dimensional_image_processing.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#input-output-and-display">
+   Input/Output and display
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exposure">
+   Exposure
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#edge-detection">
+   Edge detection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#morphological-operations">
+   Morphological operations
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#segmentation">
+   Segmentation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#making-measurements">
+   Making measurements
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#challenge-problems">
+   Challenge problems
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#improve-the-segmentation">
+     Improve the segmentation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#segment-cell-membranes">
+     Segment cell membranes
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#measure-the-area-in-m3-of-the-cells">
+     Measure the area in µm³ of the cells
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+<span class="o">%</span><span class="k">gui</span> qt
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span> <span class="k">as</span> <span class="n">ndi</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="p">(</span><span class="n">exposure</span><span class="p">,</span> <span class="n">feature</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">io</span><span class="p">,</span> <span class="n">measure</span><span class="p">,</span>
+                      <span class="n">morphology</span><span class="p">,</span> <span class="n">restoration</span><span class="p">,</span> <span class="n">segmentation</span><span class="p">,</span> <span class="n">transform</span><span class="p">,</span>
+                      <span class="n">util</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">napari</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="introduction-to-three-dimensional-image-processing">
+<h1>Introduction to three-dimensional image processing<a class="headerlink" href="#introduction-to-three-dimensional-image-processing" title="Permalink to this headline">¶</a></h1>
+<p>Images are represented as <code class="docutils literal notranslate"><span class="pre">numpy</span></code> arrays. A single-channel, or grayscale, image is a 2D matrix of pixel intensities of shape <code class="docutils literal notranslate"><span class="pre">(row,</span> <span class="pre">column)</span></code>. We can construct a 3D volume as a series of 2D <code class="docutils literal notranslate"><span class="pre">planes</span></code>, giving 3D images the shape <code class="docutils literal notranslate"><span class="pre">(plane,</span> <span class="pre">row,</span> <span class="pre">column)</span></code>. Multichannel data adds a <code class="docutils literal notranslate"><span class="pre">channel</span></code> dimension in the final position containing color information.</p>
+<p>These conventions are summarized in the table below:</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:left head"><p>Image type</p></th>
+<th class="text-align:left head"><p>Coordinates</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:left"><p>2D grayscale</p></td>
+<td class="text-align:left"><p>(row, column)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>2D multichannel</p></td>
+<td class="text-align:left"><p>(row, column, channel)</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:left"><p>3D grayscale</p></td>
+<td class="text-align:left"><p>(plane, row, column)</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:left"><p>3D multichannel</p></td>
+<td class="text-align:left"><p>(plane, row, column, channel)</p></td>
+</tr>
+</tbody>
+</table>
+<p>Some 3D images are constructed with equal resolution in each dimension; e.g., a computer generated rendering of a sphere. Most experimental data captures one dimension at a lower resolution than the other two; e.g., photographing thin slices to approximate a 3D structure as a stack of 2D images. The distance between pixels in each dimension, called <code class="docutils literal notranslate"><span class="pre">spacing</span></code>, is encoded in a tuple and is accepted as a parameter by some <code class="docutils literal notranslate"><span class="pre">skimage</span></code> functions and can be used to adjust contributions to filters.</p>
+<div class="section" id="input-output-and-display">
+<h2>Input/Output and display<a class="headerlink" href="#input-output-and-display" title="Permalink to this headline">¶</a></h2>
+<p>Three dimensional data can be loaded with <code class="docutils literal notranslate"><span class="pre">skimage.io.imread</span></code>. The data for this tutorial was provided by the Allen Institute for Cell Science. It has been downsampled by a factor of 4 in the <code class="docutils literal notranslate"><span class="pre">row</span></code> and <code class="docutils literal notranslate"><span class="pre">column</span></code> dimensions to reduce computational time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nuclei</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../images/cells.tif&#39;</span><span class="p">)</span>
+<span class="n">membranes</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../images/cells_membrane.tif&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;shape: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nuclei</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dtype: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nuclei</span><span class="o">.</span><span class="n">dtype</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;range: (</span><span class="si">{}</span><span class="s2">, </span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">nuclei</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">nuclei</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>shape: (60, 256, 256)
+dtype: float64
+range: (0.0, 1.0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The distance between pixels was reported by the microscope used to image the cells. This <code class="docutils literal notranslate"><span class="pre">spacing</span></code> information will be used to adjust contributions to filters and helps decide when to apply operations planewise. We’ve chosen to normalize it to <code class="docutils literal notranslate"><span class="pre">1.0</span></code> in the <code class="docutils literal notranslate"><span class="pre">row</span></code> and <code class="docutils literal notranslate"><span class="pre">column</span></code> dimensions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The microscope reports the following spacing (in µm)</span>
+<span class="n">original_spacing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2900000</span><span class="p">,</span> <span class="mf">0.0650000</span><span class="p">,</span> <span class="mf">0.0650000</span><span class="p">])</span>
+
+<span class="c1"># We downsampled each slice 4x to make the data smaller</span>
+<span class="n">rescaled_spacing</span> <span class="o">=</span> <span class="n">original_spacing</span> <span class="o">*</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="c1"># Normalize the spacing so that pixels are a distance of 1 apart</span>
+<span class="n">spacing</span> <span class="o">=</span> <span class="n">rescaled_spacing</span> <span class="o">/</span> <span class="n">rescaled_spacing</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;microscope spacing: </span><span class="si">{</span><span class="n">original_spacing</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;after rescaling images: </span><span class="si">{</span><span class="n">rescaled_spacing</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;normalized spacing: </span><span class="si">{</span><span class="n">spacing</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>microscope spacing: [0.29  0.065 0.065]
+after rescaling images: [0.29 0.26 0.26]
+normalized spacing: [1.11538462 1.         1.        ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can view the 3D image using napari.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">view_image</span><span class="p">(</span><span class="n">nuclei</span><span class="p">,</span> <span class="n">contrast_limits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                           <span class="n">scale</span><span class="o">=</span><span class="n">spacing</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">napari.utils.notebook_display</span> <span class="kn">import</span> <span class="n">nbscreenshot</span>
+
+<span class="n">center</span> <span class="o">=</span> <span class="n">nuclei</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span>
+
+<span class="n">viewer</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+<span class="n">nbscreenshot</span><span class="p">(</span><span class="n">viewer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/three_dimensional_image_processing_9_0.png" src="../_images/three_dimensional_image_processing_9_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="exposure">
+<h2>Exposure<a class="headerlink" href="#exposure" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">skimage.exposure</span></code> contains a number of functions for adjusting image contrast. These functions operate on pixel values. Generally, image dimensionality or pixel spacing does not need to be considered.</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Gamma_correction">Gamma correction</a>, also known as Power Law Transform, brightens or darkens an image. The function <span class="math notranslate nohighlight">\(O = I^\gamma\)</span> is applied to each pixel in the image. A <code class="docutils literal notranslate"><span class="pre">gamma</span> <span class="pre">&lt;</span> <span class="pre">1</span></code> will brighten an image, while a <code class="docutils literal notranslate"><span class="pre">gamma</span> <span class="pre">&gt;</span> <span class="pre">1</span></code> will darken an image.</p>
+<p>napari has a built-in gamma correction slider for image layers. Try playing with the gamma slider to see its effect on the image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Helper function for plotting histograms.</span>
+<span class="k">def</span> <span class="nf">plot_hist</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">ticklabel_format</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;scientific&quot;</span><span class="p">,</span> <span class="n">scilimits</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    
+    <span class="k">if</span> <span class="n">title</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Histogram_equalization">Histogram equalization</a> improves contrast in an image by redistributing pixel intensities. The most common pixel intensities are spread out, allowing areas of lower local contrast to gain a higher contrast. This may enhance background noise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">equalized</span> <span class="o">=</span> <span class="n">exposure</span><span class="o">.</span><span class="n">equalize_hist</span><span class="p">(</span><span class="n">nuclei</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="p">((</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">plot_hist</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">nuclei</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Original&quot;</span><span class="p">)</span>
+<span class="n">plot_hist</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">equalized</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Histogram equalization&quot;</span><span class="p">)</span>
+
+<span class="n">cdf</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">exposure</span><span class="o">.</span><span class="n">cumulative_distribution</span><span class="p">(</span><span class="n">nuclei</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+<span class="n">c</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">c</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Original CDF&quot;</span><span class="p">)</span>
+
+<span class="n">cdf</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="n">exposure</span><span class="o">.</span><span class="n">cumulative_distribution</span><span class="p">(</span><span class="n">equalized</span><span class="o">.</span><span class="n">ravel</span><span class="p">())</span>
+<span class="n">d</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">bins</span><span class="p">,</span> <span class="n">cdf</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">d</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Histogram equalization CDF&quot;</span><span class="p">);</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/three_dimensional_image_processing_14_0.png" src="../_images/three_dimensional_image_processing_14_0.png" />
+</div>
+</div>
+<p>We can look at the image in our napari viewer:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">equalized</span><span class="p">,</span> <span class="n">contrast_limits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;histeq&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Image layer &#39;histeq&#39; at 0x7f45281091c0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Most experimental images are affected by salt and pepper noise. A few bright artifacts can decrease the relative intensity of the pixels of interest. A simple way to improve contrast is to clip the pixel values on the lowest and highest extremes. Clipping the darkest and brightest 0.5% of pixels will increase the overall contrast of the image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">nuclei</span><span class="p">,</span> <span class="n">q</span><span class="o">=</span><span class="p">(</span><span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.995</span><span class="p">))</span>
+
+<span class="n">stretched</span> <span class="o">=</span> <span class="n">exposure</span><span class="o">.</span><span class="n">rescale_intensity</span><span class="p">(</span>
+    <span class="n">nuclei</span><span class="p">,</span> 
+    <span class="n">in_range</span><span class="o">=</span><span class="p">(</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="p">),</span> 
+    <span class="n">out_range</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span>
+<span class="p">)</span>
+
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">stretched</span><span class="p">,</span> <span class="n">contrast_limits</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;stretched&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Image layer &#39;stretched&#39; at 0x7f4528119310&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+<span class="n">nbscreenshot</span><span class="p">(</span><span class="n">viewer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/three_dimensional_image_processing_19_0.png" src="../_images/three_dimensional_image_processing_19_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="edge-detection">
+<h2>Edge detection<a class="headerlink" href="#edge-detection" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Edge_detection">Edge detection</a> highlights regions in the image where a sharp change in contrast occurs. The intensity of an edge corresponds to the steepness of the transition from one intensity to another. A gradual shift from bright to dark intensity results in a dim edge. An abrupt shift results in a bright edge.</p>
+<p>We saw the <a class="reference external" href="https://en.wikipedia.org/wiki/Sobel_operator">Sobel operator</a> in the filters lesson. It is an edge detection algorithm that approximates the gradient of the image intensity, and is fast to compute. <code class="docutils literal notranslate"><span class="pre">skimage.filters.sobel</span></code> has not been adapted for 3D images, but it can be readily generalised (see the linked Wikipedia entry). Let’s try it!</p>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="k">del</span> <span class="n">viewer</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">edges</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">sobel</span><span class="p">(</span><span class="n">nuclei</span><span class="p">)</span>
+
+<span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">view_image</span><span class="p">(</span><span class="n">nuclei</span><span class="p">,</span> <span class="n">blending</span><span class="o">=</span><span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;nuclei&#39;</span><span class="p">)</span>
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">edges</span><span class="p">,</span> <span class="n">blending</span><span class="o">=</span><span class="s1">&#39;additive&#39;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s1">&#39;magenta&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;edges&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Image layer &#39;edges&#39; at 0x7f45009026a0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+<span class="n">nbscreenshot</span><span class="p">(</span><span class="n">viewer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">denoised</span> <span class="o">=</span> <span class="n">ndi</span><span class="o">.</span><span class="n">median_filter</span><span class="p">(</span><span class="n">nuclei</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Thresholding_%28image_processing%29">Thresholding</a> is used to create binary images. A threshold value determines the intensity value separating foreground pixels from background pixels. Foregound pixels are pixels brighter than the threshold value, background pixels are darker. Thresholding is a form of image segmentation.</p>
+<p>Different thresholding algorithms produce different results. <a class="reference external" href="https://en.wikipedia.org/wiki/Otsu%27s_method">Otsu’s method</a> and Li’s minimum cross entropy threshold are two common algorithms. Below, we use Li. You can use <code class="docutils literal notranslate"><span class="pre">skimage.filters.threshold_&lt;TAB&gt;</span></code> to find different thresholding methods.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">li_thresholded</span> <span class="o">=</span> <span class="n">denoised</span> <span class="o">&gt;</span> <span class="n">filters</span><span class="o">.</span><span class="n">threshold_li</span><span class="p">(</span><span class="n">denoised</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">li_thresholded</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;thresholded&#39;</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+<span class="n">nbscreenshot</span><span class="p">(</span><span class="n">viewer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see holes due to variations of the image intensity inside the nuclei. We can actually fill them with <code class="docutils literal notranslate"><span class="pre">scipy.ndimage.binary_fill_holes</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filled</span> <span class="o">=</span> <span class="n">ndi</span><span class="o">.</span><span class="n">binary_fill_holes</span><span class="p">(</span><span class="n">li_thresholded</span><span class="p">)</span>
+
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">filled</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;filled&#39;</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+<span class="n">nbscreenshot</span><span class="p">(</span><span class="n">viewer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="morphological-operations">
+<h2>Morphological operations<a class="headerlink" href="#morphological-operations" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Mathematical_morphology">Mathematical morphology</a> operations and structuring elements are defined in <code class="docutils literal notranslate"><span class="pre">skimage.morphology</span></code>. Structuring elements are shapes which define areas over which an operation is applied. The response to the filter indicates how well the neighborhood corresponds to the structuring element’s shape.</p>
+<p>There are a number of two and three dimensional structuring elements defined in <code class="docutils literal notranslate"><span class="pre">skimage.morphology</span></code>. Not all 2D structuring element have a 3D counterpart. The simplest and most commonly used structuring elements are the <code class="docutils literal notranslate"><span class="pre">disk</span></code>/<code class="docutils literal notranslate"><span class="pre">ball</span></code> and <code class="docutils literal notranslate"><span class="pre">square</span></code>/<code class="docutils literal notranslate"><span class="pre">cube</span></code>.</p>
+<p>Morphology operations can be chained together to denoise an image. For example, a <code class="docutils literal notranslate"><span class="pre">closing</span></code> applied to an <code class="docutils literal notranslate"><span class="pre">opening</span></code> can remove salt and pepper noise from an image.</p>
+<p>Functions operating on <a class="reference external" href="https://en.wikipedia.org/wiki/Connected_space">connected components</a> can remove small undesired elements while preserving larger shapes.</p>
+<p><code class="docutils literal notranslate"><span class="pre">skimage.morphology.remove_small_holes</span></code> fills holes and <code class="docutils literal notranslate"><span class="pre">skimage.morphology.remove_small_objects</span></code> removes bright regions. Both functions accept a <code class="docutils literal notranslate"><span class="pre">min_size</span></code> parameter, which is the minimum size (in pixels) of accepted holes or objects. The <code class="docutils literal notranslate"><span class="pre">min_size</span></code> can be approximated by a cube.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">width</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="n">remove_holes</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">remove_small_holes</span><span class="p">(</span>
+    <span class="n">filled</span><span class="p">,</span> 
+    <span class="n">area_threshold</span><span class="o">=</span><span class="n">width</span> <span class="o">**</span> <span class="mi">3</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">width</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="n">remove_objects</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">remove_small_objects</span><span class="p">(</span>
+    <span class="n">remove_holes</span><span class="p">,</span> 
+    <span class="n">min_size</span><span class="o">=</span><span class="n">width</span> <span class="o">**</span> <span class="mi">3</span>
+<span class="p">)</span>
+
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">remove_objects</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;cleaned&#39;</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.3</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+<span class="n">nbscreenshot</span><span class="p">(</span><span class="n">viewer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="segmentation">
+<h2>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Image_segmentation">Image segmentation</a> partitions images into regions of interest. Interger labels are assigned to each region to distinguish regions of interest.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">remove_objects</span><span class="p">)</span>
+
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_labels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;labels&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+<span class="n">nbscreenshot</span><span class="p">(</span><span class="n">viewer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Connected components of the binary image are assigned the same label via <code class="docutils literal notranslate"><span class="pre">skimage.measure.label</span></code>. Tightly packed cells  connected in the binary image are assigned the same label.</p>
+<p>A better segmentation would assign different labels to disjoint regions in the original image.</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Watershed_%28image_processing%29">Watershed segmentation</a> can distinguish touching objects. Markers are placed at local minima/maxima and expanded outward until there is a collision with markers from another region, with the image intensity serving as a guide for the marker boundaries.</p>
+<p>It can be quite challenging to find markers with the right location. A slight amount of noise in the image can result in very wrong point locations. Here is a common approach: find the distance from the object boundaries, then place points at the maximal distance.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">transformed</span> <span class="o">=</span> <span class="n">ndi</span><span class="o">.</span><span class="n">distance_transform_edt</span><span class="p">(</span><span class="n">remove_objects</span><span class="p">,</span> <span class="n">sampling</span><span class="o">=</span><span class="n">spacing</span><span class="p">)</span>
+
+<span class="n">maxima</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">local_maxima</span><span class="p">(</span><span class="n">transformed</span><span class="p">)</span>
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_points</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">maxima</span><span class="p">)),</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;bad points&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-input docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">ndisplay</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">viewer</span><span class="o">.</span><span class="n">dims</span><span class="o">.</span><span class="n">set_point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">center</span><span class="p">)</span>
+<span class="n">nbscreenshot</span><span class="p">(</span><span class="n">viewer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">angles</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>With napari, we can combine interactive point selections with the automated watershed algorithm from <code class="docutils literal notranslate"><span class="pre">skimage.morphology</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;bad points&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">visible</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">viewer</span><span class="o">.</span><span class="n">add_points</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;interactive points&#39;</span><span class="p">,</span> <span class="n">ndim</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">points</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;add&#39;</span>
+
+<span class="c1"># now, annotate the centers of the nuclei in your image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_hide-cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">points</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+      <span class="p">[[</span> <span class="mf">30.</span>        <span class="p">,</span>  <span class="mf">14.2598685</span> <span class="p">,</span>  <span class="mf">27.7741219</span> <span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span>  <span class="mf">30.10416663</span><span class="p">,</span>  <span class="mf">81.36513029</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span>  <span class="mf">13.32785096</span><span class="p">,</span> <span class="mf">144.27631406</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span>  <span class="mf">46.8804823</span> <span class="p">,</span> <span class="mf">191.80920846</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span>  <span class="mf">43.15241215</span><span class="p">,</span> <span class="mf">211.84758551</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span>  <span class="mf">94.87938547</span><span class="p">,</span> <span class="mf">160.12061219</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span>  <span class="mf">72.97697335</span><span class="p">,</span> <span class="mf">112.58771779</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span> <span class="mf">138.21820096</span><span class="p">,</span> <span class="mf">189.01315585</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span> <span class="mf">144.74232372</span><span class="p">,</span> <span class="mf">242.60416424</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span>  <span class="mf">98.14144685</span><span class="p">,</span> <span class="mf">251.92433962</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span> <span class="mf">153.59649032</span><span class="p">,</span> <span class="mf">112.58771779</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span> <span class="mf">134.49013081</span><span class="p">,</span>  <span class="mf">40.35635865</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span> <span class="mf">182.95504275</span><span class="p">,</span>  <span class="mf">48.74451649</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span> <span class="mf">216.04166532</span><span class="p">,</span>  <span class="mf">80.89912152</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span> <span class="mf">235.14802483</span><span class="p">,</span> <span class="mf">130.296051</span>  <span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span> <span class="mf">196.00328827</span><span class="p">,</span> <span class="mf">169.44078757</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span> <span class="mf">245.86622651</span><span class="p">,</span> <span class="mf">202.06140137</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">30.</span>        <span class="p">,</span> <span class="mf">213.71162148</span><span class="p">,</span> <span class="mf">250.52631331</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mf">28.</span>        <span class="p">,</span>  <span class="mf">87.42324517</span><span class="p">,</span>  <span class="mf">52.00657787</span><span class="p">]],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once you have marked all the points, you can grab the data back, and make a markers image for <code class="docutils literal notranslate"><span class="pre">skimage.segmentation.watershed</span></code>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">marker_locations</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">data</span>
+
+<span class="n">markers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">nuclei</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint32</span><span class="p">)</span>
+<span class="n">marker_indices</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">marker_locations</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+<span class="n">markers</span><span class="p">[</span><span class="n">marker_indices</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">marker_locations</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="n">markers_big</span> <span class="o">=</span> <span class="n">morphology</span><span class="o">.</span><span class="n">dilation</span><span class="p">(</span><span class="n">markers</span><span class="p">,</span> <span class="n">morphology</span><span class="o">.</span><span class="n">ball</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+<span class="n">segmented</span> <span class="o">=</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">watershed</span><span class="p">(</span>
+    <span class="n">edges</span><span class="p">,</span>
+    <span class="n">markers_big</span><span class="p">,</span> 
+    <span class="n">mask</span><span class="o">=</span><span class="n">remove_objects</span>
+<span class="p">)</span>
+
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_labels</span><span class="p">(</span><span class="n">segmented</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;segmented&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After watershed, we have better disambiguation between internal cells!</p>
+</div>
+<div class="section" id="making-measurements">
+<h2>Making measurements<a class="headerlink" href="#making-measurements" title="Permalink to this headline">¶</a></h2>
+<p>Once we have defined our objects, we can make measurements on them using <code class="docutils literal notranslate"><span class="pre">skimage.measure.regionprops</span></code> and the new <code class="docutils literal notranslate"><span class="pre">skimage.measure.regionprops_table</span></code>. These measurements include features such as area or volume, bounding boxes, and intensity statistics.</p>
+<p>Before measuring objects, it helps to clear objects from the image border. Measurements should only be collected for objects entirely contained in the image.</p>
+<p>Given the layer-like structure of our data, we only want to clear the objects touching the sides of the volume, but not the top and bottom, so we pad and crop the volume along the 0th axis to avoid clearing the mitotic nucleus.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">segmented_padded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span>
+    <span class="n">segmented</span><span class="p">,</span>
+    <span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">,</span>
+    <span class="n">constant_values</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">interior_labels</span> <span class="o">=</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">clear_border</span><span class="p">(</span><span class="n">segmented_padded</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>After clearing the border, the object labels are no longer sequentially increasing. Optionally, the labels can be renumbered such that there are no jumps in the list of image labels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">relabeled</span><span class="p">,</span> <span class="n">fw_map</span><span class="p">,</span> <span class="n">inv_map</span> <span class="o">=</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">relabel_sequential</span><span class="p">(</span><span class="n">interior_labels</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;relabeled labels: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">relabeled</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">skimage.measure.regionprops</span></code> automatically measures many labeled image features. Optionally, an <code class="docutils literal notranslate"><span class="pre">intensity_image</span></code> can be supplied and intensity features are extracted per object. It’s good practice to make measurements on the original image.</p>
+<p>Not all properties are supported for 3D data. Below are lists of supported and unsupported 3D measurements.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">regionprops</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">regionprops</span><span class="p">(</span><span class="n">relabeled</span><span class="p">,</span> <span class="n">intensity_image</span><span class="o">=</span><span class="n">nuclei</span><span class="p">)</span>
+
+<span class="n">supported</span> <span class="o">=</span> <span class="p">[]</span> 
+<span class="n">unsupported</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">regionprops</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">regionprops</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">prop</span><span class="p">]</span>
+        <span class="n">supported</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prop</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">NotImplementedError</span><span class="p">:</span>
+        <span class="n">unsupported</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prop</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Supported properties:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  &quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">supported</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Unsupported properties:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  &quot;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">unsupported</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">skimage.measure.regionprops</span></code> ignores the 0 label, which represents the background.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;measured regions: </span><span class="si">{</span><span class="p">[</span><span class="n">regionprop</span><span class="o">.</span><span class="n">label</span> <span class="k">for</span> <span class="n">regionprop</span> <span class="ow">in</span> <span class="n">regionprops</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">regionprops_table</span></code> returns a dictionary of columns compatible with creating a pandas dataframe of properties of the data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+
+<span class="n">info_table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">measure</span><span class="o">.</span><span class="n">regionprops_table</span><span class="p">(</span>
+        <span class="n">relabeled</span><span class="p">,</span> <span class="n">nuclei</span><span class="p">,</span>
+        <span class="n">properties</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">,</span> <span class="s1">&#39;slice&#39;</span><span class="p">,</span> <span class="s1">&#39;area&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_intensity&#39;</span><span class="p">,</span> <span class="s1">&#39;solidity&#39;</span><span class="p">],</span>
+    <span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;label&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">info_table</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now use pandas and seaborn for some analysis!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;area&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;solidity&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">info_table</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;mean_intensity&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see that the mitotic nucleus is a clear outlier from the others in terms of solidity and intensity.</p>
+</div>
+<div class="section" id="challenge-problems">
+<h2>Challenge problems<a class="headerlink" href="#challenge-problems" title="Permalink to this headline">¶</a></h2>
+<p>Put your 3D image processing skills to the test by working through these challenge problems.</p>
+<div class="section" id="improve-the-segmentation">
+<h3>Improve the segmentation<a class="headerlink" href="#improve-the-segmentation" title="Permalink to this headline">¶</a></h3>
+<p>A few objects were oversegmented in the declumping step. Try to improve the segmentation and assign each object a single, unique label. You can try to use <a class="reference external" href="https://scikit-image.org/docs/dev/auto_examples/filters/plot_j_invariant.html">calibrated denoising</a> to get smoother nuclei and membrane images.</p>
+</div>
+<div class="section" id="segment-cell-membranes">
+<h3>Segment cell membranes<a class="headerlink" href="#segment-cell-membranes" title="Permalink to this headline">¶</a></h3>
+<p>Try segmenting the accompanying membrane channel. In the membrane image, the membrane walls are the bright web-like regions. This channel is difficult due to a high amount of noise in the image. Additionally, it can be hard to determine where the membrane ends in the image (it’s not the first and last planes).</p>
+<p>Below is a 2D segmentation of the membrane:</p>
+<p><img alt="" src="../_images/membrane_segmentation.png" /></p>
+<p>Hint: there should only be one nucleus per membrane.</p>
+</div>
+<div class="section" id="measure-the-area-in-m3-of-the-cells">
+<h3>Measure the area in µm³ of the cells<a class="headerlink" href="#measure-the-area-in-m3-of-the-cells" title="Permalink to this headline">¶</a></h3>
+<p>Once you have segmented the cell membranes, use regionprops to measure the distribution of cell areas.</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="4_segmentation.html" title="previous page">Segmentation</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The scikit-image contributors<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

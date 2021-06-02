@@ -1,0 +1,945 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Segmentation &#8212; Image analysis in Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_customize.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/output_cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/badge_only.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/docversions.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/underscore-1.3.1.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/random.js"></script>
+    <script src="../_static/jquery-1.11.1.js"></script>
+    <script src="../_static/websupport.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <script src="../_static/js/modernizr.min.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction to three-dimensional image processing" href="three_dimensional_image_processing.html" />
+    <link rel="prev" title="Morphological operations" href="3_morphological_operations.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Image analysis in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="00_images_are_arrays.html">
+   Images are numpy arrays
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="1_image_filters.html">
+   Image filtering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3_morphological_operations.html">
+   Morphological operations
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="three_dimensional_image_processing.html">
+   Introduction to three-dimensional image processing
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/lectures/4_segmentation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/lectures/4_segmentation.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#separating-an-image-into-one-or-more-regions-of-interest">
+   Separating an image into one or more regions of interest.
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#segmentation-contains-two-major-sub-fields">
+     Segmentation contains two major sub-fields
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#thresholding">
+   Thresholding
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#histograms">
+     Histograms
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#experimentation-supervised-thresholding">
+     Experimentation: supervised thresholding
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#experimentation-unsupervised-thresholding">
+     Experimentation: unsupervised thresholding
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#supervised-segmentation">
+   Supervised segmentation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#active-contour-segmentation">
+     Active contour segmentation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#random-walker">
+     Random walker
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#flood-fill">
+   Flood fill
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#unsupervised-segmentation">
+   Unsupervised segmentation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#slic">
+     SLIC
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#chan-vese">
+     Chan-Vese
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#felzenszwalb">
+     Felzenszwalb
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#combining-regions-with-a-region-adjacency-graph-rag">
+   Combining regions with a Region Adjacency Graph (RAG)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#finally-cut-the-graph">
+     Finally, cut the graph
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-cat-picture">
+   Exercise: Cat picture
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell tag_remove-input tag_remove-output docutils container">
+</div>
+<div class="section" id="segmentation">
+<h1>Segmentation<a class="headerlink" href="#segmentation" title="Permalink to this headline">¶</a></h1>
+<hr class="docutils" />
+<div class="section" id="separating-an-image-into-one-or-more-regions-of-interest">
+<h2>Separating an image into one or more regions of interest.<a class="headerlink" href="#separating-an-image-into-one-or-more-regions-of-interest" title="Permalink to this headline">¶</a></h2>
+<p>Everyone has heard or seen Photoshop or a similar graphics editor take a person from one image and place them into another.  The first step of doing this is <em>identifying where that person is in the source image</em>.</p>
+<p>In popular culture, the Terminator’s vision segments humans:</p>
+<img src="../workshops/2014-scipy/images/terminator-vision.png" width="700px"/>
+<div class="section" id="segmentation-contains-two-major-sub-fields">
+<h3>Segmentation contains two major sub-fields<a class="headerlink" href="#segmentation-contains-two-major-sub-fields" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><p><strong>Supervised</strong> segmentation: Some prior knowledge, possibly from human input, is used to guide the algorithm.  Supervised algorithms currently included in scikit-image include</p>
+<ul>
+<li><p>Thresholding algorithms which require user input (<code class="docutils literal notranslate"><span class="pre">skimage.filters.threshold_*</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skimage.segmentation.random_walker</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skimage.segmentation.active_contour</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skimage.segmentation.watershed</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Unsupervised</strong> segmentation: No prior knowledge.  These algorithms attempt to subdivide into meaningful regions automatically.  The user may be able to tweak settings like number of regions.</p>
+<ul>
+<li><p>Thresholding algorithms which require no user input.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skimage.segmentation.slic</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skimage.segmentation.chan_vese</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skimage.segmentation.felzenszwalb</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skimage.segmentation.quickshift</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>First, some standard imports and a helper function to display our results</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="kn">import</span> <span class="nn">skimage.data</span> <span class="k">as</span> <span class="nn">data</span>
+<span class="kn">import</span> <span class="nn">skimage.segmentation</span> <span class="k">as</span> <span class="nn">seg</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">filters</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">draw</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">color</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">exposure</span>
+
+
+<span class="k">def</span> <span class="nf">image_show</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="n">nrows</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">ncols</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="thresholding">
+<h2>Thresholding<a class="headerlink" href="#thresholding" title="Permalink to this headline">¶</a></h2>
+<p>In some images, global or local contrast may be sufficient to separate regions of interest.  Simply choosing all pixels above or below a certain <em>threshold</em> may be sufficient to segment such an image.</p>
+<p>Let’s try this on an image of a textbook.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">page</span><span class="p">()</span>
+
+<span class="n">image_show</span><span class="p">(</span><span class="n">text</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4_segmentation_5_0.png" src="../_images/4_segmentation_5_0.png" />
+</div>
+</div>
+<div class="section" id="histograms">
+<h3>Histograms<a class="headerlink" href="#histograms" title="Permalink to this headline">¶</a></h3>
+<p>A histogram simply plots the frequency (number of times) values within a certain range appear against the data values themselves.  It is a powerful tool to get to know your data - or decide where you would like to threshold.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4_segmentation_7_0.png" src="../_images/4_segmentation_7_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="experimentation-supervised-thresholding">
+<h3>Experimentation: supervised thresholding<a class="headerlink" href="#experimentation-supervised-thresholding" title="Permalink to this headline">¶</a></h3>
+<p>Try simple NumPy methods and a few different thresholds on this image.  Because <em>we</em> are setting the threshold, this is <em>supervised</em> segmentation.</p>
+<div class="cell tag_raises-exception tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_segmented</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Your code here</span>
+
+<span class="n">image_show</span><span class="p">(</span><span class="n">text_segmented</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Not ideal results!  The shadow on the left creates problems; no single global value really fits.</p>
+<p>What if we don’t want to set the threshold every time?  There are several published methods which look at the histogram and choose what should be an optimal threshold without user input.  These are unsupervised.</p>
+</div>
+<div class="section" id="experimentation-unsupervised-thresholding">
+<h3>Experimentation: unsupervised thresholding<a class="headerlink" href="#experimentation-unsupervised-thresholding" title="Permalink to this headline">¶</a></h3>
+<p>Here we will experiment with a number of automatic thresholding methods available in scikit-image.  Because these require no input beyond the image itself, this is <em>unsupervised</em> segmentation.</p>
+<p>These functions generally return the threshold value(s), rather than applying it to the image directly.</p>
+<p>Try <code class="docutils literal notranslate"><span class="pre">otsu</span></code> and <code class="docutils literal notranslate"><span class="pre">li</span></code>, then take a look at <code class="docutils literal notranslate"><span class="pre">local</span></code> or <code class="docutils literal notranslate"><span class="pre">sauvola</span></code>.</p>
+<div class="cell tag_raises-exception tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">text_threshold</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">threshold_</span>  <span class="c1"># Hit tab with the cursor after the underscore, try several methods</span>
+
+<span class="n">image_show</span><span class="p">(</span><span class="n">text</span> <span class="o">&lt;</span> <span class="n">text_threshold</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="supervised-segmentation">
+<h2>Supervised segmentation<a class="headerlink" href="#supervised-segmentation" title="Permalink to this headline">¶</a></h2>
+<p>Thresholding can be useful, but is rather basic and a high-contrast image will often limit its utility.  For doing more fun things - like removing part of an image - we need more advanced tools.</p>
+<p>For this section, we will use the <code class="docutils literal notranslate"><span class="pre">astronaut</span></code> image and attempt to segment Eileen Collins’ head using supervised segmentation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Our source image</span>
+<span class="n">astronaut</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">astronaut</span><span class="p">()</span>
+<span class="n">image_show</span><span class="p">(</span><span class="n">astronaut</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4_segmentation_15_0.png" src="../_images/4_segmentation_15_0.png" />
+</div>
+</div>
+<p>The contrast is pretty good in this image for her head against the background, so we will simply convert to grayscale with <code class="docutils literal notranslate"><span class="pre">rgb2gray</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">astronaut_gray</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">rgb2gray</span><span class="p">(</span><span class="n">astronaut</span><span class="p">)</span>
+<span class="n">image_show</span><span class="p">(</span><span class="n">astronaut_gray</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4_segmentation_17_0.png" src="../_images/4_segmentation_17_0.png" />
+</div>
+</div>
+<p>We will use two methods, which segment using very different approaches:</p>
+<ul class="simple">
+<li><p><strong>Active Contour</strong>: Initializes using a user-defined contour or line, which then is attracted to edges and/or brightness.  Can be tweaked for many situations, but mixed contrast may be problematic.</p></li>
+<li><p><strong>Random walker</strong>: Initialized using any labeled points, fills the image with the label that seems least distant from the origin point (on a path weighted by pixel differences).  Tends to respect edges or step-offs, and is surprisingly robust to noise.  Only one parameter to tweak.</p></li>
+</ul>
+<div class="section" id="active-contour-segmentation">
+<h3>Active contour segmentation<a class="headerlink" href="#active-contour-segmentation" title="Permalink to this headline">¶</a></h3>
+<p>We must have a set of initial parameters to ‘seed’ our segmentation this.  Let’s draw a circle around the astronaut’s head to initialize the snake.</p>
+<p>This could be done interactively, with a GUI, but for simplicity we will start at the point [100, 220] and use a radius of 100 pixels.  Just a little trigonometry in this helper function…</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">circle_points</span><span class="p">(</span><span class="n">resolution</span><span class="p">,</span> <span class="n">center</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate points defining a circle on an image.&quot;&quot;&quot;</span>
+    <span class="n">radians</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">resolution</span><span class="p">)</span>
+
+    <span class="n">c</span> <span class="o">=</span> <span class="n">center</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">radius</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">radians</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">center</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">radius</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">radians</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">c</span><span class="p">,</span> <span class="n">r</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># Exclude last point because a closed path should not have duplicate points</span>
+<span class="n">points</span> <span class="o">=</span> <span class="n">circle_points</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">220</span><span class="p">],</span> <span class="mi">100</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">snake</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">active_contour</span><span class="p">(</span><span class="n">astronaut_gray</span><span class="p">,</span> <span class="n">points</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">image_show</span><span class="p">(</span><span class="n">astronaut</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;--r&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">snake</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">snake</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;-b&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4_segmentation_22_0.png" src="../_images/4_segmentation_22_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="random-walker">
+<h3>Random walker<a class="headerlink" href="#random-walker" title="Permalink to this headline">¶</a></h3>
+<p>One good analogy for random walker uses graph theory.</p>
+<ul class="simple">
+<li><p>The distance from each pixel to its neighbors is weighted by how similar their values are; the more similar, the lower the cost is to step from one to another</p></li>
+<li><p>The user provides some seed points</p></li>
+<li><p>The algorithm finds the cheapest paths from each point to each seed value.</p></li>
+<li><p>Pixels are labeled with the cheapest/lowest path.</p></li>
+</ul>
+<p>We will re-use the seed values from our previous example.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">astronaut_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">astronaut_gray</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The random walker algorithm expects a label image as input.  Any label above zero will be treated as a seed; all zero-valued locations will be filled with labels from the positive integers available.</p>
+<p>There is also a masking feature where anything labeled -1 will never be labeled or traversed, but we will not use it here.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">indices</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">circle_perimeter</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+
+<span class="n">astronaut_labels</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">astronaut_labels</span><span class="p">[</span><span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">),</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">image_show</span><span class="p">(</span><span class="n">astronaut_labels</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-13-aa063a645039&gt;:4: DeprecationWarning: `np.int` is a deprecated alias for the builtin `int`. To silence this warning, use `int` by itself. Doing this will not modify any behavior and is safe. When replacing `np.int`, you may wish to use e.g. `np.int64` or `np.int32` to specify the precision. If you wish to review your current use, check the release note link for additional information.
+Deprecated in NumPy 1.20; for more details and guidance: https://numpy.org/devdocs/release/1.20.0-notes.html#deprecations
+  astronaut_labels[points[:, 1].astype(np.int), points[:, 0].astype(np.int)] = 2
+</pre></div>
+</div>
+<img alt="../_images/4_segmentation_27_1.png" src="../_images/4_segmentation_27_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">astronaut_segmented</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">random_walker</span><span class="p">(</span><span class="n">astronaut_gray</span><span class="p">,</span> <span class="n">astronaut_labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-14-9ea8609ff9ab&gt;:1: UserWarning: The probability range is outside [0, 1] given the tolerance `prob_tol`. Consider decreasing `beta` and/or decreasing `tol`.
+  astronaut_segmented = seg.random_walker(astronaut_gray, astronaut_labels)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check our results</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">image_show</span><span class="p">(</span><span class="n">astronaut_gray</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">astronaut_segmented</span> <span class="o">==</span> <span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4_segmentation_29_0.png" src="../_images/4_segmentation_29_0.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="flood-fill">
+<h2>Flood fill<a class="headerlink" href="#flood-fill" title="Permalink to this headline">¶</a></h2>
+<p>A basic but effective segmentation technique was recently added to scikit-image: <code class="docutils literal notranslate"><span class="pre">segmentation.flood</span></code> and <code class="docutils literal notranslate"><span class="pre">segmentation.flood_fill</span></code>.  These algorithms take a seed point and iteratively find and fill adjacent points which are equal to or within a tolerance of the initial point.  <code class="docutils literal notranslate"><span class="pre">flood</span></code> returns the region; <code class="docutils literal notranslate"><span class="pre">flood_fill</span></code> returns a modified image with those points changed to a new value.</p>
+<p>This approach is most suited for areas which have a relatively uniform color or gray value, and/or high contrast relative to adjacent structures.</p>
+<p>Can we accomplish the same task with flood fill?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seed_point</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">220</span><span class="p">)</span>  <span class="c1"># Experiment with the seed point</span>
+<span class="n">flood_mask</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">flood</span><span class="p">(</span><span class="n">astronaut_gray</span><span class="p">,</span> <span class="n">seed_point</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>  <span class="c1"># Experiment with tolerance</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">image_show</span><span class="p">(</span><span class="n">astronaut_gray</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">flood_mask</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4_segmentation_33_0.png" src="../_images/4_segmentation_33_0.png" />
+</div>
+</div>
+<p>Not ideal! The flood runs away into the background through the right earlobe.</p>
+<p>Let’s think outside the box.</p>
+<ul class="simple">
+<li><p>What if instead of segmenting the head, we segmented the background around it and the collar?</p></li>
+<li><p>Is there any way to increase the contrast between the background and skin?</p></li>
+</ul>
+<div class="cell tag_raises-exception tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">seed_bkgnd</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">350</span><span class="p">)</span>  <span class="c1"># Background</span>
+<span class="n">seed_collar</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">220</span><span class="p">)</span>  <span class="c1"># Collar</span>
+
+<span class="n">better_contrast</span> <span class="o">=</span>   <span class="c1"># Your idea to improve contrast here</span>
+<span class="n">tol_bkgnd</span> <span class="o">=</span>    <span class="c1"># Experiment with tolerance for background</span>
+<span class="n">tol_collar</span> <span class="o">=</span>   <span class="c1"># Experiment with tolerance for the collar</span>
+
+<span class="n">flood_background</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">flood</span><span class="p">(</span><span class="n">better_contrast</span><span class="p">,</span> <span class="n">seed_bkgnd</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="n">tol_bkgnd</span><span class="p">)</span>
+<span class="n">flood_collar</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">flood</span><span class="p">(</span><span class="n">better_contrast</span><span class="p">,</span> <span class="n">seed_collar</span><span class="p">,</span> <span class="n">tolerance</span><span class="o">=</span><span class="n">tol_collar</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">image_show</span><span class="p">(</span><span class="n">better_contrast</span><span class="p">)</span>
+
+<span class="c1"># Combine the two floods with binary OR operator</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">flood_background</span> <span class="o">|</span> <span class="n">flood_collar</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flood_mask2</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">flood</span><span class="p">(</span><span class="n">astronaut</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">220</span><span class="p">),</span> <span class="n">tolerance</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">image_show</span><span class="p">(</span><span class="n">astronaut</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">flood_mask</span> <span class="o">|</span> <span class="n">flood_mask2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4_segmentation_37_0.png" src="../_images/4_segmentation_37_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="unsupervised-segmentation">
+<h2>Unsupervised segmentation<a class="headerlink" href="#unsupervised-segmentation" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes, human input is not possible or feasible - or, perhaps your images are so large that it is not feasible to consider all pixels simultaneously.  Unsupervised segmentation can then break the image down into several sub-regions, so instead of millions of pixels you have tens to hundreds of regions.</p>
+<div class="section" id="slic">
+<h3>SLIC<a class="headerlink" href="#slic" title="Permalink to this headline">¶</a></h3>
+<p>There are many analogies to machine learning in unsupervised segmentation.  Our first example directly uses a common machine learning algorithm under the hood - K-Means.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># SLIC works in color, so we will use the original astronaut</span>
+<span class="n">astronaut_slic</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">slic</span><span class="p">(</span><span class="n">astronaut</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-21-87307e8d394f&gt;:2: FutureWarning: skimage.measure.label&#39;s indexing starts from 0. In future version it will start from 1. To disable this warning, explicitely set the `start_label` parameter to 1.
+  astronaut_slic = seg.slic(astronaut)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># label2rgb replaces each discrete label with the average interior color</span>
+<span class="n">image_show</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">astronaut_slic</span><span class="p">,</span> <span class="n">astronaut</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">));</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-22-7da7ea5bec30&gt;:2: FutureWarning: The new recommended value for bg_label is 0. Until version 0.19, the default bg_label value is -1. From version 0.19, the bg_label default value will be 0. To avoid this warning, please explicitly set bg_label value.
+  image_show(color.label2rgb(astronaut_slic, astronaut, kind=&#39;avg&#39;));
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+</pre></div>
+</div>
+<img alt="../_images/4_segmentation_40_1.png" src="../_images/4_segmentation_40_1.png" />
+</div>
+</div>
+<p>We’ve reduced this image from 512*512 = 262,000 pixels down to 100 regions!</p>
+<p>And most of these regions make some logical sense.</p>
+</div>
+<div class="section" id="chan-vese">
+<h3>Chan-Vese<a class="headerlink" href="#chan-vese" title="Permalink to this headline">¶</a></h3>
+<p>This algorithm iterates a level set, which allows it to capture complex and even disconnected features.  However, its result is binary - there will only be one region - and it requires a grayscale image.</p>
+<p>This algorithm takes a few seconds to run.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chan_vese</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">chan_vese</span><span class="p">(</span><span class="n">astronaut_gray</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">image_show</span><span class="p">(</span><span class="n">astronaut_gray</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">chan_vese</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4_segmentation_44_0.png" src="../_images/4_segmentation_44_0.png" />
+</div>
+</div>
+<p>Chan-Vese has a number of paremeters, which you can try out!  In the interest of time, we may move on.</p>
+</div>
+<div class="section" id="felzenszwalb">
+<h3>Felzenszwalb<a class="headerlink" href="#felzenszwalb" title="Permalink to this headline">¶</a></h3>
+<p>This method oversegments an RGB image (requires color, unlike Chan-Vese) using another machine learning technique, a minimum-spanning tree clustering.  The number of segments is not guaranteed and can only be indirectly controlled via <code class="docutils literal notranslate"><span class="pre">scale</span></code> parameter.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">astronaut_felzenszwalb</span> <span class="o">=</span> <span class="n">seg</span><span class="o">.</span><span class="n">felzenszwalb</span><span class="p">(</span><span class="n">astronaut</span><span class="p">)</span>  <span class="c1"># Color required</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_show</span><span class="p">(</span><span class="n">astronaut_felzenszwalb</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4_segmentation_49_0.png" src="../_images/4_segmentation_49_0.png" />
+</div>
+</div>
+<p>Whoa, lots of regions!  How many is that?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the number of unique labels</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s see if they make sense; label them with the region average (see above with SLIC)</p>
+<div class="cell tag_raises-exception tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">astronaut_felzenszwalb_colored</span> <span class="o">=</span>  <span class="c1"># Your code here</span>
+
+<span class="n">image_show</span><span class="p">(</span><span class="n">astronaut_felzenszwalb_colored</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Actually reasonable small regions.  If we wanted fewer regions, we could change the <code class="docutils literal notranslate"><span class="pre">scale</span></code> parameter (try it!) or start here and combine them.</p>
+<p>This approach is sometimes called <strong>oversegmentation</strong>.</p>
+<p>But when there are too many regions, they must be combined somehow.</p>
+</div>
+</div>
+<div class="section" id="combining-regions-with-a-region-adjacency-graph-rag">
+<h2>Combining regions with a Region Adjacency Graph (RAG)<a class="headerlink" href="#combining-regions-with-a-region-adjacency-graph-rag" title="Permalink to this headline">¶</a></h2>
+<p>Remember how the concept behind random walker was functionally looking at the difference between each pixel and its neighbors, then figuring out which were most alike?  A RAG is essentially the same, except between regions.</p>
+<p>We have RAGs now in scikit-image, but we have to import <em>from the future</em>; this functionality is exposed in the <code class="docutils literal notranslate"><span class="pre">future.graph</span></code> submodule meaning it is stable and robust enough to ship, but the API may change.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">skimage.future.graph</span> <span class="k">as</span> <span class="nn">graph</span>
+
+<span class="n">rag</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">rag_mean_color</span><span class="p">(</span><span class="n">astronaut</span><span class="p">,</span> <span class="n">astronaut_felzenszwalb</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we show just one application of a very useful tool - <code class="docutils literal notranslate"><span class="pre">skimage.measure.regionprops</span></code> - to determine the centroid of each labeled region and pass that to the graph.</p>
+<p><code class="docutils literal notranslate"><span class="pre">regionprops</span></code> has many, many other uses; see the API documentation for all of the features that can be quantified per-region!<br />
+<a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.regionprops">http://scikit-image.org/docs/dev/api/skimage.measure.html#skimage.measure.regionprops</a></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">skimage.measure</span> <span class="k">as</span> <span class="nn">measure</span>
+
+<span class="c1"># Regionprops ignores zero, but we want to include it, so add one</span>
+<span class="n">regions</span> <span class="o">=</span> <span class="n">measure</span><span class="o">.</span><span class="n">regionprops</span><span class="p">(</span><span class="n">astronaut_felzenszwalb</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  
+
+<span class="c1"># Pass centroid data into the graph</span>
+<span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">regions</span><span class="p">:</span>
+    <span class="n">rag</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">region</span><span class="p">[</span><span class="s1">&#39;label&#39;</span><span class="p">]][</span><span class="s1">&#39;centroid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">region</span><span class="p">[</span><span class="s1">&#39;centroid&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">display_edges</span></code> is a helper function to assist in visualizing the graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">display_edges</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">threshold</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Draw edges of a RAG on its image</span>
+<span class="sd"> </span>
+<span class="sd">    Returns a modified image with the edges drawn.Edges are drawn in green</span>
+<span class="sd">    and nodes are drawn in yellow.</span>
+<span class="sd"> </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    image : ndarray</span>
+<span class="sd">        The image to be drawn on.</span>
+<span class="sd">    g : RAG</span>
+<span class="sd">        The Region Adjacency Graph.</span>
+<span class="sd">    threshold : float</span>
+<span class="sd">        Only edges in `g` below `threshold` are drawn.</span>
+<span class="sd"> </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    out: ndarray</span>
+<span class="sd">        Image with the edges drawn.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="p">():</span>
+        <span class="n">n1</span><span class="p">,</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">edge</span>
+ 
+        <span class="n">r1</span><span class="p">,</span> <span class="n">c1</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">rag</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">n1</span><span class="p">][</span><span class="s1">&#39;centroid&#39;</span><span class="p">])</span>
+        <span class="n">r2</span><span class="p">,</span> <span class="n">c2</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">rag</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">n2</span><span class="p">][</span><span class="s1">&#39;centroid&#39;</span><span class="p">])</span>
+ 
+        <span class="n">line</span>  <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">line</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span> <span class="n">c1</span><span class="p">,</span> <span class="n">r2</span><span class="p">,</span> <span class="n">c2</span><span class="p">)</span>
+        <span class="n">circle</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span><span class="n">c1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+ 
+        <span class="k">if</span> <span class="n">g</span><span class="p">[</span><span class="n">n1</span><span class="p">][</span><span class="n">n2</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">threshold</span> <span class="p">:</span>
+            <span class="n">image</span><span class="p">[</span><span class="n">line</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span>
+        <span class="n">image</span><span class="p">[</span><span class="n">circle</span><span class="p">]</span> <span class="o">=</span> <span class="mi">255</span><span class="p">,</span><span class="mi">255</span><span class="p">,</span><span class="mi">0</span>
+ 
+    <span class="k">return</span> <span class="n">image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell tag_raises-exception tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All edges are drawn with threshold at infinity</span>
+<span class="n">edges_drawn_all</span> <span class="o">=</span> <span class="n">display_edges</span><span class="p">(</span><span class="n">astronaut_felzenszwalb_colored</span><span class="p">,</span> <span class="n">rag</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">)</span>
+<span class="n">image_show</span><span class="p">(</span><span class="n">edges_drawn_all</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Try a range of thresholds out, see what happens.</p>
+<div class="cell tag_raises-exception tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">threshold</span> <span class="o">=</span> <span class="o">...</span> <span class="c1"># Experiment</span>
+
+<span class="n">edges_drawn_few</span> <span class="o">=</span> <span class="n">display_edges</span><span class="p">(</span><span class="n">astronaut_felzenszwalb_colored</span><span class="p">,</span> <span class="n">rag</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
+<span class="n">image_show</span><span class="p">(</span><span class="n">edges_drawn_few</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="finally-cut-the-graph">
+<h3>Finally, cut the graph<a class="headerlink" href="#finally-cut-the-graph" title="Permalink to this headline">¶</a></h3>
+<p>Once you are happy with the (dis)connected regions above, the graph can be cut to merge the regions which are still connected.</p>
+<div class="cell tag_raises-exception tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">final_labels</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">cut_threshold</span><span class="p">(</span><span class="n">astronaut_felzenszwalb</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">rag</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
+<span class="n">final_label_rgb</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">final_labels</span><span class="p">,</span> <span class="n">astronaut</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;avg&#39;</span><span class="p">)</span>
+
+<span class="n">image_show</span><span class="p">(</span><span class="n">final_label_rgb</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>How many regions exist now?</p>
+<div class="cell tag_raises-exception tag_remove-output docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">final_labels</span><span class="p">)</span><span class="o">.</span><span class="n">size</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="exercise-cat-picture">
+<h2>Exercise: Cat picture<a class="headerlink" href="#exercise-cat-picture" title="Permalink to this headline">¶</a></h2>
+<p>The data directory also has an excellent image of Stéfan’s cat, Chelsea.  With what you’ve learned, can you segment the cat’s nose?  How about the eyes?  Why is the eye particularly challenging?</p>
+<p>Hint: the cat’s nose is located close to [240, 270] and the right eye center is near [110, 172] in row, column notation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">image_show</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">chelsea</span><span class="p">())</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">270</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">172</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4_segmentation_70_0.png" src="../_images/4_segmentation_70_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="3_morphological_operations.html" title="previous page">Morphological operations</a>
+    <a class='right-next' id="next-link" href="three_dimensional_image_processing.html" title="next page">Introduction to three-dimensional image processing</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The scikit-image contributors<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

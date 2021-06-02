@@ -1,0 +1,1335 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image filtering &#8212; Image analysis in Python</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_customize.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/output_cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/badge_only.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/docversions.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/underscore-1.3.1.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/random.js"></script>
+    <script src="../_static/jquery-1.11.1.js"></script>
+    <script src="../_static/websupport.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <script src="../_static/js/modernizr.min.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Morphological operations" href="3_morphological_operations.html" />
+    <link rel="prev" title="Images are numpy arrays" href="00_images_are_arrays.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Image analysis in Python</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="00_images_are_arrays.html">
+   Images are numpy arrays
+  </a>
+ </li>
+</ul>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Image filtering
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="3_morphological_operations.html">
+   Morphological operations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="4_segmentation.html">
+   Segmentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="three_dimensional_image_processing.html">
+   Introduction to three-dimensional image processing
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/lectures/1_image_filters.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/lectures/1_image_filters.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#image-filtering-theory">
+   Image filtering theory
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#local-filtering">
+     Local filtering
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#a-difference-filter">
+       A difference filter
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#commutativity-and-assortativity-of-filters">
+       Commutativity and assortativity of filters
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#local-filtering-of-images">
+   Local filtering of images
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-mean-filter">
+     The mean filter
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#downsampled-image">
+     Downsampled image
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mean-filter-on-a-real-image">
+     Mean filter on a real image
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#essential-filters">
+   Essential filters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gaussian-filter">
+     Gaussian filter
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#basic-edge-filtering">
+     Basic edge filtering
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#difference-filters-in-2d">
+       Difference filters in 2D
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#span-style-color-cornflowerblue-exercise-span">
+   <span style="color:cornflowerblue">
+    Exercise:
+   </span>
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#sobel-edge-filter">
+     Sobel edge filter
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#denoising-filters">
+   Denoising filters
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#median-filter">
+     Median Filter
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#further-reading">
+   Further reading
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="o">%</span><span class="k">config</span> InlineBackend.figure_format = &#39;retina&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="image-filtering">
+<h1>Image filtering<a class="headerlink" href="#image-filtering" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="image-filtering-theory">
+<h2>Image filtering theory<a class="headerlink" href="#image-filtering-theory" title="Permalink to this headline">¶</a></h2>
+<p>Filtering is one of the most basic and common image operations in image processing. You can filter an image to remove noise or to enhance features; the filtered image could be the desired result or just a preprocessing step. Regardless, filtering is an important topic to understand.</p>
+<div class="section" id="local-filtering">
+<h3>Local filtering<a class="headerlink" href="#local-filtering" title="Permalink to this headline">¶</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The “local” in local filtering simply means that a pixel is adjusted by values in some surrounding neighborhood. These surrounding elements are identified or weighted based on a “footprint”, “structuring element”, or “kernel”.</p>
+<p>Let’s go to back to basics and look at a 1D step-signal</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">step_signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">step_signal</span><span class="p">[</span><span class="mi">50</span><span class="p">:]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">step_signal</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_7_0.png" src="../_images/1_image_filters_7_0.png" />
+</div>
+</div>
+<p>Now add some noise to this signal:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Just to make sure we all see the same results</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+
+<span class="n">noisy_signal</span> <span class="o">=</span> <span class="p">(</span><span class="n">step_signal</span>
+                <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="n">step_signal</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_9_0.png" src="../_images/1_image_filters_9_0.png" />
+</div>
+</div>
+<p>The simplest way to recover something that looks a bit more like the original signal is to take the average between neighboring “pixels”:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Take the mean of neighboring pixels</span>
+<span class="n">smooth_signal</span> <span class="o">=</span> <span class="p">(</span><span class="n">noisy_signal</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">noisy_signal</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">/</span> <span class="mf">2.0</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">smooth_signal</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_11_0.png" src="../_images/1_image_filters_11_0.png" />
+</div>
+</div>
+<p>What happens if we want to take the <em>three</em> neighboring pixels? We can do the same thing:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smooth_signal3</span> <span class="o">=</span> <span class="p">(</span><span class="n">noisy_signal</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">noisy_signal</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                  <span class="o">+</span> <span class="n">noisy_signal</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span> <span class="o">/</span> <span class="mi">3</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">smooth_signal</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;mean of 2&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">smooth_signal3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;mean of 3&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_13_0.png" src="../_images/1_image_filters_13_0.png" />
+</div>
+</div>
+<p>For averages of more points, the expression keeps getting hairier. And you have to worry more about what’s going on in the margins. Is there a better way?</p>
+<p>It turns out there is. This same concept, nearest-neighbor averages, can be expressed as a <em>convolution</em> with an <em>averaging kernel</em>. Note that the operation we did with <code class="docutils literal notranslate"><span class="pre">smooth_signal3</span></code> can be expressed as follows:</p>
+<ul class="simple">
+<li><p>Create an output array called <code class="docutils literal notranslate"><span class="pre">smooth_signal3</span></code>, of the same length as <code class="docutils literal notranslate"><span class="pre">noisy_signal</span></code>.</p></li>
+<li><p>At each element in <code class="docutils literal notranslate"><span class="pre">smooth_signal3</span></code> starting at point 1, and ending at point -2, place the average of the sum of: 1/3 of the element to the left of it in <code class="docutils literal notranslate"><span class="pre">noisy_signal</span></code>, 1/3 of the element at the same position, and 1/3 of the element to the right.</p></li>
+<li><p>discard the leftmost and rightmost elements.</p></li>
+</ul>
+<p>This is called a <em>convolution</em> between the input image and the array <code class="docutils literal notranslate"><span class="pre">[1/3,</span> <span class="pre">1/3,</span> <span class="pre">1/3]</span></code>. (We’ll give a more in-depth explanation of convolution in the next section).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Same as above, using a convolution kernel</span>
+<span class="c1"># Neighboring pixels multiplied by 1/3 and summed</span>
+<span class="n">mean_kernel3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">3</span><span class="p">,),</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">smooth_signal3p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="n">mean_kernel3</span><span class="p">,</span>
+                              <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">smooth_signal3p</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;smooth_signal3 and smooth_signal3p are equal:&#39;</span><span class="p">,</span>
+      <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">smooth_signal3</span><span class="p">,</span> <span class="n">smooth_signal3p</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>smooth_signal3 and smooth_signal3p are equal: True
+</pre></div>
+</div>
+<img alt="../_images/1_image_filters_15_1.png" src="../_images/1_image_filters_15_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convolve_demo</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">):</span>
+    <span class="n">ksize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+    <span class="n">convolved</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">filter_step</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;signal&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">convolved</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;convolved&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="n">ksize</span><span class="p">),</span>
+                   <span class="n">signal</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span><span class="o">+</span><span class="n">ksize</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">convolved</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">filter_step</span>
+
+<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">widgets</span>
+
+<span class="n">i_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span>
+                             <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">interact</span><span class="p">(</span><span class="n">convolve_demo</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="n">mean_kernel3</span><span class="p">),</span>
+         <span class="n">i</span><span class="o">=</span><span class="n">i_slider</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "593e9c793d73475990f0034b006ae9f2"}
+</script><img alt="../_images/1_image_filters_16_1.png" src="../_images/1_image_filters_16_1.png" />
+</div>
+</div>
+<p>The advantage of convolution is that it’s just as easy to take the average of 11 points as 3:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_kernel11</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">11</span><span class="p">,),</span> <span class="mi">1</span><span class="o">/</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">smooth_signal11</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="n">mean_kernel11</span><span class="p">,</span>
+                              <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">smooth_signal11</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_18_0.png" src="../_images/1_image_filters_18_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">)</span> <span class="o">-</span> <span class="mi">11</span><span class="p">,</span>
+                             <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">interact</span><span class="p">(</span><span class="n">convolve_demo</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="n">mean_kernel11</span><span class="p">),</span>
+         <span class="n">i</span><span class="o">=</span><span class="n">i_slider</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "635da38ea77840608e3b8eb39148c968"}
+</script><img alt="../_images/1_image_filters_19_1.png" src="../_images/1_image_filters_19_1.png" />
+</div>
+</div>
+<p>Of course, to take the mean of 11 values, we have to move further and further away from the edges, and this starts to be noticeable. You can use <code class="docutils literal notranslate"><span class="pre">mode='same'</span></code> to pad the edges of the array and compute a result of the same size as the input:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smooth_signal3same</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="n">mean_kernel3</span><span class="p">,</span>
+                                 <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+<span class="n">smooth_signal11same</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="n">mean_kernel11</span><span class="p">,</span>
+                                  <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">smooth_signal3p</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">smooth_signal11</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;mode=valid&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">smooth_signal3same</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">smooth_signal11same</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;mode=same&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_21_0.png" src="../_images/1_image_filters_21_0.png" />
+</div>
+</div>
+<p>But now we see edge effects on the ends of the signal…</p>
+<p>This is because <code class="docutils literal notranslate"><span class="pre">mode='same'</span></code> actually pads the signal with 0s and then applies <code class="docutils literal notranslate"><span class="pre">mode='valid'</span></code> as before.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convolve_demo_same</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">):</span>
+    <span class="n">ksize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
+    <span class="n">padded_signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">ksize</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                           <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">)</span>
+    <span class="n">convolved</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">padded_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">filter_step</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">ksize</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                      <span class="nb">len</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span> <span class="o">+</span> <span class="n">ksize</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;signal&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">convolved</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;convolved&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">stop</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">ksize</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">stop</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span>
+                   <span class="n">padded_signal</span><span class="p">[</span><span class="n">start</span> <span class="p">:</span> <span class="n">stop</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">convolved</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="n">ksize</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+                    <span class="nb">len</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span> <span class="o">+</span> <span class="n">ksize</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">filter_step</span>
+
+
+<span class="n">i_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+                             <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">interact</span><span class="p">(</span><span class="n">convolve_demo_same</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="n">mean_kernel11</span><span class="p">),</span>
+         <span class="n">i</span><span class="o">=</span><span class="n">i_slider</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "e47cb70045904c6f9088fdd943a044ab"}
+</script><img alt="../_images/1_image_filters_23_1.png" src="../_images/1_image_filters_23_1.png" />
+</div>
+</div>
+<p><strong>Exercise</strong> Look up the documentation of <code class="docutils literal notranslate"><span class="pre">scipy.ndimage.convolve</span></code>. Apply the same convolution, but using a different <code class="docutils literal notranslate"><span class="pre">mode=</span></code> keyword argument to avoid the edge effects we see here.</p>
+<div class="section" id="a-difference-filter">
+<h4>A difference filter<a class="headerlink" href="#a-difference-filter" title="Permalink to this headline">¶</a></h4>
+<p>Let’s look again at our simplest signal, the step signal from before:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">step_signal</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_28_0.png" src="../_images/1_image_filters_28_0.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> Can you predict what a convolution with the kernel <code class="docutils literal notranslate"><span class="pre">[-1,</span> <span class="pre">0,</span> <span class="pre">1]</span></code> does? Try thinking about it before running the cells below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">step_signal</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+                           <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_conv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">step_signal</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+                          <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;valid&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">step_signal</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;signal&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result_conv</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;convolved&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">result_corr</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;correlated&#39;</span><span class="p">,</span>
+        <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C3&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_32_0.png" src="../_images/1_image_filters_32_0.png" />
+</div>
+</div>
+<p>(For technical signal processing reasons, convolutions actually occur “back to front” between the input array and the kernel. Correlations occur in the signal order, so we’ll use correlate from now on.)</p>
+<p>Whenever neighboring values are close, the filter response is close to 0. Right at the boundary of a step, we’re subtracting a small value from a large value and and get a spike in the response. This spike “identifies” our edge.</p>
+</div>
+<div class="section" id="commutativity-and-assortativity-of-filters">
+<h4>Commutativity and assortativity of filters<a class="headerlink" href="#commutativity-and-assortativity-of-filters" title="Permalink to this headline">¶</a></h4>
+<p>What if we try the same trick with our noisy signal?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noisy_change</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;signal&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">noisy_change</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;change&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_37_0.png" src="../_images/1_image_filters_37_0.png" />
+</div>
+</div>
+<p>Oops! We lost our edge!</p>
+<p>But recall that we smoothed the signal a bit by taking its neighbors. Perhaps we can do the same thing here. Actually, it turns out that we can do it <em>in any order</em>, so we can create a filter that combines both the difference and the mean:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">],</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mean_diff</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.33333333 -0.33333333  0.          0.33333333  0.33333333]
+</pre></div>
+</div>
+</div>
+</div>
+<p><em>Note:</em> we use <code class="docutils literal notranslate"><span class="pre">np.convolve</span></code> here, because it has the option to output a <em>wider</em> result than either of the two inputs.</p>
+<p>Now we can use this to find our edge even in a noisy signal:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">smooth_change</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="n">mean_diff</span><span class="p">,</span>
+                             <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;signal&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">smooth_change</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;change&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">margins</span><span class="p">(</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">hlines</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_42_0.png" src="../_images/1_image_filters_42_0.png" />
+</div>
+</div>
+<p><strong>Exercise:</strong> The Gaussian filter with variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[
+k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\right)}
+\]</div>
+<ol class="simple">
+<li><p>Create this filter (for example, with width 9, center 4, sigma 1). (Plot it)</p></li>
+<li><p>Convolve it with the difference filter (with appropriate mode). (Plot the result)</p></li>
+<li><p>Convolve it with the noisy signal. (Plot the result)</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">//</span> <span class="mi">2</span>  <span class="c1"># 4</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">xi</span> <span class="o">-</span> <span class="n">x0</span>
+<span class="o">...</span>  <span class="c1"># complete this code</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ellipsis
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="local-filtering-of-images">
+<h2>Local filtering of images<a class="headerlink" href="#local-filtering-of-images" title="Permalink to this headline">¶</a></h2>
+<p>Now let’s apply all this knowledge to 2D images instead of a 1D signal. Let’s start with an incredibly simple image:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">bright_square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">bright_square</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives the values below:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">bright_square</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 1. 1. 1. 0. 0.]
+ [0. 0. 1. 1. 1. 0. 0.]
+ [0. 0. 1. 1. 1. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0.]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>and looks like a white square centered on a black square:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">bright_square</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_51_0.png" src="../_images/1_image_filters_51_0.png" />
+</div>
+</div>
+<div class="section" id="the-mean-filter">
+<h3>The mean filter<a class="headerlink" href="#the-mean-filter" title="Permalink to this headline">¶</a></h3>
+<p>For our first example of a filter, consider the following filtering array, which we’ll call a “mean kernel”. For each pixel, a kernel defines which neighboring pixels to consider when filtering, and how much to weight those pixels.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="mi">1</span><span class="o">/</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">mean_kernel</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0.11111111 0.11111111 0.11111111]
+ [0.11111111 0.11111111 0.11111111]
+ [0.11111111 0.11111111 0.11111111]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now, let’s take our mean kernel and apply it to every pixel of the image.</p>
+<p>Applying a (linear) filter essentially means:</p>
+<ul class="simple">
+<li><p>Center a kernel on a pixel</p></li>
+<li><p>Multiply the pixels <em>under</em> that kernel by the values <em>in</em> the kernel</p></li>
+<li><p>Sum all the those results</p></li>
+<li><p>Replace the center pixel with the summed result</p></li>
+</ul>
+<p>This process is known as convolution.</p>
+<p>Let’s take a look at the numerical result:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.ndimage</span> <span class="k">as</span> <span class="nn">ndi</span>
+
+<span class="o">%</span><span class="k">precision</span> 2
+<span class="nb">print</span><span class="p">(</span><span class="n">bright_square</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ndi</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">bright_square</span><span class="p">,</span> <span class="n">mean_kernel</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 1. 1. 1. 0. 0.]
+ [0. 0. 1. 1. 1. 0. 0.]
+ [0. 0. 1. 1. 1. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0.]
+ [0. 0. 0. 0. 0. 0. 0.]]
+[[0.   0.   0.   0.   0.   0.   0.  ]
+ [0.   0.11 0.22 0.33 0.22 0.11 0.  ]
+ [0.   0.22 0.44 0.67 0.44 0.22 0.  ]
+ [0.   0.33 0.67 1.   0.67 0.33 0.  ]
+ [0.   0.22 0.44 0.67 0.44 0.22 0.  ]
+ [0.   0.11 0.22 0.33 0.22 0.11 0.  ]
+ [0.   0.   0.   0.   0.   0.   0.  ]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The meaning of “mean kernel” should be clear now: Each pixel was replaced with the mean value within the 3x3 neighborhood of that pixel. When the kernel was over <code class="docutils literal notranslate"><span class="pre">n</span></code> bright pixels, the pixel in the kernel’s center was changed to n/9 (= n * 0.111). When no bright pixels were under the kernel, the result was 0.</p>
+<p>This filter is a simple smoothing filter and produces two important results:</p>
+<ol class="simple">
+<li><p>The intensity of the bright pixel decreased.</p></li>
+<li><p>The intensity of the region near the bright pixel increased.</p></li>
+</ol>
+<p>Let’s see a convolution in action.</p>
+<p>(Execute the following cell, but don’t try to read it; its purpose is to generate an example.)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#--------------------------------------------------------------------------</span>
+<span class="c1">#  Convolution Demo</span>
+<span class="c1">#--------------------------------------------------------------------------</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">color</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span> <span class="k">as</span> <span class="n">ndi</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">patches</span>
+
+<span class="k">def</span> <span class="nf">mean_filter_demo</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">mean_factor</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">9.0</span>  <span class="c1"># This assumes a 3x3 kernel.</span>
+    <span class="n">iter_kernel_and_subimage</span> <span class="o">=</span> <span class="n">iter_kernel</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+
+    <span class="n">image_cache</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">mean_filter_step</span><span class="p">(</span><span class="n">i_step</span><span class="p">):</span>
+        <span class="k">while</span> <span class="n">i_step</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_cache</span><span class="p">):</span>
+            <span class="n">filtered</span> <span class="o">=</span> <span class="n">image</span> <span class="k">if</span> <span class="n">i_step</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">image_cache</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">filtered</span> <span class="o">=</span> <span class="n">filtered</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+            <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">mask</span><span class="p">,</span> <span class="n">subimage</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="n">iter_kernel_and_subimage</span><span class="p">)</span>
+            <span class="n">filter_overlay</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">label2rgb</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">bg_label</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                             <span class="n">colors</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;cyan&#39;</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">))</span>
+            <span class="n">filtered</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mean_factor</span> <span class="o">*</span> <span class="n">subimage</span><span class="p">)</span>
+            <span class="n">image_cache</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="p">(</span><span class="n">filter_overlay</span><span class="p">,</span> <span class="n">filtered</span><span class="p">)))</span>
+
+        <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">images</span> <span class="o">=</span> <span class="n">image_cache</span><span class="p">[</span><span class="n">i_step</span><span class="p">]</span>
+        <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+        
+        <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">imc</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">images</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imc</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+            <span class="n">rect</span> <span class="o">=</span> <span class="n">patches</span><span class="o">.</span><span class="n">Rectangle</span><span class="p">([</span><span class="n">j</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;yellow&#39;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+            
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">mean_filter_step</span>
+
+
+<span class="k">def</span> <span class="nf">mean_filter_interactive_demo</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">IntSlider</span><span class="p">,</span> <span class="n">interact</span>
+    <span class="n">mean_filter_step</span> <span class="o">=</span> <span class="n">mean_filter_demo</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">step_slider</span> <span class="o">=</span> <span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">interact</span><span class="p">(</span><span class="n">mean_filter_step</span><span class="p">,</span> <span class="n">i_step</span><span class="o">=</span><span class="n">step_slider</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">iter_kernel</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Yield position, kernel mask, and image for each pixel in the image.</span>
+
+<span class="sd">    The kernel mask has a 2 at the center pixel and 1 around it. The actual</span>
+<span class="sd">    width of the kernel is 2*size + 1.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">size</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">pixel</span> <span class="ow">in</span> <span class="n">iter_pixels</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;int16&#39;</span><span class="p">)</span>
+        <span class="n">mask</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">ndi</span><span class="o">.</span><span class="n">grey_dilation</span><span class="p">(</span><span class="n">mask</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">width</span><span class="p">)</span>
+        <span class="c1">#mask[i, j] = 2</span>
+        <span class="n">subimage</span> <span class="o">=</span> <span class="n">image</span><span class="p">[</span><span class="n">bounded_slice</span><span class="p">((</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span><span class="p">)]</span>
+        <span class="k">yield</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">mask</span><span class="p">,</span> <span class="n">subimage</span>
+
+
+<span class="k">def</span> <span class="nf">iter_pixels</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Yield pixel position (row, column) and pixel intensity. &quot;&quot;&quot;</span>
+    <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">bounded_slice</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">xy_max</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_min</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="n">slices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">i_max</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">xy_max</span><span class="p">):</span>
+        <span class="n">slices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">size</span><span class="p">,</span> <span class="n">i_min</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i_max</span><span class="p">)))</span>
+    <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">slices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mean_filter_interactive_demo</span><span class="p">(</span><span class="n">bright_square</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">
+{"version_major": 2, "version_minor": 0, "model_id": "89b85e8f01484a92bead31f985195ae3"}
+</script></div>
+</div>
+<p>Incidentally, the above filtering is the exact same principle behind the <em>convolutional neural networks</em>, or CNNs, that you might have heard much about over the past few years. The only difference is that while above, the simple mean kernel is used, in CNNs, the values inside the kernel are <em>learned</em> to find a specific feature, or accomplish a specific task. Time permitting, we’ll demonstrate this in an exercise at the end of the notebook.</p>
+<p>Slight aside:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mean_kernel</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that all the values of the kernel sum to 1. Why might that be important?</p>
+</div>
+<div class="section" id="downsampled-image">
+<h3>Downsampled image<a class="headerlink" href="#downsampled-image" title="Permalink to this headline">¶</a></h3>
+<p>Let’s consider a real image now. It’ll be easier to see some of the filtering we’re doing if we downsample the image a bit. We can slice into the image using the “step” argument to sub-sample it (don’t scale images using this method for real work; use <code class="docutils literal notranslate"><span class="pre">skimage.transform.rescale</span></code>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">camera</span><span class="p">()</span>
+<span class="n">pixelated</span> <span class="o">=</span> <span class="n">image</span><span class="p">[::</span><span class="mi">10</span><span class="p">,</span> <span class="p">::</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax0</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">pixelated</span><span class="p">)</span> <span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_71_0.png" src="../_images/1_image_filters_71_0.png" />
+</div>
+</div>
+<p>Here we use a step of 10, giving us every tenth column and every tenth row of the original image. You can see the highly pixelated result on the right.</p>
+<p>We are actually going to be using the pattern of plotting multiple images side by side quite often, so we are going to make the following helper function:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">img_as_float</span>
+
+<span class="k">def</span> <span class="nf">imshow_all</span><span class="p">(</span><span class="o">*</span><span class="n">images</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">img_as_float</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">images</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">titles</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+    <span class="n">vmin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">images</span><span class="p">))</span>
+    <span class="n">vmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">,</span> <span class="n">images</span><span class="p">))</span>
+    <span class="n">ncols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+    <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">width</span> <span class="o">=</span> <span class="n">height</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="n">ncols</span><span class="p">,</span>
+                             <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">images</span><span class="p">,</span> <span class="n">titles</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="mean-filter-on-a-real-image">
+<h3>Mean filter on a real image<a class="headerlink" href="#mean-filter-on-a-real-image" title="Permalink to this headline">¶</a></h3>
+<p>Now we can apply the filter to this downsampled image:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">filtered</span> <span class="o">=</span> <span class="n">ndi</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">pixelated</span><span class="p">,</span> <span class="n">mean_kernel</span><span class="p">)</span>
+<span class="n">imshow_all</span><span class="p">(</span><span class="n">pixelated</span><span class="p">,</span> <span class="n">filtered</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;pixelated&#39;</span><span class="p">,</span> <span class="s1">&#39;mean filtered&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_77_0.png" src="../_images/1_image_filters_77_0.png" />
+</div>
+</div>
+<p>Comparing the filtered image to the pixelated image, we can see that this filtered result is smoother: Sharp edges (which are just borders between dark and bright pixels) are smoothed because dark pixels reduce the intensity of neighboring pixels and bright pixels do the opposite.</p>
+</div>
+</div>
+<div class="section" id="essential-filters">
+<h2>Essential filters<a class="headerlink" href="#essential-filters" title="Permalink to this headline">¶</a></h2>
+<p>If you read through the last section, you’re already familiar with the essential concepts of image filtering. But, of course, you don’t have to create custom filter kernels for all of your filtering needs. There are many standard filter kernels pre-defined from half a century of image and signal processing.</p>
+<div class="section" id="gaussian-filter">
+<h3>Gaussian filter<a class="headerlink" href="#gaussian-filter" title="Permalink to this headline">¶</a></h3>
+<p>The classic image filter is the Gaussian filter. This is similar to the mean filter, in that it tends to smooth images. The Gaussian filter, however, doesn’t weight all values in the neighborhood equally. Instead, pixels closer to the center are weighted more than those farther away.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rename module so we don&#39;t shadow the builtin function</span>
+<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">filters</span>
+
+<span class="n">smooth_mean</span> <span class="o">=</span> <span class="n">ndi</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">bright_square</span><span class="p">,</span> <span class="n">mean_kernel</span><span class="p">)</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">smooth</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">bright_square</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+<span class="n">imshow_all</span><span class="p">(</span><span class="n">bright_square</span><span class="p">,</span> <span class="n">smooth_mean</span><span class="p">,</span> <span class="n">smooth</span><span class="p">,</span>
+           <span class="n">titles</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;original&#39;</span><span class="p">,</span> <span class="s1">&#39;result of mean filter&#39;</span><span class="p">,</span> <span class="s1">&#39;result of gaussian filter&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_83_0.png" src="../_images/1_image_filters_83_0.png" />
+</div>
+</div>
+<p>For the Gaussian filter, <code class="docutils literal notranslate"><span class="pre">sigma</span></code>, the standard deviation, defines the size of the neighborhood.</p>
+<p>For a real image, we get the following:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">img_as_float</span>
+<span class="c1"># The Gaussian filter returns a float image, regardless of input.</span>
+<span class="c1"># Cast to float so the images have comparable intensity ranges.</span>
+<span class="n">pixelated_float</span> <span class="o">=</span> <span class="n">img_as_float</span><span class="p">(</span><span class="n">pixelated</span><span class="p">)</span>
+<span class="n">smooth</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">pixelated_float</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">imshow_all</span><span class="p">(</span><span class="n">pixelated_float</span><span class="p">,</span> <span class="n">smooth</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_85_0.png" src="../_images/1_image_filters_85_0.png" />
+</div>
+</div>
+<p>This doesn’t look drastically different than the mean filter, but the Gaussian filter is typically preferred because of the distance-dependent weighting, and because it does not have any sharp transitions (consider what happens in the Fourier domain!). For a more detailed image and a larger filter, you can see artifacts in the mean filter since it doesn’t take distance into account:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">size</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">structuring_element</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">3</span><span class="o">*</span><span class="n">size</span><span class="p">,</span> <span class="mi">3</span><span class="o">*</span><span class="n">size</span><span class="p">))</span>
+<span class="n">smooth_mean</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">structuring_element</span><span class="p">)</span>
+<span class="n">smooth_gaussian</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">]</span>
+<span class="n">imshow_all</span><span class="p">(</span><span class="n">smooth_mean</span><span class="p">,</span> <span class="n">smooth_gaussian</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="n">titles</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_87_0.png" src="../_images/1_image_filters_87_0.png" />
+</div>
+</div>
+<p>(Above, we’ve tweaked the size of the structuring element used for the mean filter and the standard deviation of the Gaussian filter to produce an approximately equal amount of smoothing in the two results.)</p>
+<p>Incidentally, for reference, let’s have a look at what the Gaussian filter actually looks like. Technically, the value of the kernel at a pixel that is <span class="math notranslate nohighlight">\(r\)</span> rows and <span class="math notranslate nohighlight">\(c\)</span> cols from the center is:</p>
+<div class="math notranslate nohighlight">
+\[
+k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right)}
+\]</div>
+<p>Practically speaking, this value is pretty close to zero for values more than <span class="math notranslate nohighlight">\(4\sigma\)</span> away from the center, so practical Gaussian filters are truncated at about <span class="math notranslate nohighlight">\(4\sigma\)</span>:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sidelen</span> <span class="o">=</span> <span class="mi">45</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="p">(</span><span class="n">sidelen</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">//</span> <span class="mi">4</span>
+<span class="n">spot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">sidelen</span><span class="p">,</span> <span class="n">sidelen</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">spot</span><span class="p">[</span><span class="n">sidelen</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sidelen</span> <span class="o">//</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">kernel</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">gaussian</span><span class="p">(</span><span class="n">spot</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">sigma</span><span class="p">)</span>
+
+<span class="n">imshow_all</span><span class="p">(</span><span class="n">spot</span><span class="p">,</span> <span class="n">kernel</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">kernel</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_90_0.png" src="../_images/1_image_filters_90_0.png" />
+</div>
+</div>
+<p><strong>Exercise</strong> (Chapter 0 reminder!) Plot the profile of the gaussian kernel at its midpoint, i.e. the values under the line shown here:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">kernel</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;inferno&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;C9&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">((</span><span class="n">sidelen</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(44.00, 0.00)
+</pre></div>
+</div>
+<img alt="../_images/1_image_filters_92_1.png" src="../_images/1_image_filters_92_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>  <span class="c1"># add your plotting code here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ellipsis
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="basic-edge-filtering">
+<h3>Basic edge filtering<a class="headerlink" href="#basic-edge-filtering" title="Permalink to this headline">¶</a></h3>
+<p>For images, edges are boundaries between light and dark values. The detection of edges can be useful on its own, or it can be used as preliminary step in other algorithms (which we’ll see later).</p>
+<div class="section" id="difference-filters-in-2d">
+<h4>Difference filters in 2D<a class="headerlink" href="#difference-filters-in-2d" title="Permalink to this headline">¶</a></h4>
+<p>For images, you can think of an edge as points where the gradient is large in one direction. We can approximate gradients with difference filters.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vertical_kernel</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">[</span> <span class="mi">1</span><span class="p">],</span>
+<span class="p">])</span>
+
+<span class="n">gradient_vertical</span> <span class="o">=</span> <span class="n">ndi</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">pixelated</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">),</span>
+                                  <span class="n">vertical_kernel</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">gradient_vertical</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_98_0.png" src="../_images/1_image_filters_98_0.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="span-style-color-cornflowerblue-exercise-span">
+<h2><span style="color:cornflowerblue">Exercise:</span><a class="headerlink" href="#span-style-color-cornflowerblue-exercise-span" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Add a horizontal kernel to the above example to also compute the horizontal gradient, <span class="math notranslate nohighlight">\(g_y\)</span></p></li>
+<li><p>Compute the magnitude of the image gradient at each point: <span class="math notranslate nohighlight">\(\left|g\right| = \sqrt{g_x^2 + g_y^2}\)</span></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>  <span class="c1"># add your horizontal and gradient magnitude code here</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ellipsis
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="sobel-edge-filter">
+<h3>Sobel edge filter<a class="headerlink" href="#sobel-edge-filter" title="Permalink to this headline">¶</a></h3>
+<p>The Sobel filter, the most commonly used edge filter, should look pretty similar to what you developed above. Take a look at the vertical and horizontal components of the Sobel kernel to see how they differ from your earlier implementation:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.sobel_v">http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.sobel_v</a></p></li>
+<li><p><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.sobel_h">http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.sobel_h</a></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">imshow_all</span><span class="p">(</span><span class="n">bright_square</span><span class="p">,</span> <span class="n">filters</span><span class="o">.</span><span class="n">sobel</span><span class="p">(</span><span class="n">bright_square</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_105_0.png" src="../_images/1_image_filters_105_0.png" />
+</div>
+</div>
+<p>Notice that the size of the output matches the input, and the edges aren’t preferentially shifted to a corner of the image. Furthermore, the weights used in the Sobel filter produce diagonal edges with reponses that are comparable to horizontal or vertical edges.</p>
+<p>Like any derivative, noise can have a strong impact on the result:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pixelated_gradient</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">sobel</span><span class="p">(</span><span class="n">pixelated</span><span class="p">)</span>
+<span class="n">imshow_all</span><span class="p">(</span><span class="n">pixelated</span><span class="p">,</span> <span class="n">pixelated_gradient</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_107_0.png" src="../_images/1_image_filters_107_0.png" />
+</div>
+</div>
+<p>Smoothing is often used as a preprocessing step in preparation for feature detection and image-enhancement operations because sharp features can distort results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gradient</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">sobel</span><span class="p">(</span><span class="n">smooth</span><span class="p">)</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;gradient before smoothing&#39;</span><span class="p">,</span> <span class="s1">&#39;gradient after smoothing&#39;</span><span class="p">]</span>
+<span class="c1"># Scale smoothed gradient up so they&#39;re of comparable brightness.</span>
+<span class="n">imshow_all</span><span class="p">(</span><span class="n">pixelated_gradient</span><span class="p">,</span> <span class="n">gradient</span><span class="o">*</span><span class="mf">1.8</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="n">titles</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_109_0.png" src="../_images/1_image_filters_109_0.png" />
+</div>
+</div>
+<p>Notice how the edges look more continuous in the smoothed image.</p>
+<p><strong>Exercise: the simplest neural network.</strong> Let’s pretend we have an image and a “ground truth” image of what we want to detect:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">target</span> <span class="o">=</span> <span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">sobel_h</span><span class="p">(</span><span class="n">image</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.07</span><span class="p">)</span>
+<span class="n">imshow_all</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;source&#39;</span><span class="p">,</span> <span class="s1">&#39;target&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_112_0.png" src="../_images/1_image_filters_112_0.png" />
+</div>
+</div>
+<p>Can we use machine learning to find a 3x3 convolutional filter that recovers this target?</p>
+<ul class="simple">
+<li><p>use <code class="docutils literal notranslate"><span class="pre">skimage.util.view_as_windows</span></code> and <code class="docutils literal notranslate"><span class="pre">np.reshape</span></code> to view the image as a set of (approximately) <code class="docutils literal notranslate"><span class="pre">npixels</span></code> 3x3 patches. (Hint: why is it only approximate? Think of <code class="docutils literal notranslate"><span class="pre">mode=valid</span></code> convolutions.)</p></li>
+<li><p>use <code class="docutils literal notranslate"><span class="pre">np.reshape</span></code> again to see it as <code class="docutils literal notranslate"><span class="pre">npixels</span></code> “linear” patches of 9 pixels.</p></li>
+<li><p>Now you have an <code class="docutils literal notranslate"><span class="pre">(npixels,</span> <span class="pre">9)</span></code> “feature” matrix, <code class="docutils literal notranslate"><span class="pre">X</span></code>.</p></li>
+<li><p>Use slicing and <code class="docutils literal notranslate"><span class="pre">np.ravel</span></code> to get an <code class="docutils literal notranslate"><span class="pre">npixels</span></code>-length array of target values.</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.LogisticRegression</span></code> to learn the relationship between our pixel neighborhoods (of size 9) and the target.</p></li>
+<li><p>Look at your <code class="docutils literal notranslate"><span class="pre">model.coef_</span></code>. How do they compare to the Sobel coefficients?</p></li>
+</ul>
+</div>
+</div>
+<hr class="docutils" />
+<div class="section" id="denoising-filters">
+<h2>Denoising filters<a class="headerlink" href="#denoising-filters" title="Permalink to this headline">¶</a></h2>
+<p>At this point, we make a distinction. The earlier filters were implemented as a <em>linear dot-product</em> of values in the filter kernel and values in the image. The following kernels implement an <em>arbitrary</em> function of the local image neighborhood. Denoising filters in particular are filters that preserve the sharpness of edges in the image.</p>
+<p>As you can see from our earlier examples, mean and Gaussian filters smooth an image rather uniformly, including the edges of objects in an image. When denoising, however, you typically want to preserve features and just remove noise. The distinction between noise and features can, of course, be highly situation-dependent and subjective.</p>
+<div class="section" id="median-filter">
+<h3>Median Filter<a class="headerlink" href="#median-filter" title="Permalink to this headline">¶</a></h3>
+<p>The median filter is the classic edge-preserving filter. As the name implies, this filter takes a set of pixels (i.e. the pixels within a kernel or “structuring element”) and returns the median value within that neighborhood. Because regions near a sharp edge will have many dark values and many light values (but few values in between) the median at an edge will most likely be either light or dark, rather than some value in between. In that way, we don’t end up with edges that are smoothed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="n">disk</span>
+<span class="n">neighborhood</span> <span class="o">=</span> <span class="n">disk</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># &quot;selem&quot; is often the name used for &quot;structuring element&quot;</span>
+<span class="n">median</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">pixelated</span><span class="p">,</span> <span class="n">neighborhood</span><span class="p">)</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">]</span>
+<span class="n">imshow_all</span><span class="p">(</span><span class="n">pixelated</span><span class="p">,</span> <span class="n">smooth</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="n">titles</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_120_0.png" src="../_images/1_image_filters_120_0.png" />
+</div>
+</div>
+<p>This difference is more noticeable with a more detailed image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">neighborhood</span> <span class="o">=</span> <span class="n">disk</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">coins</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">coins</span><span class="p">()</span>
+<span class="n">mean_coin</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">neighborhood</span><span class="p">)</span>
+<span class="n">median_coin</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">neighborhood</span><span class="p">)</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">]</span>
+<span class="n">imshow_all</span><span class="p">(</span><span class="n">coins</span><span class="p">,</span> <span class="n">mean_coin</span><span class="p">,</span> <span class="n">median_coin</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="n">titles</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_122_0.png" src="../_images/1_image_filters_122_0.png" />
+</div>
+</div>
+<p>Notice how the edges of coins are preserved after using the median filter.</p>
+</div>
+</div>
+<div class="section" id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">scikit-image</span></code> also provides more sophisticated denoising filters:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.restoration</span> <span class="kn">import</span> <span class="n">denoise_tv_bregman</span>
+<span class="n">denoised</span> <span class="o">=</span> <span class="n">denoise_tv_bregman</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">disk</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">median</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">,</span> <span class="s1">&#39;denoised&#39;</span><span class="p">]</span>
+<span class="n">imshow_all</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">median</span><span class="p">,</span> <span class="n">denoised</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="n">titles</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/1_image_filters_126_0.png" src="../_images/1_image_filters_126_0.png" />
+</div>
+</div>
+<ul class="simple">
+<li><p><a class="reference external" href="http://scikit-image.org/docs/dev/auto_examples/plot_denoise.html">Denoising examples</a></p></li>
+<li><p><a class="reference external" href="http://scikit-image.org/docs/dev/auto_examples/applications/plot_rank_filters.html">Rank filters example</a></p></li>
+<li><p><a class="reference external" href="http://scikit-image.org/docs/stable/api/skimage.restoration.html">Restoration API</a></p></li>
+</ul>
+<p>Take a look at this <a class="reference external" href="https://github.com/scikit-image/scikit-image/pull/2647">neat feature</a> merged last year:</p>
+<p><img alt="cycle spinning" src="../_images/cycle_spin.png" /></p>
+</div>
+</div>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"caec36769b354e739224e70380095931": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b803ff07164d42ae962c91272603409c": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "dfa065ea832c43d484a8705370c32726": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "i", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_caec36769b354e739224e70380095931", "max": 97, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_b803ff07164d42ae962c91272603409c", "value": 0}}, "27c59ec4cab24c5585fe5d44307a4165": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "593e9c793d73475990f0034b006ae9f2": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_dfa065ea832c43d484a8705370c32726", "IPY_MODEL_d57f929707674f08b4dfd72fb380c6b6"], "layout": "IPY_MODEL_27c59ec4cab24c5585fe5d44307a4165"}}, "19347e0af63642f0a30472a31125d76f": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d57f929707674f08b4dfd72fb380c6b6": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_19347e0af63642f0a30472a31125d76f", "msg_id": "", "outputs": []}}, "86d4ffb5805a4430ac9d5be0ff31c934": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "afae0f8f5ea64f50bf9777bec471754c": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "4ed1a468688c4b0c9ea949fd9693b27f": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "i", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_86d4ffb5805a4430ac9d5be0ff31c934", "max": 89, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_afae0f8f5ea64f50bf9777bec471754c", "value": 0}}, "2c5bd279f15a4d1b98da5f4f480c3392": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "635da38ea77840608e3b8eb39148c968": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_4ed1a468688c4b0c9ea949fd9693b27f", "IPY_MODEL_d5e0fe4c2598405ab44b8fdc601d55c1"], "layout": "IPY_MODEL_2c5bd279f15a4d1b98da5f4f480c3392"}}, "c44bba5b81bb42a89ee2e534fece5a8e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d5e0fe4c2598405ab44b8fdc601d55c1": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_c44bba5b81bb42a89ee2e534fece5a8e", "msg_id": "", "outputs": []}}, "6d69e0dba05640bfb20a1a884a3bceba": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2b39db82bbd6491cb1bb0aaf891a3510": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "89b06e7e6b3f4201a4cbfeb8444b1223": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "i", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_6d69e0dba05640bfb20a1a884a3bceba", "max": 99, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_2b39db82bbd6491cb1bb0aaf891a3510", "value": 0}}, "4df5243316624abd94e0764b4fe34b20": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "e47cb70045904c6f9088fdd943a044ab": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_89b06e7e6b3f4201a4cbfeb8444b1223", "IPY_MODEL_bb7d9ece50854227a300a7c108166b8f"], "layout": "IPY_MODEL_4df5243316624abd94e0764b4fe34b20"}}, "7ff14c7c84ea4b509163c6e2671e206e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "bb7d9ece50854227a300a7c108166b8f": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_7ff14c7c84ea4b509163c6e2671e206e", "msg_id": "", "outputs": []}}, "e4db30cdac9a421a88697ee700216d19": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "75168b6cbe364f34b39142ca2daae93d": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "d2bcec48b2184adaba2e43423d81852b": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "i_step", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_e4db30cdac9a421a88697ee700216d19", "max": 48, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_75168b6cbe364f34b39142ca2daae93d", "value": 0}}, "1fedb690c3b04ddfbed18b23796a46aa": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "89b85e8f01484a92bead31f985195ae3": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_d2bcec48b2184adaba2e43423d81852b", "IPY_MODEL_348679f09f4c4bd0a44615387c02b922"], "layout": "IPY_MODEL_1fedb690c3b04ddfbed18b23796a46aa"}}, "bb483aabba914405ae780a8fe1e6d5df": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "348679f09f4c4bd0a44615387c02b922": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_bb483aabba914405ae780a8fe1e6d5df", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {"image/png": {"width": 585, "height": 284}, "needs_background": "light"}, "data": {"text/plain": "<Figure size 720x360 with 2 Axes>", "image/png": "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\n"}}]}}}, "version_major": 2, "version_minor": 0}
+</script>
+
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="00_images_are_arrays.html" title="previous page">Images are numpy arrays</a>
+    <a class='right-next' id="next-link" href="3_morphological_operations.html" title="next page">Morphological operations</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By The scikit-image contributors<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
