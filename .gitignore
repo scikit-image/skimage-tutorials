@@ -9,3 +9,6 @@ build
 *~
 *pano-advanced-output.png
 book/lessons
+
+# ignoring website local builds
+website/_build
