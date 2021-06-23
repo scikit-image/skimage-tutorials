@@ -61,13 +61,13 @@ jobs:
       # - name: Build the theme
       #   run: yarn build:theme-prod
 
-      # Build the book
-      - name: Build the book
+      # Build site
+      - name: Build site
         env:
           DISPLAY: ":99.0"
-        run: jupyter-book build .
+        run: make -C website/ html
 
-      # Deploy the book's HTML to github pages
+      # Deploy site to github pages
       - name: GitHub Pages action
         if: github.repository == 'scikit-image/skimage-tutorials' && github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: peaceiris/actions-gh-pages@v3.6.1
