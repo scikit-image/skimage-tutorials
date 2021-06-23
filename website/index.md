@@ -10,7 +10,7 @@
 ---
 maxdepth: 2
 ---
-content/00_images_are_arrays.md
+introduction
 applications
 ```
 
