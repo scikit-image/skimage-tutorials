@@ -26,11 +26,6 @@ $(GENERATED_LESSONS_DIR)/%.ipynb:$(LESSONS_DIR)/%.md book/lessons book/lessons/i
 #	$(eval NBSTRING := [📂 Download lesson notebook](.\/$(basename $(notdir $@)).ipynb)\n\n)
 #	sed -i'.bak' '1s/^/$(NBSTRING)/' $@
 
-notebooks:
-    mkdir -p notebooks
-    jupytext -k python3 ../content/*.md --from myst --to notebook
-    mv ../content/*.ipynb notebooks
-
 book/lessons:
     mkdir -p book/lessons
 
@@ -43,7 +38,3 @@ html: | _requirements.installed $(NOTEBOOKS) $(MD_OUTPUTS)
 
 clean:
     rm -rf $(GENERATED_LESSONS_DIR)/*
-    rm -rf _build
-    rm -rf notebooks
-
-.PHONY: Makefile notebooks clean
