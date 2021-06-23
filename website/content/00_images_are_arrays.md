@@ -11,20 +11,6 @@ kernelspec:
   name: python3
 ---
 
-<div style='font-size: 200%; line-height: 2;'>
-To participate, you'll need to git clone (or download the .zip from GitHub):
-
-<p>https://github.com/scikit-image/skimage-tutorials</p>
-</div>
-
-<p>You can do that in git using:</p>
-
-<pre>git clone --depth=1 https://github.com/scikit-image/skimage-tutorials</pre>
-
-<div style='font-size: 200%; line-height: 1.5;'>
-If you have already cloned the material, please issue `git pull` now and reload the notebook to ensure that you have the latest updates.
-</div>
-
 ```{code-cell} ipython3
 :tags: [remove-input, remove-output]
 
@@ -233,7 +219,7 @@ for ax in axes:
 for i, image in enumerate(ic):
     axes[i].imshow(image, cmap='gray')
     axes[i].set_title(os.path.basename(ic.files[i]))
-    
+
 plt.tight_layout()
 ```
 
@@ -263,10 +249,10 @@ Start with the following template:
 
 def draw_H(image, coords, color=(0, 255, 0)):
     out = image.copy()
-    
+
     ...
-    
-    return out 
+
+    return out
 ```
 
 Test your function like so:
@@ -304,7 +290,7 @@ for ax in axes:
     ax.axis('off')
 
 (ax_r, ax_g, ax_b, ax_color) = axes
-    
+
 ax_r.imshow(r, cmap='gray')
 ax_r.set_title('red channel')
 
