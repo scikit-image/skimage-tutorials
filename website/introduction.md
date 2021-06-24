@@ -6,5 +6,5 @@ Basic tutorials to prepare you for your journey on scikit-image.
 ---
 maxdepth: 1
 ---
-introduction/00_images_are_arrays.md
+content/00_images_are_arrays.md
 ```
