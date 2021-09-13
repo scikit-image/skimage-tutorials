@@ -11,7 +11,7 @@ kernelspec:
   name: python3
 ---
 
-```{code-cell} ipython3
+```{code-cell} python
 :tags: [remove-input, remove-output]
 
 %matplotlib inline
@@ -26,7 +26,7 @@ Images are represented in ``scikit-image`` using standard ``numpy`` arrays.  Thi
 
 Let's see how to build a grayscale image as a 2D array:
 
-```{code-cell} ipython3
+```{code-cell} python
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -38,7 +38,7 @@ plt.colorbar();
 
 The same holds for "real-world" images:
 
-```{code-cell} ipython3
+```{code-cell} python
 from skimage import data
 
 coins = data.coins()
@@ -52,7 +52,7 @@ plt.imshow(coins, cmap='gray');
 
 A color image is a 3D array, where the last dimension has size 3 and represents the red, green, and blue channels:
 
-```{code-cell} ipython3
+```{code-cell} python
 cat = data.chelsea()
 print("Shape:", cat.shape)
 print("Values min/max:", cat.min(), cat.max())
@@ -62,7 +62,7 @@ plt.imshow(cat);
 
 These are *just NumPy arrays*. E.g., we can make a red square by using standard array slicing and manipulation:
 
-```{code-cell} ipython3
+```{code-cell} python
 cat[10:110, 10:110, :] = [255, 0, 0]  # [red, green, blue]
 plt.imshow(cat);
 ```
@@ -84,14 +84,14 @@ Images can also include transparent regions by adding a 4th dimension, called an
 
 ## Displaying images using matplotlib
 
-```{code-cell} ipython3
+```{code-cell} python
 from skimage import data
 
 img0 = data.chelsea()
 img1 = data.rocket()
 ```
 
-```{code-cell} ipython3
+```{code-cell} python
 import matplotlib.pyplot as plt
 
 f, (ax0, ax1) = plt.subplots(1, 2, figsize=(20, 10))
@@ -128,7 +128,7 @@ data-type of the array.
 
 E.g., here, I generate two valid images:
 
-```{code-cell} ipython3
+```{code-cell} python
 linear0 = np.linspace(0, 1, 2500).reshape((50, 50))
 linear1 = np.linspace(0, 255, 2500).reshape((50, 50)).astype(np.uint8)
 
@@ -148,7 +148,7 @@ as long as the range is correct (0-1 for floating point images, 0-255 for unsign
 
 You can convert images between different representations by using ``img_as_float``, ``img_as_ubyte``, etc.:
 
-```{code-cell} ipython3
+```{code-cell} python
 from skimage import img_as_float, img_as_ubyte
 
 image = data.chelsea()
@@ -181,7 +181,7 @@ Mostly, we won't be using input images from the scikit-image example data sets. 
 
 scikit-image conveniently wraps many of these in the `io` submodule, and will use whichever of the libraries mentioned above are installed:
 
-```{code-cell} ipython3
+```{code-cell} python
 from skimage import io
 
 image = io.imread('../images/balloon.jpg')
@@ -196,7 +196,7 @@ plt.imshow(image);
 
 We also have the ability to load multiple images, or multi-layer TIFF images:
 
-```{code-cell} ipython3
+```{code-cell} python
 ic = io.ImageCollection('../images/*.png:../images/*.jpg')
 
 print('Type:', type(ic))
@@ -204,7 +204,7 @@ print('Type:', type(ic))
 ic.files
 ```
 
-```{code-cell} ipython3
+```{code-cell} python
 import os
 
 f, axes = plt.subplots(nrows=3, ncols=len(ic) // 3 + 1, figsize=(20, 5))
@@ -227,11 +227,11 @@ plt.tight_layout()
 
 `enumerate` gives us each element in a container, along with its position.
 
-```{code-cell} ipython3
+```{code-cell} python
 animals = ['cat', 'dog', 'leopard']
 ```
 
-```{code-cell} ipython3
+```{code-cell} python
 for i, animal in enumerate(animals):
     print('The animal in position {} is {}'.format(i, animal))
 ```
@@ -244,7 +244,7 @@ The arms and strut of the H should have a width of 3 pixels, and the H itself sh
 
 Start with the following template:
 
-```{code-cell} ipython3
+```{code-cell} python
 :tags: [hide-output]
 
 def draw_H(image, coords, color=(0, 255, 0)):
@@ -257,7 +257,7 @@ def draw_H(image, coords, color=(0, 255, 0)):
 
 Test your function like so:
 
-```{code-cell} ipython3
+```{code-cell} python
 :tags: [remove-output]
 
 cat = data.chelsea()
@@ -269,7 +269,7 @@ plt.imshow(cat_H);
 
 Display the different color channels of the image along (each as a gray-scale image).  Start with the following template:
 
-```{code-cell} ipython3
+```{code-cell} python
 :tags: [raises-exception, remove-output]
 
 # --- read in the image ---
@@ -308,7 +308,7 @@ ax_color.set_title('all channels');
 
 Now, take a look at the following R, G, and B channels.  How would their combination look? (Write some code to confirm your intuition.)
 
-```{code-cell} ipython3
+```{code-cell} python
 from skimage import draw
 
 red = np.zeros((300, 300))
@@ -344,7 +344,7 @@ Compare your results to that obtained with `skimage.color.rgb2gray`.
 
 Change the coefficients to 1/3 (i.e., take the mean of the red, green, and blue channels, to see how that approach compares with `rgb2gray`).
 
-```{code-cell} ipython3
+```{code-cell} python
 :tags: [raises-exception, remove-output]
 
 from skimage import color, img_as_float
