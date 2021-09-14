@@ -1,4 +1,4 @@
-format: jb-article
+format: jb-book
 root: lectures/00_images_are_arrays
 sections:
 - file: lectures/1_image_filters
