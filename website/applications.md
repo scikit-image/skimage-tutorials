@@ -6,5 +6,10 @@ A collection of tutorials highlighting the use of scikit-image for applications 
 ---
 maxdepth: 1
 ---
-content/adv1-lesion-quantification.md
+content/adv0_chromosomes.md
+content/adv1_lesion-quantification.md
+content/adv2_microarray.md
+content/adv3_panorama_stitching.md
+content/adv4_warping.md
+content/adv5_pores.md
 ```

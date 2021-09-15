@@ -6,5 +6,6 @@ Basic tutorials to prepare you for your journey on scikit-image.
 ---
 maxdepth: 1
 ---
+content/tour_of_skimage.md
 content/00_images_are_arrays.md
 ```
