@@ -5,7 +5,7 @@ OBSHELL=/bin/bash
 .DEFAULT_GOAL = html
 
 LESSONS_DIR = lessons
-GENERATED_LESSONS_DIR = book/lessons
+GENERATED_LESSONS_DIR = site/lessons
 
 _requirements.installed:
 	pip install -q -r requirements.txt
@@ -17,7 +17,7 @@ NOTEBOOKS = $(patsubst %.md, %.ipynb, $(MD_OUTPUTS))
 
 .SECONDARY: $(MD_OUTPUTS) $(NOTEBOOKS)
 
-$(GENERATED_LESSONS_DIR)/%.ipynb:$(LESSONS_DIR)/%.md book/lessons book/lessons/images
+$(GENERATED_LESSONS_DIR)/%.ipynb:$(LESSONS_DIR)/%.md site/lessons site/lessons/images
 	# This does not work, due to bug in notedown; see https://github.com/aaren/notedown/issues/53
 	#notedown --match=python --precode='%matplotlib inline' $< > $@
 	notedown --match=python $< > $@
@@ -28,14 +28,14 @@ $(GENERATED_LESSONS_DIR)/%.ipynb:$(LESSONS_DIR)/%.md book/lessons book/lessons/i
 #	$(eval NBSTRING := [📂 Download lesson notebook](.\/$(basename $(notdir $@)).ipynb)\n\n)
 #	sed -i'.bak' '1s/^/$(NBSTRING)/' $@
 
-book/lessons:
+site/lessons:
 	mkdir -p book/lessons
 
-book/lessons/images:
-	ln -s ${PWD}/lessons/images ${PWD}/book/lessons/images
+site/lessons/images:
+	ln -s ${PWD}/lessons/images ${PWD}/site/lessons/images
 
-html: book/lessons _requirements.installed $(NOTEBOOKS) $(MD_OUTPUTS)
-	@export SPHINXOPTS=-W; make -C book html
+html: site/lessons _requirements.installed $(NOTEBOOKS) $(MD_OUTPUTS)
+	@export SPHINXOPTS=-W; make -C site html
 	cp $(GENERATED_LESSONS_DIR)/*.ipynb book/build/html/lessons/
 
 clean:
