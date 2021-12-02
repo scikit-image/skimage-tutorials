@@ -11,4 +11,4 @@ build
 book/lessons
 
 # ignoring website local builds
-website/_build
+site/_build
