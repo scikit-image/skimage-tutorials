@@ -1,3 +1,5 @@
+.PHONY: html
+
 OBSHELL=/bin/bash
 
 .DEFAULT_GOAL = html
@@ -32,7 +34,7 @@ book/lessons:
 book/lessons/images:
 	ln -s ${PWD}/lessons/images ${PWD}/book/lessons/images
 
-html: | _requirements.installed $(NOTEBOOKS) $(MD_OUTPUTS)
+html: book/lessons _requirements.installed $(NOTEBOOKS) $(MD_OUTPUTS)
 	@export SPHINXOPTS=-W; make -C book html
 	cp $(GENERATED_LESSONS_DIR)/*.ipynb book/build/html/lessons/
 
