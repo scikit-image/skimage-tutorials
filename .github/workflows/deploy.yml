@@ -65,7 +65,7 @@ jobs:
       - name: Build site
         env:
           DISPLAY: ":99.0"
-        run: make -C website/ html
+        run: make -C site/ html
 
       # Deploy site to github pages
       - name: GitHub Pages action
