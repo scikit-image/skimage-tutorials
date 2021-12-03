@@ -62,8 +62,8 @@ skdemo.imshow_all(chromosomes, chromosomes_binary, cmap='gray')
 Let's try using an adaptive threshold:
 
 ```{code-cell} python
-from skimage.filters import threshold_adaptive
-chromosomes_adapt = threshold_adaptive(chromosomes, block_size=51)
+from skimage.filters import threshold_local
+chromosomes_adapt = threshold_local(chromosomes, block_size=51)
 # Question: how did I choose this block size?
 skdemo.imshow_all(chromosomes, chromosomes_adapt)
 ```
