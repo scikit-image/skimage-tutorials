@@ -9,3 +9,4 @@ jupytext >= 1.10.3
 sphinx-book-theme
 myst-nb
 sphinx-copybutton
+imagecodecs
