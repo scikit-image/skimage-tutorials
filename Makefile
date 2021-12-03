@@ -21,7 +21,7 @@ $(EXEC_NB_DIR)/skdemo:
 $(EXEC_NB_DIR)/%.ipynb:$(NB_DIR)/%.md $(EXEC_NB_DIR) $(EXEC_NB_DIR)/skdemo
 	@# Jupytext will also catch and print execution errors
 	@# unless a cell is marked with the `raises-exception` tag
-	jupytext --execute --to ipynb --output $@ $<
+	jupytext --execute --to ipynb --run-path $(NB_DIR) --output $@ $<
 
 book: _requirements.installed $(NOTEBOOKS)
 	@export SPHINXOPTS=-W; make -C book html

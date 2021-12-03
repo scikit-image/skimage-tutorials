@@ -162,7 +162,7 @@ In this specific image, we got a bit more than we bargained for in the
 form of magnificently large solar flares.  Let's see if some *canny
 edge detection* will help isolate the sun's boundaries.
 
-```{code-cell} python
+```python
 from skimage import feature, color
 
 # Step 1: convert the image from color to gray, using `color.rgb2gray`
@@ -179,7 +179,7 @@ ax.imshow(my_result, cmap='gray')
 The edges look good, but there's a lot going on inside the sun.  We
 use RANSAC to fit a robust circle model.
 
-```{code-cell} python
+```python
 from skimage.measure import CircleModel
 
 points = ...    # Let points be an array with coordinate positions of edge pixels found above, shape (N, 2)
@@ -189,14 +189,14 @@ model_robust, inliers = ransac(...)
 
 The parameters of the circle are center x, y and radius:
 
-```{code-cell} python
+```python
 model_robust.params
 ```
 
 Let's visualize the results, drawing a circle on the sun, and also
 highlighting inlier vs outlier edge pixels:
 
-```{code-cell} python
+```python
 from skimage import draw
 
 cy, cx, r = model_robust.params

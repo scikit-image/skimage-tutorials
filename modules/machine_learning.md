@@ -502,7 +502,7 @@ data = np.array([(prop.area,
 ```
 
 ```{code-cell} python
-plt.imshow(labels, cmap='spectral')
+plt.imshow(labels, cmap='nipy_spectral')
 ```
 
 Once again we use the KMeans algorithm to cluster the objects. We visualize the result as an array of labels.
@@ -522,7 +522,7 @@ def reshape_cluster_labels(cluster_labels, image_labels):
     
 
 object_clusters = reshape_cluster_labels(clf.labels_, labels)
-plt.imshow(object_clusters, cmap='spectral')
+plt.imshow(object_clusters, cmap='nipy_spectral')
 ```
 
 However, our features were not carefully designed. Since the ``area`` property can take much larger values than the other properties, it dominates the other ones. To correct this effect, we can normalize the area to its maximal value. 
@@ -533,7 +533,7 @@ data[:, 0] /= data[:, 0].max()
 clf.fit(data)
 
 object_clusters = reshape_cluster_labels(clf.labels_, labels)
-plt.imshow(object_clusters, cmap='spectral')
+plt.imshow(object_clusters, cmap='nipy_spectral')
 ```
 
 A better way to do the rescaling is to use of the scaling methods provided by ``sklearn.preprocessing``. The ``StandardScaler`` makes sure that every feature has a zero mean and a unit standard deviation.
@@ -548,7 +548,7 @@ clf = KMeans(n_clusters=2)
 clf.fit(data_scaled)
 
 object_clusters = reshape_cluster_labels(clf.labels_, labels)
-plt.imshow(object_clusters, cmap='spectral')
+plt.imshow(object_clusters, cmap='nipy_spectral')
 ```
 
 ###Exercise

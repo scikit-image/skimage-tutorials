@@ -74,7 +74,7 @@ def imshow_all(*images, **kwargs):
         kwargs.setdefault('vmin', vmin)
         kwargs.setdefault('vmax', vmax)
 
-    nrows, ncols = kwargs.get('shape', (1, len(images)))
+    nrows, ncols = kwargs.pop('shape', (1, len(images)))
 
     size = nrows * kwargs.pop('size', 5)
     width = size * len(images)

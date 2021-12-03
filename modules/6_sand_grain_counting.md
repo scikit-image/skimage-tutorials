@@ -135,5 +135,5 @@ for name, img in [('Sand', sand),
                  i in range(1, labels.max())]
     print("Mean obj area %d" % np.mean(obj_areas))
 
-plot_images(cmap=plt.cm.spectral)
+plot_images(cmap=plt.cm.nipy_spectral)
 ```
