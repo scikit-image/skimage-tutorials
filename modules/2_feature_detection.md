@@ -55,8 +55,7 @@ slideshow:
 ---
 import skdemo
 from skimage import data
-# Rename module so we don't shadow the builtin function
-import skimage.filter as filters
+from skimage import filters
 
 image = data.camera()
 pixelated = image[::10, ::10]
@@ -116,7 +115,7 @@ from skimage import img_as_float
 sigma = 1  # Standard-deviation of Gaussian; larger smooths more.
 pixelated_float = img_as_float(pixelated)
 pixelated_float = pixelated
-smooth = filters.gaussian_filter(pixelated_float, sigma)
+smooth = filters.gaussian(pixelated_float, sigma)
 skdemo.imshow_all(pixelated_float, smooth)
 ```
 
@@ -220,12 +219,12 @@ slideshow:
   slide_type: fragment
 ---
 from IPython.html import widgets
-from skimage import data
+from skimage import data, feature
 
 image = data.coins()
 
 def canny_demo(**kwargs):
-    edges = filters.canny(image, **kwargs)
+    edges = feature.canny(image, **kwargs)
     plt.imshow(edges)
     plt.show()
 # As written, the following doesn't actually interact with the

@@ -1,1 +1,1 @@
-../../images/spice_1_credits.txt
+../../../images/spice_1_credits.txt
