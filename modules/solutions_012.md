@@ -282,17 +282,17 @@ Using a couple of the filters in the `filter` module, **find the direction of th
 
 +++
 
-**NOTE:** When developing this exercise, it was assumed that `vsobel` and `hsobel` from `skimage.filter` returned the response from the vertical-edge and horizontal-edge Sobel kernels, pictured in the links below:
+**NOTE:** When developing this exercise, it was assumed that `vsobel` and `hsobel` from `skimage.filters` returned the response from the vertical-edge and horizontal-edge Sobel kernels, pictured in the links below:
 
-* http://scikit-image.org/docs/dev/api/skimage.filter.html#vsobel
-* http://scikit-image.org/docs/dev/api/skimage.filter.html#hsobel
+* http://scikit-image.org/docs/dev/api/skimage.filters.html#vsobel
+* http://scikit-image.org/docs/dev/api/skimage.filters.html#hsobel
 
 As described in those docs, however, the **absolute value** of the response is returned. While this result is typically preferred, it's not in this case, since the sign of the response contributes to the gradient angle.
 
 To get around this oversight, we'll copy the edge kernels from the documentation:
 
 ```{code-cell} python
-from skimage import filter
+from skimage import filters
 
 # Kernel copied from `vsobel` docstring.
 # Vertical edge-reponse is the *horizontal* gradient.
@@ -348,7 +348,7 @@ First, let's replicate the data from the tutorial
 from skimage.transform import hough_circle
 
 image = data.coins()[0:95, 180:370]
-edges = filter.canny(image, sigma=3, low_threshold=10, high_threshold=60)
+edges = filters.canny(image, sigma=3, low_threshold=10, high_threshold=60)
 hough_radii = np.arange(15, 30, 2)
 hough_response = hough_circle(edges, hough_radii)
 ```

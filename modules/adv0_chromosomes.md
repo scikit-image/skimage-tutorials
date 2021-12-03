@@ -47,7 +47,7 @@ protein, centromeres, chromosomes = image.transpose((2, 0, 1))
 Getting the centromeres is easy because the signal is so clean:
 
 ```{code-cell} python
-from skimage.filter import threshold_otsu
+from skimage.filters import threshold_otsu
 centromeres_binary = centromeres > threshold_otsu(centromeres)
 skdemo.imshow_all(centromeres, centromeres_binary)
 ```
@@ -62,7 +62,7 @@ skdemo.imshow_all(chromosomes, chromosomes_binary, cmap='gray')
 Let's try using an adaptive threshold:
 
 ```{code-cell} python
-from skimage.filter import threshold_adaptive
+from skimage.filters import threshold_adaptive
 chromosomes_adapt = threshold_adaptive(chromosomes, block_size=51)
 # Question: how did I choose this block size?
 skdemo.imshow_all(chromosomes, chromosomes_adapt)
