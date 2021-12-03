@@ -15,7 +15,10 @@ _requirements.installed:
 $(EXEC_NB_DIR):
 	mkdir book/_modules
 
-$(EXEC_NB_DIR)/%.ipynb:$(NB_DIR)/%.md $(EXEC_NB_DIR)
+$(EXEC_NB_DIR)/skdemo:
+	ln -s $(PWD)/lectures/skdemo $(EXEC_NB_DIR)/skdemo
+
+$(EXEC_NB_DIR)/%.ipynb:$(NB_DIR)/%.md $(EXEC_NB_DIR) $(EXEC_NB_DIR)/skdemo
 	@# Jupytext will also catch and print execution errors
 	@# unless a cell is marked with the `raises-exception` tag
 	jupytext --execute --to ipynb --output $@ $<
@@ -25,4 +28,3 @@ book: _requirements.installed $(NOTEBOOKS)
 
 clean:
 	make -C book clean
-
