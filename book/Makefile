@@ -1,5 +1,4 @@
-# Minimal makefile for Sphinx documentation
-#
+.PHONY: help Makefile clean
 
 # You can set these variables from the command line, and also
 # from the environment for the first two.
@@ -12,16 +11,8 @@ BUILDDIR      = _build
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-notebooks:
-	mkdir -p notebooks
-	jupytext -k python3 ../content/*.md --from myst --to notebook
-	mv ../content/*.ipynb notebooks
-
 clean:
 	rm -rf _build
-	rm -rf notebooks
-
-.PHONY: help Makefile notebooks clean
 
 # Catch-all target: route all unknown targets to Sphinx using the new
 # "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).

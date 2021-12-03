@@ -4,7 +4,7 @@
 
 [launch_binder]: http://mybinder.org/v2/gh/scikit-image/skimage-tutorials/main?urlpath=lab/tree/content
 
- ## Content
+## Content
 
 ```{toctree}
 ---
@@ -13,7 +13,6 @@ maxdepth: 2
 introduction
 applications
 ```
-
 
 ## Indices and tables
 

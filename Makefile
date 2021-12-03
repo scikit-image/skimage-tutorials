@@ -1,42 +1,28 @@
-.PHONY: html
+.PHONY: clean book
 
-OBSHELL=/bin/bash
+.DEFAULT_GOAL = book
 
-.DEFAULT_GOAL = html
+NB_DIR = modules
+EXEC_NB_DIR = book/_modules
 
-LESSONS_DIR = lessons
-GENERATED_LESSONS_DIR = site/lessons
+MARKDOWNS = $(wildcard $(NB_DIR)/*.md)
+NOTEBOOKS = $(patsubst $(NB_DIR)/%.md, $(EXEC_NB_DIR)/%.ipynb, $(MARKDOWNS))
 
 _requirements.installed:
 	pip install -q -r requirements.txt
 	touch _requirements.installed
 
-MARKDOWNS = $(wildcard $(LESSONS_DIR)/*.md)
-MD_OUTPUTS = $(patsubst $(LESSONS_DIR)/%.md, $(GENERATED_LESSONS_DIR)/%.md, $(MARKDOWNS))
-NOTEBOOKS = $(patsubst %.md, %.ipynb, $(MD_OUTPUTS))
+$(EXEC_NB_DIR):
+	mkdir book/_modules
 
-.SECONDARY: $(MD_OUTPUTS) $(NOTEBOOKS)
+$(EXEC_NB_DIR)/%.ipynb:$(NB_DIR)/%.md $(EXEC_NB_DIR)
+	@# Jupytext will also catch and print execution errors
+	@# unless a cell is marked with the `raises-exception` tag
+	jupytext --execute --to ipynb --output $@ $<
 
-$(GENERATED_LESSONS_DIR)/%.ipynb:$(LESSONS_DIR)/%.md site/lessons site/lessons/images
-	# This does not work, due to bug in notedown; see https://github.com/aaren/notedown/issues/53
-	#notedown --match=python --precode='%matplotlib inline' $< > $@
-	notedown --match=python $< > $@
-	jupyter nbconvert --execute --inplace $@ --ExecutePreprocessor.timeout=-1
-
-%.md:%.ipynb
-	jupyter nbconvert --to=mdoutput --output="$(notdir $@)" --output-dir=$(GENERATED_LESSONS_DIR) $<
-#	$(eval NBSTRING := [📂 Download lesson notebook](.\/$(basename $(notdir $@)).ipynb)\n\n)
-#	sed -i'.bak' '1s/^/$(NBSTRING)/' $@
-
-site/lessons:
-	mkdir -p book/lessons
-
-site/lessons/images:
-	ln -s ${PWD}/lessons/images ${PWD}/site/lessons/images
-
-html: site/lessons _requirements.installed $(NOTEBOOKS) $(MD_OUTPUTS)
-	@export SPHINXOPTS=-W; make -C site html
-	cp $(GENERATED_LESSONS_DIR)/*.ipynb book/build/html/lessons/
+book: _requirements.installed $(NOTEBOOKS)
+	@export SPHINXOPTS=-W; make -C book html
 
 clean:
-	rm -rf $(GENERATED_LESSONS_DIR)/*
+	make -C book clean
+

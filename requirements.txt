@@ -1,15 +1,11 @@
 scikit-image[data] >= 0.18
-numpy >= 1.12
-scipy >= 1.0
-matplotlib >= 2.1
+numpy >= 1.20
+scipy >= 1.7
+matplotlib >= 3.0
 notebook >= 4.0
 scikit-learn >= 0.18
-jupyter-book >= 0.10.2
 napari[all]
-jupytext >=1.10.3
-sphinx_autodoc_typehints>=1.11.0
-ghp-import
-pytest
-pytest-qt
-pooch
-furo
+jupytext >= 1.10.3
+sphinx-book-theme
+myst-nb
+sphinx-copybutton

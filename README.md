@@ -1,5 +1,4 @@
-scikit-image tutorials
-======================
+# scikit-image tutorials
 
 A collection of tutorials for the [scikit-image](http://skimage.org) package.
 
@@ -16,8 +15,7 @@ Refer to [the gallery](http://scikit-image.org/docs/dev/auto_examples/) as
 well as [scikit-image demos](https://github.com/scikit-image/skimage-demos)
 for more examples.
 
-Usage
------
+## Usage
 
 These usage guidelines are based on goodwill. They are not a legal contract.
 
@@ -42,9 +40,28 @@ For more information on these guidelines, which are sometimes known as
 CC0 (+BY), see [this blog post](http://www.dancohen.org/2013/11/26/cc0-by/) by
 Dan Cohen.
 
-Contributing
-------------
+## Contributing
 
 If you make any modifications to these tutorials that you think would benefit
 the community at large, please
 [create a pull request](http://scikit-image.org/docs/dev/contribute.html)!
+
+The tutorials live at
+https://github.com/scikit-image/skimage-tutorials
+
+
+## Contributor notes
+
+- Notebooks are stored in `modules`; see [modules/00_images_are_arrays.md](modules/00_images_are_arrays.md)
+  for an example.
+- They use the [myst](https://myst-nb.readthedocs.io/en/latest/)
+  notebook format
+- Cells can be tagged with:
+  `remove-input` : Get rid of the input but display the output
+  `remove-output` : Show the input but not the output
+  `raises-exception` : This cell is expected to fail execution, so
+  don't halt the book build because of it.
+
+To build the book, run `make`. Results appear in `book/_build`.
+Notebooks can be edited in your favorite text editor or in Jupyter (as
+long as Jupytext is installed).

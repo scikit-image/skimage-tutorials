@@ -4,15 +4,17 @@ jupytext:
     extension: .md
     format_name: myst
     format_version: 0.13
-    jupytext_version: 1.10.3
+    jupytext_version: 1.11.2
 kernelspec:
   display_name: Python 3
   language: python
   name: python3
 ---
 
-```{code-cell} python
-:tags: [remove-input, remove-output]
+```{code-cell}
+---
+tags: [remove-input, remove-output]
+---
 
 %matplotlib inline
 %config InlineBackend.figure_format = 'retina'
@@ -26,7 +28,7 @@ Images are represented in ``scikit-image`` using standard ``numpy`` arrays.  Thi
 
 Let's see how to build a grayscale image as a 2D array:
 
-```{code-cell} python
+```{code-cell}
 import numpy as np
 from matplotlib import pyplot as plt
 
@@ -38,7 +40,7 @@ plt.colorbar();
 
 The same holds for "real-world" images:
 
-```{code-cell} python
+```{code-cell}
 from skimage import data
 
 coins = data.coins()
@@ -52,7 +54,7 @@ plt.imshow(coins, cmap='gray');
 
 A color image is a 3D array, where the last dimension has size 3 and represents the red, green, and blue channels:
 
-```{code-cell} python
+```{code-cell}
 cat = data.chelsea()
 print("Shape:", cat.shape)
 print("Values min/max:", cat.min(), cat.max())
@@ -62,7 +64,7 @@ plt.imshow(cat);
 
 These are *just NumPy arrays*. E.g., we can make a red square by using standard array slicing and manipulation:
 
-```{code-cell} python
+```{code-cell}
 cat[10:110, 10:110, :] = [255, 0, 0]  # [red, green, blue]
 plt.imshow(cat);
 ```
@@ -84,14 +86,14 @@ Images can also include transparent regions by adding a 4th dimension, called an
 
 ## Displaying images using matplotlib
 
-```{code-cell} python
+```{code-cell}
 from skimage import data
 
 img0 = data.chelsea()
 img1 = data.rocket()
 ```
 
-```{code-cell} python
+```{code-cell}
 import matplotlib.pyplot as plt
 
 f, (ax0, ax1) = plt.subplots(1, 2, figsize=(20, 10))
@@ -128,7 +130,7 @@ data-type of the array.
 
 E.g., here, I generate two valid images:
 
-```{code-cell} python
+```{code-cell}
 linear0 = np.linspace(0, 1, 2500).reshape((50, 50))
 linear1 = np.linspace(0, 255, 2500).reshape((50, 50)).astype(np.uint8)
 
@@ -148,7 +150,7 @@ as long as the range is correct (0-1 for floating point images, 0-255 for unsign
 
 You can convert images between different representations by using ``img_as_float``, ``img_as_ubyte``, etc.:
 
-```{code-cell} python
+```{code-cell}
 from skimage import img_as_float, img_as_ubyte
 
 image = data.chelsea()
@@ -164,7 +166,7 @@ print("231/255 =", 231/255.)
 
 Your code would then typically look like this:
 
-```python
+```{code-cell}
 def my_function(any_image):
    float_image = img_as_float(any_image)
    # Proceed, knowing image is in [0, 1]
@@ -181,7 +183,7 @@ Mostly, we won't be using input images from the scikit-image example data sets. 
 
 scikit-image conveniently wraps many of these in the `io` submodule, and will use whichever of the libraries mentioned above are installed:
 
-```{code-cell} python
+```{code-cell}
 from skimage import io
 
 image = io.imread('../images/balloon.jpg')
@@ -196,7 +198,7 @@ plt.imshow(image);
 
 We also have the ability to load multiple images, or multi-layer TIFF images:
 
-```{code-cell} python
+```{code-cell}
 ic = io.ImageCollection('../images/*.png:../images/*.jpg')
 
 print('Type:', type(ic))
@@ -204,7 +206,7 @@ print('Type:', type(ic))
 ic.files
 ```
 
-```{code-cell} python
+```{code-cell}
 import os
 
 f, axes = plt.subplots(nrows=3, ncols=len(ic) // 3 + 1, figsize=(20, 5))
@@ -227,11 +229,11 @@ plt.tight_layout()
 
 `enumerate` gives us each element in a container, along with its position.
 
-```{code-cell} python
+```{code-cell}
 animals = ['cat', 'dog', 'leopard']
 ```
 
-```{code-cell} python
+```{code-cell}
 for i, animal in enumerate(animals):
     print('The animal in position {} is {}'.format(i, animal))
 ```
@@ -244,8 +246,10 @@ The arms and strut of the H should have a width of 3 pixels, and the H itself sh
 
 Start with the following template:
 
-```{code-cell} python
-:tags: [hide-output]
+```{code-cell}
+---
+tags: [hide-output]
+---
 
 def draw_H(image, coords, color=(0, 255, 0)):
     out = image.copy()
@@ -257,8 +261,10 @@ def draw_H(image, coords, color=(0, 255, 0)):
 
 Test your function like so:
 
-```{code-cell} python
-:tags: [remove-output]
+```{code-cell}
+---
+tags: [remove-output]
+---
 
 cat = data.chelsea()
 cat_H = draw_H(cat, (50, -50))
@@ -269,8 +275,10 @@ plt.imshow(cat_H);
 
 Display the different color channels of the image along (each as a gray-scale image).  Start with the following template:
 
-```{code-cell} python
-:tags: [raises-exception, remove-output]
+```{code-cell}
+---
+tags: [raises-exception, remove-output]
+---
 
 # --- read in the image ---
 
@@ -308,20 +316,20 @@ ax_color.set_title('all channels');
 
 Now, take a look at the following R, G, and B channels.  How would their combination look? (Write some code to confirm your intuition.)
 
-```{code-cell} python
+```{code-cell}
 from skimage import draw
 
 red = np.zeros((300, 300))
 green = np.zeros((300, 300))
 blue = np.zeros((300, 300))
 
-r, c = draw.circle(100, 100, 100)
+r, c = draw.circle_perimeter(100, 100, 100, shape=red.shape)
 red[r, c] = 1
 
-r, c = draw.circle(100, 200, 100)
+r, c = draw.circle_perimeter(100, 200, 100, shape=green.shape)
 green[r, c] = 1
 
-r, c = draw.circle(200, 150, 100)
+r, c = draw.circle_perimeter(200, 150, 100, shape=blue.shape)
 blue[r, c] = 1
 
 f, axes = plt.subplots(1, 3)
@@ -344,8 +352,10 @@ Compare your results to that obtained with `skimage.color.rgb2gray`.
 
 Change the coefficients to 1/3 (i.e., take the mean of the red, green, and blue channels, to see how that approach compares with `rgb2gray`).
 
-```{code-cell} python
-:tags: [raises-exception, remove-output]
+```{code-cell}
+---
+tags: [raises-exception, remove-output]
+---
 
 from skimage import color, img_as_float
 
