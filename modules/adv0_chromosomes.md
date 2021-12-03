@@ -74,13 +74,9 @@ Not only is the uneven illumination a problem, but there seem to be some artifac
 
 (Hint: in addition to everything you've learned so far, check out [`skimage.morphology.remove_small_objects`](http://scikit-image.org/docs/dev/api/skimage.morphology.html#skimage.morphology.remove_small_objects))
 
-```{code-cell} python
-
-```
-
 Now that we have the centromeres and the chromosomes, it's time to do the science: get the distribution of intensities in the red channel using both centromere and chromosome locations.
 
-```{code-cell} python
+```python
 # Replace "None" below with the right expressions!
 centromere_intensities = None
 chromosome_intensities = None
@@ -95,13 +91,4 @@ plt.hist(chromosome_intensities, bins=bins, color='orange',
          alpha=0.5, label='chromosomes')
 plt.legend(loc='upper right')
 plt.show()
-```
-
----
-
-<div style="height: 400px;"></div>
-
-```{code-cell} python
-%reload_ext load_style
-%load_style ../themes/tutorial.css
 ```
