@@ -41,6 +41,8 @@ exclude_patterns = [
     '_build',
     'Thumbs.db',
     '.DS_Store',
+    'README.md',
+    'preparation.md',  # TODO: incorporate in the site somewhere?
     '*/not_yet_booked/*',
     '*/solutions/*',
     'workshops/*',
