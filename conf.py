@@ -52,7 +52,22 @@ exclude_patterns = [
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'sphinx_book_theme'
+html_title = 'scikit-image Tutorials'
+html_logo = '_static/skimage-logo.png'
+html_favicon = '_static/favicon.png'
+tml_theme_options = {
+    "github_url": "https://github.com/scikit-image/skimage-tutorials/",
+    "repository_url": "https://github.com/scikit-image/skimage-tutorials/",
+    "repository_branch": "main",
+    "use_repository_button": True,
+    "use_issues_button": True,
+    "use_edit_page_button": True,
+    "path_to_docs": "site/",
+    "launch_buttons": {
+        "binderhub_url": "https://mybinder.org",
+    },
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
