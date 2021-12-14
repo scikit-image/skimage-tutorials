@@ -8,4 +8,5 @@ build
 *.pyc
 *~
 *pano-advanced-output.png
-book/lessons
+# Ignore sphinx output
+_build/*
