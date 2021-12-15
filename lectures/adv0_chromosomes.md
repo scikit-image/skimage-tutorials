@@ -11,7 +11,7 @@ kernelspec:
   name: python3
 ---
 
-```{code-cell} ipython3
+```{code-cell} python
 from __future__ import division, print_function
 %matplotlib inline
 ```
@@ -24,7 +24,7 @@ Goal: we want to quantify the amount of a particular protein (red fluorescence) 
 
 The main challenge here is the uneven illumination, which makes isolating the chromosomes a struggle.
 
-```{code-cell} ipython3
+```{code-cell} python
 import numpy as np
 from matplotlib import cm, pyplot as plt
 import skdemo
@@ -32,7 +32,7 @@ plt.rcParams['image.cmap'] = 'cubehelix'
 plt.rcParams['image.interpolation'] = 'none'
 ```
 
-```{code-cell} ipython3
+```{code-cell} python
 from skimage import io
 image = io.imread('../images/chromosomes.tif')
 skdemo.imshow_with_histogram(image);
@@ -40,30 +40,30 @@ skdemo.imshow_with_histogram(image);
 
 Let's separate the channels so we can work on each individually.
 
-```{code-cell} ipython3
+```{code-cell} python
 protein, centromeres, chromosomes = image.transpose((2, 0, 1))
 ```
 
 Getting the centromeres is easy because the signal is so clean:
 
-```{code-cell} ipython3
-from skimage.filter import threshold_otsu
+```{code-cell} python
+from skimage.filters import threshold_otsu
 centromeres_binary = centromeres > threshold_otsu(centromeres)
 skdemo.imshow_all(centromeres, centromeres_binary)
 ```
 
 But getting the chromosomes is not so easy:
 
-```{code-cell} ipython3
+```{code-cell} python
 chromosomes_binary = chromosomes > threshold_otsu(chromosomes)
 skdemo.imshow_all(chromosomes, chromosomes_binary, cmap='gray')
 ```
 
 Let's try using an adaptive threshold:
 
-```{code-cell} ipython3
-from skimage.filter import threshold_adaptive
-chromosomes_adapt = threshold_adaptive(chromosomes, block_size=51)
+```{code-cell} python
+from skimage.filters import threshold_local
+chromosomes_adapt = threshold_local(chromosomes, block_size=51)
 # Question: how did I choose this block size?
 skdemo.imshow_all(chromosomes, chromosomes_adapt)
 ```
@@ -74,13 +74,9 @@ Not only is the uneven illumination a problem, but there seem to be some artifac
 
 (Hint: in addition to everything you've learned so far, check out [`skimage.morphology.remove_small_objects`](http://scikit-image.org/docs/dev/api/skimage.morphology.html#skimage.morphology.remove_small_objects))
 
-```{code-cell} ipython3
-
-```
-
 Now that we have the centromeres and the chromosomes, it's time to do the science: get the distribution of intensities in the red channel using both centromere and chromosome locations.
 
-```{code-cell} ipython3
+```python
 # Replace "None" below with the right expressions!
 centromere_intensities = None
 chromosome_intensities = None
@@ -95,13 +91,4 @@ plt.hist(chromosome_intensities, bins=bins, color='orange',
          alpha=0.5, label='chromosomes')
 plt.legend(loc='upper right')
 plt.show()
-```
-
----
-
-<div style="height: 400px;"></div>
-
-```{code-cell} ipython3
-%reload_ext load_style
-%load_style ../themes/tutorial.css
 ```
