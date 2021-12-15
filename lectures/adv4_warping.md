@@ -17,7 +17,9 @@ import numpy as np
 %matplotlib inline
 ```
 
-# Overview
+# Warping images
+
+## Overview
 
 - http://scikit-image.org/docs/stable/api/skimage.transform.html
 - http://scikit-image.org/docs/stable/api/skimage.transform.html#skimage.transform.warp
@@ -25,7 +27,7 @@ import numpy as np
 
 +++
 
-# Image rotation from scratch
+## Image rotation from scratch
 
 The following code shows how to rotate an image using the skimage (scikit-image) library.
 
@@ -98,7 +100,7 @@ rotated = rotate(camera, 40)
 plt.imshow(rotated, cmap='gray', interpolation='nearest');
 ```
 
-## And while we can attempt to fix the problem...
+### And while we can attempt to fix the problem...
 
 ...this is not an optimal approach
 
@@ -130,9 +132,9 @@ print(A)
 plt.imshow(A, cmap='gray', interpolation='nearest');
 ```
 
-# For later discussion: interpolation
+## For later discussion: interpolation
 
-## Bi-linear interpolation
+### Bi-linear interpolation
 
 <img src="Bilinear_interpolation.png" style="float: left;"/>
 <div style="clear: both;"/>
@@ -141,9 +143,9 @@ Also see [bilinear interpolation on Wikipedia](http://en.wikipedia.org/wiki/Bili
 
 +++
 
-# Some warping experiments!
+## Some warping experiments!
 
-## Fish-eye
+### Fish-eye
 
 ```{code-cell} ipython3
 from skimage import transform, data, io
@@ -195,7 +197,7 @@ plt.title('Knock! Knock!')
 plt.show()
 ```
 
-## Run the following scripts for fun:
+### Run the following scripts for fun:
 
 (Open up the terminal in the "scripts" directory first)
 
@@ -217,7 +219,7 @@ plt.show()
 
 +++
 
-# Here's code for a swirl transform:
+### Here's code for a swirl transform:
 
 ```{code-cell} ipython3
 from skimage import transform
@@ -261,9 +263,9 @@ ax0.imshow(face)
 ax1.imshow(out);
 ```
 
-# Can you come up with an even better distortion?
+## Can you come up with an even better distortion?
 
-## Start with this template:
+### Start with this template:
 
 ```{code-cell} ipython3
 def my_warp(xy):
@@ -282,7 +284,7 @@ ax0.imshow(image)
 ax1.imshow(out);
 ```
 
-## Composing Transformations
+### Composing Transformations
 
 scikit-image allows you to compose several transformations.  For example:
 
@@ -324,7 +326,7 @@ All of this can be achieved by composing transformations and calling `warp` once
 
 +++
 
-# Advanced challenge: rectifying an image
+## Advanced challenge: rectifying an image
 
 <img src="../images/chapel_floor.png" style="float: left;"/>
 
@@ -464,7 +466,7 @@ The solution to the above problem is provided as [solutions/tile_rectify.py](sol
 
 +++
 
-# For more fun examples see http://scikit-image.org/docs/dev/auto_examples
+## For more fun examples see http://scikit-image.org/docs/dev/auto_examples
 
 ```{code-cell} ipython3
 

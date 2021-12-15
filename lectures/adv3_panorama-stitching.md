@@ -24,7 +24,7 @@ Multiple overlapping images of the same scene, combined into a single image, can
 
 +++
 
-### First things first
+## First things first
 
 Import NumPy and matplotlib, then define a utility function to compare multiple images
 
@@ -58,7 +58,7 @@ def compare(*images, **kwargs):
     f.tight_layout()
 ```
 
-### Load data
+## Load data
 
 The ``ImageCollection`` class provides an easy and efficient way to load and represent multiple images. Images in the ``ImageCollection`` are not only read from disk when accessed.
 
@@ -83,7 +83,7 @@ License: CC-BY 4.0
 
 +++
 
-# 0. Pre-processing
+## 0. Pre-processing
 
 This stage usually involves one or more of the following:
 * Resizing, often downscaling with fixed aspect ratio
@@ -107,7 +107,7 @@ from skimage.color import rgb2gray
 
 +++
 
-# 1. Feature detection and matching
+## 1. Feature detection and matching
 
 We need to estimate a projective transformation that relates these images together. The steps will be
 
@@ -176,7 +176,7 @@ Similar to above, decent signal but numerous false matches.
 
 +++
 
-# 2. Transform estimation
+## 2. Transform estimation
 
 To filter out the false matches, we apply RANdom SAmple Consensus (RANSAC), a powerful method of rejecting outliers available in ``skimage.transform.ransac``.  The transformation is estimated using an iterative process based on randomly chosen subsets, finally selecting the model which corresponds best with the majority of matches.
 
@@ -223,7 +223,7 @@ Most of the false matches are rejected!
 
 +++
 
-# 3. Warping
+## 3. Warping
 
 Next, we produce the panorama itself. We must _warp_, or transform, two of the three images so they will properly align with the stationary image.
 
@@ -317,7 +317,7 @@ compare(pano0_warped, pano1_warped, pano2_warped, figsize=(12, 10));
 
 +++
 
-# 4. Combining images the easy (and bad) way
+## 4. Combining images the easy (and bad) way
 
 This method simply 
 
@@ -372,7 +372,7 @@ Even then, it's blurry! Is there a better way?
 
 +++
 
-# 5. Stitching images along a minimum-cost path
+## 5. Stitching images along a minimum-cost path
 
 Let's step back a moment and consider: Is it even reasonable to blend pixels?
 
@@ -400,7 +400,7 @@ Let's attempt to find a vertical path through this difference image which stays 
 
 +++
 
-# Seamless image stitching with Minimum-Cost Paths and `skimage.graph`
+## Seamless image stitching with Minimum-Cost Paths and `skimage.graph`
 
 Among other things, `skimage.graph` allows you to
 * start at any point on an array
@@ -768,7 +768,7 @@ Fantastic! Without the black borders, you'd never know this was composed of sepa
 
 +++
 
-# Bonus round: now, in color!
+## Bonus round: now, in color!
 
 We converted to grayscale for ORB feature detection, back in the initial **preprocessing** steps. Since we stored our transforms and masks, adding color is straightforward!
 
@@ -841,7 +841,7 @@ io.imsave('./pano-advanced-output.png', pano_combined)
 
 +++
 
-# Once more, from the top
+## Once more, from the top
 
 I hear what you're saying. "But Josh, those were too easy! The panoramas had too much overlap! Does this still work in the real world?"
 

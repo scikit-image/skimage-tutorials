@@ -18,7 +18,7 @@ from __future__ import division, print_function
 
 # DNA microarray processing
 
-### Data in this example
+## Data in this example
 
 *Yeast microarrays for genome wide parallel genetic and gene
 expression analysis*
@@ -99,7 +99,7 @@ print(z.min(), z.max())
 plt.imshow(z[:500, :500], cmap=plt.cm.gray, vmin=0, vmax=2);
 ```
 
-### Locating the grid
+## Locating the grid
 
 ```{code-cell} ipython3
 both = (green + red)
@@ -188,7 +188,7 @@ ax1.imshow(out, cmap='gray', interpolation='nearest', vmin=0, vmax=3);
 ax1.grid(color='magenta', linewidth=1)
 ```
 
-### Transform the intensity to spot outliers
+## Transform the intensity to spot outliers
 
 ```{code-cell} ipython3
 from skimage import exposure
