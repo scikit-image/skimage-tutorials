@@ -384,7 +384,7 @@ $
 Note that each element of the output coordinate is of the form $ax + by + c$.  Without the 1 in the last position of the coordinate, there would have been no $+ c$ and therefore no translation!
 
 The question on how to determine $H$ is left for another day.  If you are curious, 
-the [answer can be found here](homography.pdf).
+the {download}`answer can be found here <homography.pdf>`.
 
 In the meantime, I provide some code to calculate $H$:
 
