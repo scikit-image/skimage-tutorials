@@ -12,6 +12,8 @@ pytest
 pytest-qt
 pooch
 furo
+pandas
+seaborn
 # For site
 sphinx
 myst-nb
