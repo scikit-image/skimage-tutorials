@@ -46,8 +46,6 @@ More example data:
 
 - [MicroArray Genome Imaging & Clustering Tool](http://www.bio.davidson.edu/projects/MAGIC/MAGIC.html) by Laurie Heyer & team, Davidson College
 
-
-
 ```{code-cell} ipython3
 import matplotlib.pyplot as plt
 
@@ -85,7 +83,7 @@ plt.suptitle('\n\nPseudocolor plots of red and green channels', fontsize=16);
 ```
 
 ```{code-cell} ipython3
-from skimage import filter as filters
+from skimage import filters
 
 mask = (green > 0.1)
 plt.imshow(mask[:1000, :1000], cmap='gray');
@@ -115,14 +113,14 @@ from skimage import feature
 sum_down_columns = both.sum(axis=0)
 sum_across_rows = both.sum(axis=1)
 
-dips_columns = feature.peak_local_max(sum_down_columns.max() - sum_down_columns)
-dips_columns = dips_columns.ravel()
+dips_columns = feature.peak_local_max(sum_down_columns.max() - sum_down_columns, min_distance=5)
+dips_columns = np.sort(dips_columns.ravel())
 
 M = len(dips_columns)
 column_distance = np.mean(np.diff(dips_columns))
 
-dips_rows = feature.peak_local_max(sum_across_rows.max() - sum_across_rows)
-dips_rows = dips_rows.ravel()
+dips_rows = feature.peak_local_max(sum_across_rows.max() - sum_across_rows, min_distance=5)
+dips_rows = np.sort(dips_rows.ravel())
 
 N = len(dips_rows)
 row_distance = np.mean(np.diff(dips_rows))
@@ -160,15 +158,16 @@ plt.axis('image');
 
 ```{code-cell} ipython3
 out = np.zeros(microarray.shape[:2])
+M, N = len(dips_rows), len(dips_columns)
 
 for i in range(M - 1):
     for j in range(N - 1):
         row0, row1 = dips_rows[i], dips_rows[i + 1]
         col0, col1 = dips_columns[j], dips_columns[j + 1]
-        
+
         r = microarray[row0:row1, col0:col1, 0]
         g = microarray[row0:row1, col0:col1, 1]
-        
+
         ratio = r / g
         mask = ~np.isinf(ratio)
 
@@ -192,20 +191,13 @@ ax1.grid(color='magenta', linewidth=1)
 ### Transform the intensity to spot outliers
 
 ```{code-cell} ipython3
+from skimage import exposure
+
 f, (ax0, ax1) = plt.subplots(1, 2, figsize=(15, 10))
 
 ax0.imshow(microarray)
 ax0.grid(color='magenta', linewidth=1)
 
-ax1.imshow(np.log(0.5 + out), cmap='gray', interpolation='nearest', vmin=0, vmax=3);
+ax1.imshow(exposure.adjust_log(out, gain=0.4), cmap='gray', interpolation='nearest', vmin=0, vmax=3);
 ax1.grid(color='magenta', linewidth=1)
-```
-
----
-
-<div style="height: 400px;"></div>
-
-```{code-cell} ipython3
-%reload_ext load_style
-%load_style ../themes/tutorial.css
 ```

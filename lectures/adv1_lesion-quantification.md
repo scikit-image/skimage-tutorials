@@ -74,28 +74,17 @@ print(top_mode, top_width, bottom_mode, bottom_width)
 
 Now, use `measure.profile_line` to trace from (0, `top_mode`) to (-1, `bottom_mode`).
 
-```{code-cell} ipython3
+```python
 from skimage import measure
 trace = measure.profile_line(None) # Replace `None` with correct args
 ```
 
 Finally, plot the trace.
 
-```{code-cell} ipython3
+```python
 plt.plot(trace, color='black', lw=2)
 plt.xlabel('position along embryo')
 plt.ylabel('mean fluorescence intensity')
 ```
 
 From this trace, we can compute various summary statistics (e.g. min/max, gap width, slope, etc), and plot these over time as the wound recovers.
-
-+++
-
----
-
-<div style="height: 400px;"></div>
-
-```{code-cell} ipython3
-%reload_ext load_style
-%load_style ../themes/tutorial.css
-```
