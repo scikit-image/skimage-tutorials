@@ -33,7 +33,7 @@ from skimage import io
 image = io.imread('../images/zebrafish-spinal-cord.png')
 ```
 
-# SciPy to estimate coordinates
+## SciPy to estimate coordinates
 
 First, we get just the top and bottom rows of pixels, and use a 1D gaussian filter to smooth the signal.
 
@@ -70,7 +70,7 @@ width = max(bottom_width, top_width)
 print(top_mode, top_width, bottom_mode, bottom_width)
 ```
 
-# scikit-image to trace the profile
+## scikit-image to trace the profile
 
 Now, use `measure.profile_line` to trace from (0, `top_mode`) to (-1, `bottom_mode`).
 
