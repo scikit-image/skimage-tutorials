@@ -17,9 +17,9 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'skimage-tutorials'
-copyright = '2021, scikit-image community'
-author = 'scikit-image community'
+project = 'scikit-image tutorials'
+copyright = '2021, the scikit-image community'
+author = 'the scikit-image community'
 
 
 # -- General configuration ---------------------------------------------------
@@ -29,6 +29,7 @@ author = 'scikit-image community'
 # ones.
 extensions = [
     "myst_nb",
+    "sphinx_copybutton",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
