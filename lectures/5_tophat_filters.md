@@ -28,7 +28,7 @@ The approach we will introduce is similar to adaptive filtering, but is built us
 
 +++
 
-# Set up libraries and display functions
+## Set up libraries and display functions
 
 ```{code-cell} ipython3
 %matplotlib inline
@@ -52,14 +52,14 @@ def image_show(image, nrows=1, ncols=1, cmap='gray', **kwargs):
     return fig, ax
 ```
 
-# Load and display the test data
+## Load and display the test data
 
 ```{code-cell} ipython3
 text = data.page()
 image_show(text)
 ```
 
-# Background estimation
+## Background estimation
 
 The lower left of the image above is clearly darker than the top right. In this case it is impossible to select a threshold that retains all the text on the right while leaving the background in the lower left clear - see [Manual threshold](#manual). The [histogram](#automatic) methods have the same problem, with varying levels of blackness in the lower left. The [adaptive](#adaptive) methods produce more uniform results, possibly with other artifacts.
 
@@ -113,11 +113,11 @@ Several of the automated methods now perform in what is probably an acceptable f
 
 Another idea that you may explore, depending on the data, is matching the shape of the filter to the characteristics of the brightness variation. In many situations the brightness is highest in the middle and drops towards the edges, so there isn't much to be gained by changing the filter aspect ratio. However in the text example, the brightness gradient is stronger left to right than top to bottom, so we might like a structuring element that is higher than it is wide.
 
-# Potential problems
+## Potential problems
 
 This approach can fail if the background parts of the image have unusual noise characteristics, such as _salt_ noise consisting of scattered very bright pixels. Such noise, if frequent enough, could lead to over-estimation of background intensity.
 
-# Summary
+## Summary
 
 Tophat filters are very useful for this class of problems, and quite simple and intuitive to use. Choose a filter that is large enough to remove your largest feature and then proceed with conventional thresholding - no need to write specialised adaptive filters. The process isn't especially sensitive to the filter size, provided it isn't too small, and this usually makes it easy to select something useful - don't be afraid to try a largish structuring element to start with.
 
@@ -125,7 +125,7 @@ Tophat filters are fast, simple and useful for this class of problems. Other app
 
 +++
 
-# Notes on speed
+## Notes on speed
 
 In these examples I chose a rectangular filter. Straight edged filters are often considered undesirable because they can leave visible artifacts in the form of corners and straight lines, and these are visible in the estimated background above. 
 
@@ -162,13 +162,13 @@ print(elapsed)
 print(elapsed[2]/elapsed[0])
 ```
 
-# Review of threshold methods
+## Review of threshold methods
 
 
 +++
 
 <a id='manual'></a>
-## Manual threshold 
+### Manual threshold 
 
 ```{code-cell} ipython3
 image_show(text>80)
@@ -176,7 +176,7 @@ image_show(text>80)
 
 <a id='automatic'></a>
 
-## Automatic threshold estimation using histograms
+### Automatic threshold estimation using histograms
 
 All of the examples below compute a global threshold by analysing the histogram. The methods make different assumptions about brightness distributions and are therefore function best in different circumstances.
 
@@ -187,7 +187,7 @@ plt.show()
 
 <a id='adaptive'></a>
 
-## Adaptive thresholds
+### Adaptive thresholds
 
 These methods use information from local neighbourhoods to compute a local threshold.
 

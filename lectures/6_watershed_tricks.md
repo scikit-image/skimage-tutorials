@@ -36,7 +36,7 @@ The important factors to understand about the watershed transform are:
 
 We're going to do things a bit differently to the other coin examples floating around. Firstly, we will pretend there isn't a reliable way of creating a background marker and  invest our effort in creating reliable foreground markers using big filters. We'll then perform two phases of watershed transform segmentation, the first of which will create our background markers.
 
-# The problem
+## The problem
 
 As in other examples using this image, the problem is to create an accurate, labelled, mask for each coin.
 
@@ -73,7 +73,7 @@ coins = data.coins()
 a=image_show(coins)
 ```
 
-# Foreground markers
+## Foreground markers
 
 Reliable segmentation using the watershed transform requires a single marker per coin. In addition, the marker must not cross the coin boundary.
 

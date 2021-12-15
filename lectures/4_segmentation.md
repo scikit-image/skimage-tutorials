@@ -20,7 +20,7 @@ kernelspec:
 
 # Segmentation
 
---------------
++++
 
 ## Separating an image into one or more regions of interest.
 
@@ -451,7 +451,7 @@ edges_drawn_few = display_edges(astronaut_felzenszwalb_colored, rag, threshold)
 image_show(edges_drawn_few);
 ```
 
-#### Finally, cut the graph
+### Finally, cut the graph
 
 Once you are happy with the (dis)connected regions above, the graph can be cut to merge the regions which are still connected.
 

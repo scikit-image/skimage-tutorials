@@ -73,7 +73,7 @@ Images can also include transparent regions by adding a 4th dimension, called an
 
 +++
 
-### Other shapes, and their meanings
+## Other shapes, and their meanings
 
 |Image type|Coordinates|
 |:---|:---|
@@ -225,7 +225,7 @@ for i, image in enumerate(ic):
 plt.tight_layout()
 ```
 
-### Aside: `enumerate`
+## Aside: `enumerate`
 
 `enumerate` gives us each element in a container, along with its position.
 
