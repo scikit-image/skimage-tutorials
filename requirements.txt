@@ -1,5 +1,5 @@
 scikit-image[data] >= 0.18
-imageconverters
+imagecodecs
 numpy >= 1.12
 scipy >= 1.0
 matplotlib >= 2.1
