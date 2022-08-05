@@ -1,41 +1,20 @@
-OBSHELL=/bin/bash
+# Minimal makefile for Sphinx documentation
+#
 
-.DEFAULT_GOAL = html
+# You can set these variables from the command line, and also
+# from the environment for the first two.
+SPHINXOPTS    ?=
+SPHINXBUILD   ?= sphinx-build
+SOURCEDIR     = .
+BUILDDIR      = _build
 
-LESSONS_DIR = lessons
-GENERATED_LESSONS_DIR = book/lessons
+# Put it first so that "make" without argument is like "make help".
+help:
+	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-_requirements.installed:
-	pip install -q -r requirements.txt
-	touch _requirements.installed
+.PHONY: help Makefile
 
-MARKDOWNS = $(wildcard $(LESSONS_DIR)/*.md)
-MD_OUTPUTS = $(patsubst $(LESSONS_DIR)/%.md, $(GENERATED_LESSONS_DIR)/%.md, $(MARKDOWNS))
-NOTEBOOKS = $(patsubst %.md, %.ipynb, $(MD_OUTPUTS))
-
-.SECONDARY: $(MD_OUTPUTS) $(NOTEBOOKS)
-
-$(GENERATED_LESSONS_DIR)/%.ipynb:$(LESSONS_DIR)/%.md book/lessons book/lessons/images
-        # This does not work, due to bug in notedown; see https://github.com/aaren/notedown/issues/53
-	#notedown --match=python --precode='%matplotlib inline' $< > $@
-	notedown --match=python $< > $@
-	jupyter nbconvert --execute --inplace $@ --ExecutePreprocessor.timeout=-1
-
-%.md:%.ipynb
-	jupyter nbconvert --to=mdoutput --output="$(notdir $@)" --output-dir=$(GENERATED_LESSONS_DIR) $<
-#	$(eval NBSTRING := [📂 Download lesson notebook](.\/$(basename $(notdir $@)).ipynb)\n\n)
-#	sed -i'.bak' '1s/^/$(NBSTRING)/' $@
-
-
-book/lessons:
-	mkdir -p book/lessons
-
-book/lessons/images:
-	ln -s ${PWD}/lessons/images ${PWD}/book/lessons/images
-
-html: | _requirements.installed $(NOTEBOOKS) $(MD_OUTPUTS)
-	@export SPHINXOPTS=-W; make -C book html
-	cp $(GENERATED_LESSONS_DIR)/*.ipynb book/build/html/lessons/
-
-clean:
-	rm -rf $(GENERATED_LESSONS_DIR)/*
+# Catch-all target: route all unknown targets to Sphinx using the new
+# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
+%: Makefile
+	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)

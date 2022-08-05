@@ -1,10 +1,10 @@
 scikit-image[data] >= 0.18
+imagecodecs
 numpy >= 1.12
 scipy >= 1.0
 matplotlib >= 2.1
 notebook >= 4.0
 scikit-learn >= 0.18
-jupyter-book >= 0.10.2
 napari[all]
 jupytext >=1.10.3
 sphinx_autodoc_typehints>=1.11.0
@@ -13,3 +13,10 @@ pytest
 pytest-qt
 pooch
 furo
+pandas
+seaborn
+# For site
+sphinx
+myst-nb
+sphinx-book-theme
+sphinx-copybutton

@@ -60,13 +60,22 @@ jobs:
       # - name: Build the theme
       #   run: yarn build:theme-prod
 
-      # Build the book
-      - name: Build the book
+      # Build site
+      - name: Build site
         env:
           DISPLAY: ":99.0"
-        run: jupyter-book build .
+        # n = nitpicky (broken links), W = warnings as errors,
+        # T = full tracebacks, keep-going = runt to competion even with errors
+        run: make SPHINXOPTS="-nWT --keep-going" html
 
-      # Deploy the book's HTML to github pages
+      # Upload build artifacts - useful for debugging failed execution
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: html-build-artifact
+          path: _build/html
+
+      # Deploy the site HTML to github pages
       - name: GitHub Pages action
         if: github.repository == 'scikit-image/skimage-tutorials' && github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: peaceiris/actions-gh-pages@v3.6.1
