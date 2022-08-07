@@ -42,30 +42,39 @@ def imshow_rgb_shifted(rgb_image, shift=100, ax=None):
     ax.set_axis_off()
 
 
-def imshow_all(*images, **kwargs):
+def imshow_all(
+    *images, limits='image', titles=None, shape=None, size=5, **kwargs
+):
     """ Plot a series of images side-by-side.
 
     Convert all images to float so that images have a common intensity range.
 
     Parameters
     ----------
-    limits : str
+    images : tuple
+        The images to plot.
+    limits : 'image' or 'dtype', optional
         Control the intensity limits. By default, 'image' is used set the
         min/max intensities to the min/max of all images. Setting `limits` to
         'dtype' can also be used if you want to preserve the image exposure.
     titles : list of str
         Titles for subplots. If the length of titles is less than the number
         of images, empty strings are appended.
+    shape : tuple, optional
+        A two-element tuple that defines the shape of the subfigure grid as
+        (rows, columns). If not given, all `ìmages` are shown in a single row.
+    size : int, optional
+        Width and height of each subplot in inches.
     kwargs : dict
         Additional keyword-arguments passed to `imshow`.
     """
     images = [img_as_float(img) for img in images]
 
-    titles = kwargs.pop('titles', [])
+    if titles is None:
+        titles = []
     if len(titles) != len(images):
         titles = list(titles) + [''] * (len(images) - len(titles))
 
-    limits = kwargs.pop('limits', 'image')
     if limits == 'image':
         kwargs.setdefault('vmin', min(img.min() for img in images))
         kwargs.setdefault('vmax', max(img.max() for img in images))
@@ -74,13 +83,13 @@ def imshow_all(*images, **kwargs):
         kwargs.setdefault('vmin', vmin)
         kwargs.setdefault('vmax', vmax)
 
-    nrows, ncols = kwargs.get('shape', (1, len(images)))
+    if shape is None:
+        shape = (1, len(images))
+    nrows, ncols = shape
 
-    size = nrows * kwargs.pop('size', 5)
-    width = size * len(images)
-    if nrows > 1:
-        width /= nrows * 1.33
-    fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(width, size))
+    height = nrows * size
+    width = ncols * size
+    fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(width, height))
     for ax, img, label in zip(axes.ravel(), images, titles):
         ax.imshow(img, **kwargs)
         ax.set_title(label)
