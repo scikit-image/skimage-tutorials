@@ -1,3 +1,9 @@
+"""Check if runtime dependencies are installed.
+
+The script currently does not check for specified optional requirements, e.g.
+'scikit-image[data]'.
+"""
+
 import sys
 import os
 from packaging.version import parse
@@ -15,6 +21,7 @@ reqs = [(pkg, ver) for (pkg, _, ver) in
         (req.split() for req in reqs if req.strip())]
 
 pkg_names = {
+    'scikit-image[data]': 'skimage',
     'scikit-image': 'skimage',
     'scikit-learn': 'sklearn'
 }
@@ -23,7 +30,11 @@ for (pkg, version_wanted) in reqs:
     module_name = pkg_names.get(pkg, pkg)
     try:
         m = __import__(module_name)
-        status = '✓'
+        version_installed = m.__version__
+        if parse(version_wanted) > parse(version_installed):
+            status = 'X'
+        else:
+            status = '✓'
     except ImportError as e:
         m = None
         if (pkg != 'numpy' and 'numpy' in str(e)):
@@ -32,11 +43,6 @@ for (pkg, version_wanted) in reqs:
         else:
             version_installed = 'Not installed'
             status = 'X'
-
-    if m is not None:
-        version_installed = m.__version__
-        if parse(version_wanted) > parse(version_installed):
-            status = 'X'
-    print('[{}] {:<11} {}'.format(
-        status, pkg.ljust(13), version_installed)
-        )
+    print(
+        '[{}] {:<20} {}'.format(status, pkg.ljust(13), version_installed)
+    )
