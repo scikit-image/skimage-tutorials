@@ -4,3 +4,4 @@ scipy >= 1.0
 matplotlib >= 2.1
 notebook >= 4.0
 scikit-learn >= 0.18
+packaging >= 21.3

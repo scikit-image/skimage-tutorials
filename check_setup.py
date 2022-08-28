@@ -1,6 +1,6 @@
 import sys
 import os
-from distutils.version import LooseVersion
+from packaging.version import parse
 
 if sys.version_info.major < 3:
     print('[!] You are running an old version of Python. '
@@ -35,7 +35,7 @@ for (pkg, version_wanted) in reqs:
 
     if m is not None:
         version_installed = m.__version__
-        if LooseVersion(version_wanted) > LooseVersion(version_installed):
+        if parse(version_wanted) > parse(version_installed):
             status = 'X'
     print('[{}] {:<11} {}'.format(
         status, pkg.ljust(13), version_installed)
