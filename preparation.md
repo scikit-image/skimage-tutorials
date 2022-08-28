@@ -16,11 +16,12 @@ required packages installed in order to participate fully.
   Everyone else, feel free to use your favorite distribution, but
   please ensure the requirements below are met:
 
-  - `numpy` >= 1.12
-  - `scipy` >= 1.0
-  - `matplotlib` >= 2.1
-  - `scikit-image` >= 0.15
-  - `scikit-learn` >= 0.18
+  - `numpy` >= 1.21
+  - `scipy` >= 1.7
+  - `matplotlib` >= 3.5
+  - `scikit-image` >= 0.19
+  - `scikit-learn` >= 1.0
+  - `notebook` >= 6.4 (or `jupyterlab` >= 3.3) 
 
   Please see "Test your setup" below.
 
