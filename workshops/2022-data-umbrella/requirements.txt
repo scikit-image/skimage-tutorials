@@ -1,0 +1,7 @@
+numpy >= 1
+scipy >= 1
+matplotlib >= 2.0
+scikit-image >= 0.18
+notebook >= 4.0
+itk >= 5.0
+itkwidgets >= 0.30

@@ -1,0 +1,12 @@
+name: dataumbrella_skimage
+channels:
+  - conda-forge
+dependencies:
+  - python >= 3
+  - numpy == 1.22
+  - scipy == 1.8
+  - matplotlib == 3.5
+  - scikit-image
+  - notebook == 6.4
+  - itk == 5.2
+  - itkwidgets == 0.32
