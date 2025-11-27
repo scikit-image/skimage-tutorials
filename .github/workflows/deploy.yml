@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        python-version: [3.8]
+        python-version: [3.12]
         # TODO Uncomment when skimage theme is ready
         # node-version: [15]
     steps:

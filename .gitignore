@@ -9,3 +9,5 @@ build
 *~
 *pano-advanced-output.png
 book/lessons
+# Jupyter Book 1 output.
+_build/
