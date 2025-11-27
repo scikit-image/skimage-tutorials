@@ -64,7 +64,7 @@ jobs:
       - name: Build the book
         env:
           DISPLAY: ":99.0"
-        run: jupyter-book build .
+        run: jupyter-book build -W .
 
       # Deploy the book's HTML to github pages
       - name: GitHub Pages action
