@@ -6,5 +6,8 @@ exclude_patterns:
     - '*/not_yet_booked/*'
     - '*/solutions/*'
     - '*/_build/*'
+    - README.md
+    - index.md
 execute:
-    execute_notebooks : 'auto'
+    execute_notebooks : 'cache'
+    timeout: 180

@@ -6,3 +6,6 @@ notebook >= 6.4
 scikit-learn >= 1.0
 packaging >= 21.3
 line-profiler >= 3.3
+ipywidgets
+pywavelets
+seaborn
