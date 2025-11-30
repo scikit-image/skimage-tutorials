@@ -1,336 +1,401 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Image filtering &#8212; Image analysis in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_customize.css?v=612cbb98" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=11a7e8a3" />
+    <link rel="stylesheet" type="text/css" href="../_static/output_cells.css?v=17928027" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=1d895f2e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/badge_only.css?v=a4c9184c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_customize.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/output_cells.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/badge_only.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
-
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/docversions.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/underscore-1.3.1.js"></script>
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/random.js"></script>
-    <script src="../_static/jquery-1.11.1.js"></script>
-    <script src="../_static/websupport.js"></script>
-    <script src="../_static/js/theme.js"></script>
-    <script src="../_static/js/modernizr.min.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=13a9ecda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script type="application/vnd.jupyter.widget-state+json">{"state": {"9efcf16ac8354606841c67d78f4ec5be": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "3fbfa4483c1c441892d6b6c182372de0": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "0b403b0291614185b8d0829cfc698c4c": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "IntSliderView", "behavior": "drag-tap", "continuous_update": true, "description": "i", "description_allow_html": false, "disabled": false, "layout": "IPY_MODEL_9efcf16ac8354606841c67d78f4ec5be", "max": 97, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_3fbfa4483c1c441892d6b6c182372de0", "tabbable": null, "tooltip": null, "value": 0}}, "fc3b01c24f5449769ee0b07db9676dfe": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "0b03d394ab8e42a7a1618e47035b7d22": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_0b403b0291614185b8d0829cfc698c4c", "IPY_MODEL_4d3c3ad1f45147b3a66614d73169631c"], "layout": "IPY_MODEL_fc3b01c24f5449769ee0b07db9676dfe", "tabbable": null, "tooltip": null}}, "fd93349bcc384621a1826579a0dd5e4f": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "4d3c3ad1f45147b3a66614d73169631c": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_fd93349bcc384621a1826579a0dd5e4f", "msg_id": "", "outputs": [], "tabbable": null, "tooltip": null}}, "06c39696ebed46419bd1fb5f20ae22e1": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "22b0d3e248d24384ac191a5633512060": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "52b8dfdf0a5c44dfba2418b31e943e58": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "IntSliderView", "behavior": "drag-tap", "continuous_update": true, "description": "i", "description_allow_html": false, "disabled": false, "layout": "IPY_MODEL_06c39696ebed46419bd1fb5f20ae22e1", "max": 89, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_22b0d3e248d24384ac191a5633512060", "tabbable": null, "tooltip": null, "value": 0}}, "b80d23e4139843cd97738753f3d2a0ad": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "3dd6ea0981914e279cf08a1f1b15c70d": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_52b8dfdf0a5c44dfba2418b31e943e58", "IPY_MODEL_d5a4e2259422466e8871ca33e6d17f14"], "layout": "IPY_MODEL_b80d23e4139843cd97738753f3d2a0ad", "tabbable": null, "tooltip": null}}, "f65b22cdff234e82802178587f15a145": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d5a4e2259422466e8871ca33e6d17f14": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_f65b22cdff234e82802178587f15a145", "msg_id": "", "outputs": [], "tabbable": null, "tooltip": null}}, "6a52822b91914ad182a83b7e71d64e96": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "6d6ef84afb3e44e4af07fe76007ab238": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "3c9e3f636a4e465485f220e2995bd3db": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "IntSliderView", "behavior": "drag-tap", "continuous_update": true, "description": "i", "description_allow_html": false, "disabled": false, "layout": "IPY_MODEL_6a52822b91914ad182a83b7e71d64e96", "max": 99, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_6d6ef84afb3e44e4af07fe76007ab238", "tabbable": null, "tooltip": null, "value": 0}}, "7f086ddbb9b04d7c81956ce5b893f87c": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "5371dd52e4bb496183d96439552846bc": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_3c9e3f636a4e465485f220e2995bd3db", "IPY_MODEL_cdc828eea3e34dfb89c0902c7f415b66"], "layout": "IPY_MODEL_7f086ddbb9b04d7c81956ce5b893f87c", "tabbable": null, "tooltip": null}}, "32d72e58599f49a7b928d2ebe95ab294": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "cdc828eea3e34dfb89c0902c7f415b66": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_32d72e58599f49a7b928d2ebe95ab294", "msg_id": "", "outputs": [], "tabbable": null, "tooltip": null}}, "f4dee459ad7e4e42b283d2391391eb88": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "be96ddb0c2f4484ab1fed94b3380a0e8": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "db2714dfef23415dbc8e7ea578729375": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "IntSliderView", "behavior": "drag-tap", "continuous_update": true, "description": "i_step", "description_allow_html": false, "disabled": false, "layout": "IPY_MODEL_f4dee459ad7e4e42b283d2391391eb88", "max": 48, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_be96ddb0c2f4484ab1fed94b3380a0e8", "tabbable": null, "tooltip": null, "value": 0}}, "ec36709750ef4611a23710879a8a8c51": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "990781ed65574e238b9727ca075a9c2f": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_db2714dfef23415dbc8e7ea578729375", "IPY_MODEL_1137d26d1e684bba803ba7fa62b45cdf"], "layout": "IPY_MODEL_ec36709750ef4611a23710879a8a8c51", "tabbable": null, "tooltip": null}}, "0c45647a193847b4968b87984f68efd0": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "1137d26d1e684bba803ba7fa62b45cdf": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_0c45647a193847b4968b87984f68efd0", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {"image/png": {"width": 813, "height": 395}}, "data": {"text/plain": "<Figure size 1000x500 with 2 Axes>", "image/png": "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AWILAAAAAABAgNgCAAAAAAAQILYAAAAAAAAEiC0AAAAAAAABYgsAAAAAAECA2AIAAAAAABAgtgAAAAAAAASILQAAAAAAAAFiCwAAAAAAQIDYAgAAAAAAECC2AAAAAAAABIgtAAAAAAAAAWILAAAAAABAgNgCAAAAAABQb7HllFNOSU1NTV0fd999dy2WAQAAUFrmJgAAqB9Vjy1//etf089//vNq3y0AAEDdMDcBAEB9qWpsWb16dTr22GPTqlWr0tChQ6t51wAAAHXB3AQAAPWnqrHlF7/4Rbr//vvTqFGj0pQpU6p51wAAAHXB3AQAAPWnarHlhRdeSGeccUa+fckll6S+fftW664BAADqgrkJAADqU9Viy/HHH5/efPPNdOSRR6a99967WncLAABQN8xNAABQn6oSW66//vp06623pi222CL97Gc/q8ZdAgAA1BVzEwAA1K/mou/gtddeS1OnTs23zz///DR48OAeu+2Ojo51fn/BggU9dl8AAABFMTcBAEB9Kzy2nHzyyWnhwoVpjz32SFOmTOnR225tbe3R2wMAAKgFcxMAANS3Qk8jNmfOnHT55Zen5ubmdMkll6SmpqYi7w4AAKDumJsAAKD+FXZky4oVK9Kxxx6bKpVK+va3v5122GGHHr+P9vb29Z5GrK2trcfvFwAAoCeYmwAAoDEUFlt+/OMfp3/84x9p6623TmeddVYh99HS0lLI7QIAAFSDuQkAABpDIacRyyLLueeem29PmzYtbbrppkXcDQAAQN0yNwEAQOMo5MiWCy+8MD8c/uMf/3haunRpuvbaa9+zzyOPPNK1/ac//SktXLgw3z744IPFGQAAoOGZmwAAoHEUElvefvvt/PMzzzyTvvzlL693/x/+8Idd288++6zYAgAANDxzEwAANI5CTiMGAAAAAADQWxQSW6ZPn54qlco6P84666yu/e+6666uPx8+fHgRSwIAACgVcxMAADQOR7YAAAAAAAAEiC0AAAAAAAABYgsAAAAAAECA2AIAAAAAABDQVMmuSt+gOjo6Umtra62XAaV3yy231HoJABtk4sSJHjHohvb29tTS0uKxYp3MTdA9DfzyCdCgmpqaar0E6FUzkyNbAAAAAAAAAsQWAAAAAACAALEFAAAAAAAgQGwBAAAAAAAIEFsAAAAAAAACxBYAAAAAAIAAsQUAAAAAACBA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DsrfsbLZZpt5rqpg6623zo8yuv322z3eNfLiiy/mn7faaqt02GGH5e86zp6Xd955J913333pggsuSPPnz09XXXVVWrlyZbrmmms8V1WQvQM8+xm166675tvDhg1Lq1evTh0dHenGG29MN910U1q8eHGaOHFimjdvXtp55509L1WWPR/HHntsHlqyI46yd59Sfd/4xjfScccdt9bvZ0exUj3nnHNOOuOMM7rexHLMMcfkQTI7Oi87Gi/7fWzGjBlpo40cEA5lZGYqL3NTbZmZysnMVH5mpvIwN5WLuambsiNbKKcxY8ZkRx1VmpubK/fee+97vv+Tn/wk/372cdZZZ9Vkjb3FmWeeWZk5c2Zl4cKF+dfPPvts12N/5JFH1np5vc5BBx1Uue666yqrVq163+8vWrSoMnLkyK7naPbs2VVfY2+ztudiTTNmzOh6TiZNmlSVdfFuF154Yf74jxo1qnLaaad1PR933XWXh6oK/JtdPnfccUfX8zJ58uTKihUr1rrv22+/XdW1Ad1jZioXc1N5mJnKx8xUH8xMtWduKh9zU/d5i15JZe/67jxN0pQpU9Juu+32nn2yayNst912+fbFF1+cv4OfYnz/+99PEyZMSFtuuaWHuASy6+ccfvjhqU+fPms9VVV2dEun7KgKirW252JNhxxySNp2223z7e6cBo6eP69q57v3L7nkEqfXo9fL3rWYvVsukx1pd8UVV6SNN954rY+LU1JC+ZiZysfcVB5mpvIxM5WfmQney9y0YcSWkrr55pu7trOLfb+f7HQW2TUpMq+99lp+zn3g37LTWXV6+umnPSwl0Xm6w+XLl9d6Kb3O8ccfn9588838OlPZNUGgt8tOB/rkk092XQC1udnZdaHemJkgxsxUTmam2jEzwXuZmzaM2FJSc+fO7Tpve3b9g7VZ8wWze+65pyprg3rw9ttvb9A7iCjeP//5z/xCg5nsukdUz/XXX5+/u3GLLbZIP/vZzzz0kFK64YYbui7AmR292umVV17JI0z2GSg3MxPEmJnKx8xUO2YmeH/mpg0jtpTU448/nn8eMWLEOt9pueYLlp3/GyCl2bNndz0Mnafbo/qWLl2av2j585//PI/D2YXZMyeeeKKno0qyIx+nTp2ab59//vn5afao/S+r22+/fdpkk03ydy5+4hOfyI84coRqdf35z3/OPw8fPjx/Hq655pq04447pg9/+MNp5MiR+efs1IdZoFzzxSigPMxMEGNmKgczU+2ZmcrJ3FQO5qYN43wJJZSdXmfx4sX5dktLyzr3/dCHPpQf/fLWW2+l9vb2Kq0Qyn8+yfPOO6/r6+z6LlTP9OnT13r6w8ypp56avvKVr3hKquTkk09OCxcuTHvssUd+DTBq77HHHnvX10899VT+cdVVV+XXNsr+Dm2++eY1W19v+XfiH//4R76dBcgsSP7iF794z35PPPFE+q//+q80Y8aMNGvWrDRo0KAarBZ4P2YmiDEz1ZaZqVzMTOVkbqo9c9OGc2RLCb3xxhtd2wMHDlzv/llsyWTn4gdSuvDCC/MLpma+8IUvrPNUfFTPLrvskj8v5557bn7aHoo3Z86cdPnll+dHSF5yySUe9xrLjmT5z//8z3TZZZflz81DDz2Un//29NNPz4+i6Lz+wOc///m0cuXKWi+3ob3++uv54JB5+OGH89AybNiwdPXVV+enD8veYZq92/ezn/1svs+9996bvva1r9V41cCazEwQY2YqJzNT9ZmZysfcVB7mpg3nyJYSWvPC0X379l3v/v369cs/L1u2rNB1QT3IXhzLjpzIDB06NP3yl7+s9ZJ6neyd+Z/+9Ke7fi49/fTT+flvs3eGf/nLX04XXXTRu66PQDFWrFiRjj322FSpVNK3v/3ttMMOO3ioa2z+/Pnve2TEuHHj0gknnJAOPPDAPMBkP8eyn13f+ta3arLO3iA7InjN37uygS47jVt22rBOe+21V/rTn/6Udtttt/S3v/0t/xn2v//7v+kzn/lMjVYNrMnMBB+cman2zEzlYGYqJ3NTeZibNpwjW0qof//+7/rBvz6d5xEfMGBAoeuCsnv00UfTpEmT8uuCZH+PsvN7ZsGF6speTM5e2M8+Ro8enb+T/6abbspPkfTMM8/k79rPDpunWD/+8Y/z0yRtvfXW6ayzzvJwl8C6TkG15ZZbphtvvDFtvPHG+dfTpk2r4sp69+9ama9//evvCi2dst+tfvSjH3V9fd1111VlfcD6mZnggzEzlYOZqRzMTOVkbioPc9OGE1tKKLtIa6funBqsszJ255Rj0KieffbZNH78+PTqq6+mPn36pGuvvTZ/VzLl8dWvfjUddthh+al7vvnNb+an6qEYWWTJTtfW+aJ95+kmKbePf/zj+VEumewaLi+++GKtl9QrftfKZP9+rM1+++2Xn4ovc//99xe+NqB7zEyw4cxM5Wdmqh4zU/0yN1WPuWnDOY1YSathdu72l19+OXV0dKxz3+yF5c7Y0traWqUVQrlkL0juv//++efsWiBXXnllfvQE5ZM9L9kpxbKfW7///e/TV77ylVovqWHPwZ0dGZn9EppdeyKLj//XI4880rWdnSpp4cKF+fbBBx8sztTQ9ttvn2677bauw+e32mqrWi6nYWWnYB0yZEhatGjRen+Hyn4vGzx4cP53pHN/oPbMTLBhzEz1w8xUHWam+mZuqg5z04YTW0r8QyO7SFf2ztbslEid76h8vxLfabvttqviCqEcFi9enL8TPDs9Vee7+CdPnlzrZbEW2YubnZ5//nmPU0E6Ty+Z/b3IrpOzPj/84Q/f9Y5HR8LUThaMqY5PfvKT6e67786333nnnXXu2/n9tf0+BtSGmQm6x8xUX8xM1WFmqm/mpuoxN20YpxErqT333DP/nL37+y9/+cs6L2zXaY899qjK2qAsXn/99XTAAQekxx57LP/6vPPOS8cff3ytl8U6ZO/U7+TUh/BenT/PMo5qKdaap5rsDPbvZ8mSJfmLVJmPfOQjBa8K2BBmJlg/M1P9MTPB+pmbqsfctGHElpI65JBDurZ//etfv+8+2XUPsgtOd148auzYsVVbH9Radmqkgw46KD344IP516effno65ZRTar0s1uOGG27o2t5xxx09XgWZPn16qlQq6/w466yzuva/6667uv58+PDhnpcayY4q+uMf/5hvb7PNNl7YL9ihhx7atT1jxoy17pd9L/u7kRkzZkzRywI2gJkJ1s3MVJ/MTNVhZqpf5qbqMjdtGLGlpNra2roG+iuuuCLdd99979nnggsuSI8//ni+PXXq1LTxxhtXfZ1QC9m1KCZNmpTuueeerv/+zznnHE9GjX9RXb58+XrPidt5LYqPfexjXrSkV5k5c2Z+WtC1eemll/JfYrOfb5njjjuuiqvrnXbaaad04IEH5tu/+93v0p133vmefbLrtHzve9/Lt/v27ZuOPvroqq8TWDszE6ydmal8zEywfuam8jE3bRgnni6xiy++OD812LJly9L48ePTd7/73fzolezr7GLHl156ab7fyJEj00knnVTr5Ta0uXPn5tfP6dR5OpFM9ufZL01rOuqoo6q6vt4muwbF7bffnm/vu+++acqUKe+62Pf/lb1Alv09oThnn312/nMoe7E4O6VH9q787DRhb7zxRnr44YfTb3/72644lj0f2c+vPn36eEroNU444YS0cuXK/O/Ibrvtlh9BNGDAgPzfk+y6Ib/61a+6/m3J/g45JWJ1XHTRRfkbWl577bU0YcKEdOKJJ6bPfe5z+XMzb968dO6556aOjo6uaxs5jRiUj5mpXMxN5WFmKh8zE6yfuamczE3d11TpPC8CpS26RxxxRH6+8PeTvYA8a9asNGLEiKqvrTfJ4slvfvObbu/vr1W5LoT20Y9+ND333HOFrYeUv3DcnQvet7S0pCuvvDKNGzfOw1aCYe/73/9+12nE9tlnn1ovqaF19+9IFmMuv/zy/PSgVO+FwS9+8Yv50UVr+zcnO1VlFluAcjIzlYe5qTzMTOVjZqo/ZqbqMzeVl7mpexzZUnIHH3xw+vvf/56/YyuLKtm7K7N3hWdx5bDDDkvf/OY30yabbFLrZQK93B/+8If8Z1R29Ep2tFf2ouXLL7+cvzt86NChaZdddsnfNX744Yf7mUWvlAX72bNn50dRZBdjz45iyd5IkR0B1tramnbfffd05JFH5ke9UF3ZkUSPPvpomjZtWrr55pvzc0Bnp14ZNmxYHiGzd9d96lOf8rRAiZmZgHpgZoL1MzeVl7mpexzZAgAAAAAAELBR5H8MAAAAAADQ24ktAAAAAAAAAWILAAAAAABAgNgCAAAAAAAQILYAAAAAAAAEiC0AAAAAAAABYgsAAAAAAECA2AIAAAAAABAgtgAAAAAAAASILQAAAAAAAAFiCwAAAAAAQIDYAgAAAAAAECC2AAAAAAAABIgtAAAAAAAAAWILAAAAAABAgNgCAAAAAAAQILYAAAAAAAAEiC0AAAAAAAABYgsAAAAAAECA2AIAAAAAABAgtgAAAAAAAASILQAAAAAAAAFiCwAAAAAAQIDYAgAAAAAAkD64/wf0gO3RIAlWYgAAAABJRU5ErkJggg=="}}], "tabbable": null, "tooltip": null}}}, "version_major": 2, "version_minor": 0}</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script crossorigin="anonymous" data-jupyter-widgets-cdn="https://cdn.jsdelivr.net/npm/" src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@1.0.6/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/1_image_filters';</script>
+    <script src="../_static/docversions.js?v=00a78bfa"></script>
+    <script src="../_static/underscore.js?v=ff3b9a9a"></script>
+    <script src="../_static/random.js?v=6d4713dd"></script>
+    <script src="../_static/searchtools.js?v=4653291c"></script>
+    <script src="../_static/jquery-1.11.1.js?v=b05730fb"></script>
+    <script src="../_static/underscore-1.3.1.js?v=ae82f386"></script>
+    <script src="../_static/doctools.js?v=13a9ecda"></script>
+    <script src="../_static/websupport.js?v=ec85a7bc"></script>
+    <script src="../_static/jquery.js?v=804ff984"></script>
+    <script src="../_static/js/modernizr.min.js?v=3ff6d828"></script>
+    <script src="../_static/js/theme.js?v=babe0fed"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Morphological operations" href="3_morphological_operations.html" />
     <link rel="prev" title="Images are numpy arrays" href="00_images_are_arrays.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_images_are_arrays.html">
+  
+  
+  
+  
+  
+    
+    
       
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Image analysis in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="00_images_are_arrays.html">
-   Images are numpy arrays
-  </a>
- </li>
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Image analysis in Python - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Image analysis in Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_images_are_arrays.html">
+                    Images are numpy arrays
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Image filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_morphological_operations.html">Morphological operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_segmentation.html">Segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="three_dimensional_image_processing.html">Introduction to three-dimensional image processing</a></li>
 </ul>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Image filtering
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="3_morphological_operations.html">
-   Morphological operations
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="4_segmentation.html">
-   Segmentation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="three_dimensional_image_processing.html">
-   Introduction to three-dimensional image processing
-  </a>
- </li>
-</ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/lectures/1_image_filters.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/lectures/1_image_filters.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
         
         
-        
-        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
     </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/1_image_filters.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
 </div>
 
-        </div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Image filtering</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
+            <div>
+                <h2> Contents </h2>
             </div>
-            <nav id="bd-toc-nav">
+            <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#image-filtering-theory">
-   Image filtering theory
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#local-filtering">
-     Local filtering
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#a-difference-filter">
-       A difference filter
-      </a>
-     </li>
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#commutativity-and-assortativity-of-filters">
-       Commutativity and assortativity of filters
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#local-filtering-of-images">
-   Local filtering of images
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-mean-filter">
-     The mean filter
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#downsampled-image">
-     Downsampled image
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mean-filter-on-a-real-image">
-     Mean filter on a real image
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#essential-filters">
-   Essential filters
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#gaussian-filter">
-     Gaussian filter
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#basic-edge-filtering">
-     Basic edge filtering
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h4 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#difference-filters-in-2d">
-       Difference filters in 2D
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#span-style-color-cornflowerblue-exercise-span">
-   <span style="color:cornflowerblue">
-    Exercise:
-   </span>
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#sobel-edge-filter">
-     Sobel edge filter
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#denoising-filters">
-   Denoising filters
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#median-filter">
-     Median Filter
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#further-reading">
-   Further reading
-  </a>
- </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-filtering-theory">Image filtering theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-filtering">Local filtering</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-difference-filter">A difference filter</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#commutativity-and-assortativity-of-filters">Commutativity and assortativity of filters</a></li>
 </ul>
-
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-filtering-of-images">Local filtering of images</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mean-filter">The mean filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#downsampled-image">Downsampled image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-filter-on-a-real-image">Mean filter on a real image</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#essential-filters">Essential filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-filter">Gaussian filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-edge-filtering">Basic edge filtering</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-filters-in-2d">Difference filters in 2D</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise"><span style="color:cornflowerblue">Exercise:</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sobel-edge-filter">Sobel edge filter</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#denoising-filters">Denoising filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#median-filter">Median Filter</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
@@ -339,17 +404,17 @@
 </div>
 </div>
 </div>
-<div class="section" id="image-filtering">
-<h1>Image filtering<a class="headerlink" href="#image-filtering" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="image-filtering-theory">
-<h2>Image filtering theory<a class="headerlink" href="#image-filtering-theory" title="Permalink to this headline">¶</a></h2>
+<section class="tex2jax_ignore mathjax_ignore" id="image-filtering">
+<h1>Image filtering<a class="headerlink" href="#image-filtering" title="Link to this heading">#</a></h1>
+<section id="image-filtering-theory">
+<h2>Image filtering theory<a class="headerlink" href="#image-filtering-theory" title="Link to this heading">#</a></h2>
 <p>Filtering is one of the most basic and common image operations in image processing. You can filter an image to remove noise or to enhance features; the filtered image could be the desired result or just a preprocessing step. Regardless, filtering is an important topic to understand.</p>
-<div class="section" id="local-filtering">
-<h3>Local filtering<a class="headerlink" href="#local-filtering" title="Permalink to this headline">¶</a></h3>
+<section id="local-filtering">
+<h3>Local filtering<a class="headerlink" href="#local-filtering" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;image.cmap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;gray&#39;</span>
 </pre></div>
@@ -369,7 +434,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_7_0.png" src="../_images/1_image_filters_7_0.png" />
+<a class="reference internal image-reference" href="../_images/0f4b339e3ddc2f39b073292b849cb407eebea140309c5d8a9517b9e89b9ed510.png"><img alt="../_images/0f4b339e3ddc2f39b073292b849cb407eebea140309c5d8a9517b9e89b9ed510.png" src="../_images/0f4b339e3ddc2f39b073292b849cb407eebea140309c5d8a9517b9e89b9ed510.png" style="width: 547px; height: 413px;" />
+</a>
 </div>
 </div>
 <p>Now add some noise to this signal:</p>
@@ -387,7 +453,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_9_0.png" src="../_images/1_image_filters_9_0.png" />
+<a class="reference internal image-reference" href="../_images/0345dea1964ca32f879a26725db8069ad0a2eab3992f5a72adf6da3e4544f1b1.png"><img alt="../_images/0345dea1964ca32f879a26725db8069ad0a2eab3992f5a72adf6da3e4544f1b1.png" src="../_images/0345dea1964ca32f879a26725db8069ad0a2eab3992f5a72adf6da3e4544f1b1.png" style="width: 559px; height: 413px;" />
+</a>
 </div>
 </div>
 <p>The simplest way to recover something that looks a bit more like the original signal is to take the average between neighboring “pixels”:</p>
@@ -401,7 +468,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_11_0.png" src="../_images/1_image_filters_11_0.png" />
+<a class="reference internal image-reference" href="../_images/345ef14fd81be60496e35e127f57c1307c725296cb188363062c4854f2d74c0f.png"><img alt="../_images/345ef14fd81be60496e35e127f57c1307c725296cb188363062c4854f2d74c0f.png" src="../_images/345ef14fd81be60496e35e127f57c1307c725296cb188363062c4854f2d74c0f.png" style="width: 559px; height: 413px;" />
+</a>
 </div>
 </div>
 <p>What happens if we want to take the <em>three</em> neighboring pixels? We can do the same thing:</p>
@@ -417,7 +485,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_13_0.png" src="../_images/1_image_filters_13_0.png" />
+<a class="reference internal image-reference" href="../_images/cdc099a7f240780482c89d693e6a677555ed89c6d6807bdc89c6bc8844848a40.png"><img alt="../_images/cdc099a7f240780482c89d693e6a677555ed89c6d6807bdc89c6bc8844848a40.png" src="../_images/cdc099a7f240780482c89d693e6a677555ed89c6d6807bdc89c6bc8844848a40.png" style="width: 559px; height: 413px;" />
+</a>
 </div>
 </div>
 <p>For averages of more points, the expression keeps getting hairier. And you have to worry more about what’s going on in the margins. Is there a better way?</p>
@@ -447,15 +516,16 @@
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>smooth_signal3 and smooth_signal3p are equal: True
 </pre></div>
 </div>
-<img alt="../_images/1_image_filters_15_1.png" src="../_images/1_image_filters_15_1.png" />
+<a class="reference internal image-reference" href="../_images/cae0b9dbfe49905d637fb6404757f82b287db8469c20e885db322b6339a42397.png"><img alt="../_images/cae0b9dbfe49905d637fb6404757f82b287db8469c20e885db322b6339a42397.png" src="../_images/cae0b9dbfe49905d637fb6404757f82b287db8469c20e885db322b6339a42397.png" style="width: 573px; height: 413px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convolve_demo</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">convolve_demo</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">):</span>
     <span class="n">ksize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
     <span class="n">convolved</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">filter_step</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_step</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
         <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;signal&#39;</span><span class="p">)</span>
         <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">convolved</span><span class="p">[:</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;convolved&#39;</span><span class="p">)</span>
@@ -465,7 +535,7 @@
         <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">convolved</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">filter_step</span>
 
-<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">widgets</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">widgets</span>
 
 <span class="n">i_slider</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">noisy_signal</span><span class="p">)</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span>
                              <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -476,9 +546,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "593e9c793d73475990f0034b006ae9f2"}
-</script><img alt="../_images/1_image_filters_16_1.png" src="../_images/1_image_filters_16_1.png" />
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "0b03d394ab8e42a7a1618e47035b7d22"}</script><a class="reference internal image-reference" href="../_images/84e179bfa008592f16f2f32f83e5c7847f0ea7f9ee90fbf7ae208e44f85c2ca8.png"><img alt="../_images/84e179bfa008592f16f2f32f83e5c7847f0ea7f9ee90fbf7ae208e44f85c2ca8.png" src="../_images/84e179bfa008592f16f2f32f83e5c7847f0ea7f9ee90fbf7ae208e44f85c2ca8.png" style="width: 559px; height: 413px;" />
+</a>
 </div>
 </div>
 <p>The advantage of convolution is that it’s just as easy to take the average of 11 points as 3:</p>
@@ -493,7 +562,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_18_0.png" src="../_images/1_image_filters_18_0.png" />
+<a class="reference internal image-reference" href="../_images/5c6beb7e2e4e8a9ebc8a12b6561a1eb5197995d133d567b066dd0626eac73b22.png"><img alt="../_images/5c6beb7e2e4e8a9ebc8a12b6561a1eb5197995d133d567b066dd0626eac73b22.png" src="../_images/5c6beb7e2e4e8a9ebc8a12b6561a1eb5197995d133d567b066dd0626eac73b22.png" style="width: 559px; height: 413px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -507,9 +577,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "635da38ea77840608e3b8eb39148c968"}
-</script><img alt="../_images/1_image_filters_19_1.png" src="../_images/1_image_filters_19_1.png" />
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "3dd6ea0981914e279cf08a1f1b15c70d"}</script><a class="reference internal image-reference" href="../_images/e2453efe3f3e7c3ba10fe4b344f8da8e910dc8efb094acd5fce60430d65691f7.png"><img alt="../_images/e2453efe3f3e7c3ba10fe4b344f8da8e910dc8efb094acd5fce60430d65691f7.png" src="../_images/e2453efe3f3e7c3ba10fe4b344f8da8e910dc8efb094acd5fce60430d65691f7.png" style="width: 559px; height: 413px;" />
+</a>
 </div>
 </div>
 <p>Of course, to take the mean of 11 values, we have to move further and further away from the edges, and this starts to be noticeable. You can use <code class="docutils literal notranslate"><span class="pre">mode='same'</span></code> to pad the edges of the array and compute a result of the same size as the input:</p>
@@ -531,19 +600,20 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_21_0.png" src="../_images/1_image_filters_21_0.png" />
+<a class="reference internal image-reference" href="../_images/fde389d1838c15a95bdf7c48f1f532a83edf90276748c0af54e135a76bbe3558.png"><img alt="../_images/fde389d1838c15a95bdf7c48f1f532a83edf90276748c0af54e135a76bbe3558.png" src="../_images/fde389d1838c15a95bdf7c48f1f532a83edf90276748c0af54e135a76bbe3558.png" style="width: 573px; height: 434px;" />
+</a>
 </div>
 </div>
 <p>But now we see edge effects on the ends of the signal…</p>
 <p>This is because <code class="docutils literal notranslate"><span class="pre">mode='same'</span></code> actually pads the signal with 0s and then applies <code class="docutils literal notranslate"><span class="pre">mode='valid'</span></code> as before.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">convolve_demo_same</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">convolve_demo_same</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">):</span>
     <span class="n">ksize</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">kernel</span><span class="p">)</span>
     <span class="n">padded_signal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">ksize</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
                            <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">)</span>
     <span class="n">convolved</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">padded_signal</span><span class="p">,</span> <span class="n">kernel</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">filter_step</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">filter_step</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
         <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">ksize</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
                       <span class="nb">len</span><span class="p">(</span><span class="n">signal</span><span class="p">)</span> <span class="o">+</span> <span class="n">ksize</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
@@ -568,14 +638,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "e47cb70045904c6f9088fdd943a044ab"}
-</script><img alt="../_images/1_image_filters_23_1.png" src="../_images/1_image_filters_23_1.png" />
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "5371dd52e4bb496183d96439552846bc"}</script><a class="reference internal image-reference" href="../_images/3aefda4a411dd263968c28c08e73afa06981998c0df924c342e6b7b6d78c8201.png"><img alt="../_images/3aefda4a411dd263968c28c08e73afa06981998c0df924c342e6b7b6d78c8201.png" src="../_images/3aefda4a411dd263968c28c08e73afa06981998c0df924c342e6b7b6d78c8201.png" style="width: 559px; height: 413px;" />
+</a>
 </div>
 </div>
 <p><strong>Exercise</strong> Look up the documentation of <code class="docutils literal notranslate"><span class="pre">scipy.ndimage.convolve</span></code>. Apply the same convolution, but using a different <code class="docutils literal notranslate"><span class="pre">mode=</span></code> keyword argument to avoid the edge effects we see here.</p>
-<div class="section" id="a-difference-filter">
-<h4>A difference filter<a class="headerlink" href="#a-difference-filter" title="Permalink to this headline">¶</a></h4>
+<section id="a-difference-filter">
+<h4>A difference filter<a class="headerlink" href="#a-difference-filter" title="Link to this heading">#</a></h4>
 <p>Let’s look again at our simplest signal, the step signal from before:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -586,7 +655,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_28_0.png" src="../_images/1_image_filters_28_0.png" />
+<a class="reference internal image-reference" href="../_images/0f4b339e3ddc2f39b073292b849cb407eebea140309c5d8a9517b9e89b9ed510.png"><img alt="../_images/0f4b339e3ddc2f39b073292b849cb407eebea140309c5d8a9517b9e89b9ed510.png" src="../_images/0f4b339e3ddc2f39b073292b849cb407eebea140309c5d8a9517b9e89b9ed510.png" style="width: 547px; height: 413px;" />
+</a>
 </div>
 </div>
 <p><strong>Exercise:</strong> Can you predict what a convolution with the kernel <code class="docutils literal notranslate"><span class="pre">[-1,</span> <span class="pre">0,</span> <span class="pre">1]</span></code> does? Try thinking about it before running the cells below.</p>
@@ -619,14 +689,15 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_32_0.png" src="../_images/1_image_filters_32_0.png" />
+<a class="reference internal image-reference" href="../_images/bb37c365c0228afc995aa140226c7d8d84cb35291a1bc11a594f537f626916d2.png"><img alt="../_images/bb37c365c0228afc995aa140226c7d8d84cb35291a1bc11a594f537f626916d2.png" src="../_images/bb37c365c0228afc995aa140226c7d8d84cb35291a1bc11a594f537f626916d2.png" style="width: 559px; height: 413px;" />
+</a>
 </div>
 </div>
 <p>(For technical signal processing reasons, convolutions actually occur “back to front” between the input array and the kernel. Correlations occur in the signal order, so we’ll use correlate from now on.)</p>
 <p>Whenever neighboring values are close, the filter response is close to 0. Right at the boundary of a step, we’re subtracting a small value from a large value and and get a spike in the response. This spike “identifies” our edge.</p>
-</div>
-<div class="section" id="commutativity-and-assortativity-of-filters">
-<h4>Commutativity and assortativity of filters<a class="headerlink" href="#commutativity-and-assortativity-of-filters" title="Permalink to this headline">¶</a></h4>
+</section>
+<section id="commutativity-and-assortativity-of-filters">
+<h4>Commutativity and assortativity of filters<a class="headerlink" href="#commutativity-and-assortativity-of-filters" title="Link to this heading">#</a></h4>
 <p>What if we try the same trick with our noisy signal?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -640,7 +711,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_37_0.png" src="../_images/1_image_filters_37_0.png" />
+<a class="reference internal image-reference" href="../_images/6920b72da22c8b4850816f350f1976faa2792bba30ac3857d76bee728cc3eaa5.png"><img alt="../_images/6920b72da22c8b4850816f350f1976faa2792bba30ac3857d76bee728cc3eaa5.png" src="../_images/6920b72da22c8b4850816f350f1976faa2792bba30ac3857d76bee728cc3eaa5.png" style="width: 559px; height: 413px;" />
+</a>
 </div>
 </div>
 <p>Oops! We lost our edge!</p>
@@ -673,7 +745,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_42_0.png" src="../_images/1_image_filters_42_0.png" />
+<a class="reference internal image-reference" href="../_images/5b8b0d8d43f5715c6415ecdaf122684dc90645a13e0fb9c8f46b8f7aa468a62b.png"><img alt="../_images/5b8b0d8d43f5715c6415ecdaf122684dc90645a13e0fb9c8f46b8f7aa468a62b.png" src="../_images/5b8b0d8d43f5715c6415ecdaf122684dc90645a13e0fb9c8f46b8f7aa468a62b.png" style="width: 559px; height: 413px;" />
+</a>
 </div>
 </div>
 <p><strong>Exercise:</strong> The Gaussian filter with variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> is given by:</p>
@@ -681,7 +754,7 @@
 \[
 k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\right)}
 \]</div>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Create this filter (for example, with width 9, center 4, sigma 1). (Plot it)</p></li>
 <li><p>Convolve it with the difference filter (with appropriate mode). (Plot the result)</p></li>
 <li><p>Convolve it with the noisy signal. (Plot the result)</p></li>
@@ -701,15 +774,15 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
 </div>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="local-filtering-of-images">
-<h2>Local filtering of images<a class="headerlink" href="#local-filtering-of-images" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+</section>
+<section id="local-filtering-of-images">
+<h2>Local filtering of images<a class="headerlink" href="#local-filtering-of-images" title="Link to this heading">#</a></h2>
 <p>Now let’s apply all this knowledge to 2D images instead of a 1D signal. Let’s start with an incredibly simple image:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
 <span class="n">bright_square</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
 <span class="n">bright_square</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
@@ -745,11 +818,12 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_51_0.png" src="../_images/1_image_filters_51_0.png" />
+<a class="reference internal image-reference" href="../_images/a32f7db985d5c1d514d41c47333a2d014cb89fe304c37596e2539f133352c03e.png"><img alt="../_images/a32f7db985d5c1d514d41c47333a2d014cb89fe304c37596e2539f133352c03e.png" src="../_images/a32f7db985d5c1d514d41c47333a2d014cb89fe304c37596e2539f133352c03e.png" style="width: 408px; height: 413px;" />
+</a>
 </div>
 </div>
-<div class="section" id="the-mean-filter">
-<h3>The mean filter<a class="headerlink" href="#the-mean-filter" title="Permalink to this headline">¶</a></h3>
+<section id="the-mean-filter">
+<h3>The mean filter<a class="headerlink" href="#the-mean-filter" title="Link to this heading">#</a></h3>
 <p>For our first example of a filter, consider the following filtering array, which we’ll call a “mean kernel”. For each pixel, a kernel defines which neighboring pixels to consider when filtering, and how much to weight those pixels.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -779,7 +853,7 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
 <p>Let’s take a look at the numerical result:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.ndimage</span> <span class="k">as</span> <span class="nn">ndi</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">scipy.ndimage</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ndi</span>
 
 <span class="o">%</span><span class="k">precision</span> 2
 <span class="nb">print</span><span class="p">(</span><span class="n">bright_square</span><span class="p">)</span>
@@ -808,7 +882,7 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
 </div>
 <p>The meaning of “mean kernel” should be clear now: Each pixel was replaced with the mean value within the 3x3 neighborhood of that pixel. When the kernel was over <code class="docutils literal notranslate"><span class="pre">n</span></code> bright pixels, the pixel in the kernel’s center was changed to n/9 (= n * 0.111). When no bright pixels were under the kernel, the result was 0.</p>
 <p>This filter is a simple smoothing filter and produces two important results:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>The intensity of the bright pixel decreased.</p></li>
 <li><p>The intensity of the region near the bright pixel increased.</p></li>
 </ol>
@@ -819,17 +893,17 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#--------------------------------------------------------------------------</span>
 <span class="c1">#  Convolution Demo</span>
 <span class="c1">#--------------------------------------------------------------------------</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">color</span>
-<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">ndimage</span> <span class="k">as</span> <span class="n">ndi</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">patches</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">color</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">ndimage</span> <span class="k">as</span> <span class="n">ndi</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">patches</span>
 
-<span class="k">def</span> <span class="nf">mean_filter_demo</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mean_filter_demo</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="n">mean_factor</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="mf">9.0</span>  <span class="c1"># This assumes a 3x3 kernel.</span>
     <span class="n">iter_kernel_and_subimage</span> <span class="o">=</span> <span class="n">iter_kernel</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
     <span class="n">image_cache</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">def</span> <span class="nf">mean_filter_step</span><span class="p">(</span><span class="n">i_step</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">mean_filter_step</span><span class="p">(</span><span class="n">i_step</span><span class="p">):</span>
         <span class="k">while</span> <span class="n">i_step</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_cache</span><span class="p">):</span>
             <span class="n">filtered</span> <span class="o">=</span> <span class="n">image</span> <span class="k">if</span> <span class="n">i_step</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">image_cache</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">filtered</span> <span class="o">=</span> <span class="n">filtered</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -852,15 +926,15 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
     <span class="k">return</span> <span class="n">mean_filter_step</span>
 
 
-<span class="k">def</span> <span class="nf">mean_filter_interactive_demo</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">IntSlider</span><span class="p">,</span> <span class="n">interact</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">mean_filter_interactive_demo</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">ipywidgets</span><span class="w"> </span><span class="kn">import</span> <span class="n">IntSlider</span><span class="p">,</span> <span class="n">interact</span>
     <span class="n">mean_filter_step</span> <span class="o">=</span> <span class="n">mean_filter_demo</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
     <span class="n">step_slider</span> <span class="o">=</span> <span class="n">IntSlider</span><span class="p">(</span><span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">interact</span><span class="p">(</span><span class="n">mean_filter_step</span><span class="p">,</span> <span class="n">i_step</span><span class="o">=</span><span class="n">step_slider</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">iter_kernel</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Yield position, kernel mask, and image for each pixel in the image.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">iter_kernel</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Yield position, kernel mask, and image for each pixel in the image.</span>
 
 <span class="sd">    The kernel mask has a 2 at the center pixel and 1 around it. The actual</span>
 <span class="sd">    width of the kernel is 2*size + 1.</span>
@@ -875,15 +949,15 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
         <span class="k">yield</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">mask</span><span class="p">,</span> <span class="n">subimage</span>
 
 
-<span class="k">def</span> <span class="nf">iter_pixels</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Yield pixel position (row, column) and pixel intensity. &quot;&quot;&quot;</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">iter_pixels</span><span class="p">(</span><span class="n">image</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Yield pixel position (row, column) and pixel intensity. &quot;&quot;&quot;</span>
     <span class="n">height</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">height</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">width</span><span class="p">):</span>
             <span class="k">yield</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">),</span> <span class="n">image</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
 
 
-<span class="k">def</span> <span class="nf">bounded_slice</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">xy_max</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_min</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bounded_slice</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">xy_max</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">i_min</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="n">slices</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">i_max</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">center</span><span class="p">,</span> <span class="n">xy_max</span><span class="p">):</span>
         <span class="n">slices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="n">size</span><span class="p">,</span> <span class="n">i_min</span><span class="p">),</span> <span class="nb">min</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">i_max</span><span class="p">)))</span>
@@ -899,9 +973,7 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">
-{"version_major": 2, "version_minor": 0, "model_id": "89b85e8f01484a92bead31f985195ae3"}
-</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 0, "model_id": "990781ed65574e238b9727ca075a9c2f"}</script></div>
 </div>
 <p>Incidentally, the above filtering is the exact same principle behind the <em>convolutional neural networks</em>, or CNNs, that you might have heard much about over the past few years. The only difference is that while above, the simple mean kernel is used, in CNNs, the values inside the kernel are <em>learned</em> to find a specific feature, or accomplish a specific task. Time permitting, we’ll demonstrate this in an exercise at the end of the notebook.</p>
 <p>Slight aside:</p>
@@ -918,13 +990,13 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
 </div>
 </div>
 <p>Note that all the values of the kernel sum to 1. Why might that be important?</p>
-</div>
-<div class="section" id="downsampled-image">
-<h3>Downsampled image<a class="headerlink" href="#downsampled-image" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="downsampled-image">
+<h3>Downsampled image<a class="headerlink" href="#downsampled-image" title="Link to this heading">#</a></h3>
 <p>Let’s consider a real image now. It’ll be easier to see some of the filtering we’re doing if we downsample the image a bit. We can slice into the image using the “step” argument to sub-sample it (don’t scale images using this method for real work; use <code class="docutils literal notranslate"><span class="pre">skimage.transform.rescale</span></code>):</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">camera</span><span class="p">()</span>
 <span class="n">pixelated</span> <span class="o">=</span> <span class="n">image</span><span class="p">[::</span><span class="mi">10</span><span class="p">,</span> <span class="p">::</span><span class="mi">10</span><span class="p">]</span>
@@ -935,16 +1007,17 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_71_0.png" src="../_images/1_image_filters_71_0.png" />
+<a class="reference internal image-reference" href="../_images/895e9e10b4058071df059cc537ddd0dde4eb2da9d8220a592839ebdb719d308c.png"><img alt="../_images/895e9e10b4058071df059cc537ddd0dde4eb2da9d8220a592839ebdb719d308c.png" src="../_images/895e9e10b4058071df059cc537ddd0dde4eb2da9d8220a592839ebdb719d308c.png" style="width: 831px; height: 401px;" />
+</a>
 </div>
 </div>
 <p>Here we use a step of 10, giving us every tenth column and every tenth row of the original image. You can see the highly pixelated result on the right.</p>
 <p>We are actually going to be using the pattern of plotting multiple images side by side quite often, so we are going to make the following helper function:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">img_as_float</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">img_as_float</span>
 
-<span class="k">def</span> <span class="nf">imshow_all</span><span class="p">(</span><span class="o">*</span><span class="n">images</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">imshow_all</span><span class="p">(</span><span class="o">*</span><span class="n">images</span><span class="p">,</span> <span class="n">titles</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="n">images</span> <span class="o">=</span> <span class="p">[</span><span class="n">img_as_float</span><span class="p">(</span><span class="n">img</span><span class="p">)</span> <span class="k">for</span> <span class="n">img</span> <span class="ow">in</span> <span class="n">images</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">titles</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -963,9 +1036,9 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="mean-filter-on-a-real-image">
-<h3>Mean filter on a real image<a class="headerlink" href="#mean-filter-on-a-real-image" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="mean-filter-on-a-real-image">
+<h3>Mean filter on a real image<a class="headerlink" href="#mean-filter-on-a-real-image" title="Link to this heading">#</a></h3>
 <p>Now we can apply the filter to this downsampled image:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -975,22 +1048,23 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_77_0.png" src="../_images/1_image_filters_77_0.png" />
+<a class="reference internal image-reference" href="../_images/29270ef9ab37e16a5aafb132913415568ce5ad2b0445b5e8c307100a068839b4.png"><img alt="../_images/29270ef9ab37e16a5aafb132913415568ce5ad2b0445b5e8c307100a068839b4.png" src="../_images/29270ef9ab37e16a5aafb132913415568ce5ad2b0445b5e8c307100a068839b4.png" style="width: 822px; height: 417px;" />
+</a>
 </div>
 </div>
 <p>Comparing the filtered image to the pixelated image, we can see that this filtered result is smoother: Sharp edges (which are just borders between dark and bright pixels) are smoothed because dark pixels reduce the intensity of neighboring pixels and bright pixels do the opposite.</p>
-</div>
-</div>
-<div class="section" id="essential-filters">
-<h2>Essential filters<a class="headerlink" href="#essential-filters" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="essential-filters">
+<h2>Essential filters<a class="headerlink" href="#essential-filters" title="Link to this heading">#</a></h2>
 <p>If you read through the last section, you’re already familiar with the essential concepts of image filtering. But, of course, you don’t have to create custom filter kernels for all of your filtering needs. There are many standard filter kernels pre-defined from half a century of image and signal processing.</p>
-<div class="section" id="gaussian-filter">
-<h3>Gaussian filter<a class="headerlink" href="#gaussian-filter" title="Permalink to this headline">¶</a></h3>
+<section id="gaussian-filter">
+<h3>Gaussian filter<a class="headerlink" href="#gaussian-filter" title="Link to this heading">#</a></h3>
 <p>The classic image filter is the Gaussian filter. This is similar to the mean filter, in that it tends to smooth images. The Gaussian filter, however, doesn’t weight all values in the neighborhood equally. Instead, pixels closer to the center are weighted more than those farther away.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Rename module so we don&#39;t shadow the builtin function</span>
-<span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">filters</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">filters</span>
 
 <span class="n">smooth_mean</span> <span class="o">=</span> <span class="n">ndi</span><span class="o">.</span><span class="n">correlate</span><span class="p">(</span><span class="n">bright_square</span><span class="p">,</span> <span class="n">mean_kernel</span><span class="p">)</span>
 <span class="n">sigma</span> <span class="o">=</span> <span class="mi">1</span>
@@ -1001,14 +1075,15 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_83_0.png" src="../_images/1_image_filters_83_0.png" />
+<a class="reference internal image-reference" href="../_images/2fe7361031325f684c964587a2a659a31cd31ca1cef7e9b8ae9202672d874034.png"><img alt="../_images/2fe7361031325f684c964587a2a659a31cd31ca1cef7e9b8ae9202672d874034.png" src="../_images/2fe7361031325f684c964587a2a659a31cd31ca1cef7e9b8ae9202672d874034.png" style="width: 1201px; height: 406px;" />
+</a>
 </div>
 </div>
 <p>For the Gaussian filter, <code class="docutils literal notranslate"><span class="pre">sigma</span></code>, the standard deviation, defines the size of the neighborhood.</p>
 <p>For a real image, we get the following:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">img_as_float</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">img_as_float</span>
 <span class="c1"># The Gaussian filter returns a float image, regardless of input.</span>
 <span class="c1"># Cast to float so the images have comparable intensity ranges.</span>
 <span class="n">pixelated_float</span> <span class="o">=</span> <span class="n">img_as_float</span><span class="p">(</span><span class="n">pixelated</span><span class="p">)</span>
@@ -1018,7 +1093,8 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_85_0.png" src="../_images/1_image_filters_85_0.png" />
+<a class="reference internal image-reference" href="../_images/69dbe7f81b14309e0d56d7a531f23e1e9e86f96ccdfb0f8990f1a473e032efe8.png"><img alt="../_images/69dbe7f81b14309e0d56d7a531f23e1e9e86f96ccdfb0f8990f1a473e032efe8.png" src="../_images/69dbe7f81b14309e0d56d7a531f23e1e9e86f96ccdfb0f8990f1a473e032efe8.png" style="width: 822px; height: 398px;" />
+</a>
 </div>
 </div>
 <p>This doesn’t look drastically different than the mean filter, but the Gaussian filter is typically preferred because of the distance-dependent weighting, and because it does not have any sharp transitions (consider what happens in the Fourier domain!). For a more detailed image and a larger filter, you can see artifacts in the mean filter since it doesn’t take distance into account:</p>
@@ -1034,7 +1110,8 @@ k_i = \frac{1}{\sqrt{2\pi}\sigma}\exp{\left(-\frac{(x_i - x_0)^2}{2\sigma^2}\rig
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_87_0.png" src="../_images/1_image_filters_87_0.png" />
+<a class="reference internal image-reference" href="../_images/76d8ee68df834f776d1463c59b121bbe5dd8c1133f45830460320e587c431985.png"><img alt="../_images/76d8ee68df834f776d1463c59b121bbe5dd8c1133f45830460320e587c431985.png" src="../_images/76d8ee68df834f776d1463c59b121bbe5dd8c1133f45830460320e587c431985.png" style="width: 836px; height: 417px;" />
+</a>
 </div>
 </div>
 <p>(Above, we’ve tweaked the size of the structuring element used for the mean filter and the standard deviation of the Gaussian filter to produce an approximately equal amount of smoothing in the two results.)</p>
@@ -1057,7 +1134,8 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_90_0.png" src="../_images/1_image_filters_90_0.png" />
+<a class="reference internal image-reference" href="../_images/10cbf3b74568d0229ebc4d3e61e4f62de7a09f5dc968d291ed1f01e2c575147b.png"><img alt="../_images/10cbf3b74568d0229ebc4d3e61e4f62de7a09f5dc968d291ed1f01e2c575147b.png" src="../_images/10cbf3b74568d0229ebc4d3e61e4f62de7a09f5dc968d291ed1f01e2c575147b.png" style="width: 822px; height: 397px;" />
+</a>
 </div>
 </div>
 <p><strong>Exercise</strong> (Chapter 0 reminder!) Plot the profile of the gaussian kernel at its midpoint, i.e. the values under the line shown here:</p>
@@ -1075,7 +1153,8 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(44.00, 0.00)
 </pre></div>
 </div>
-<img alt="../_images/1_image_filters_92_1.png" src="../_images/1_image_filters_92_1.png" />
+<a class="reference internal image-reference" href="../_images/d51bef30946860bf8c002c485899636d65318420dd341b4e2caa92e1f98a46e6.png"><img alt="../_images/d51bef30946860bf8c002c485899636d65318420dd341b4e2caa92e1f98a46e6.png" src="../_images/d51bef30946860bf8c002c485899636d65318420dd341b4e2caa92e1f98a46e6.png" style="width: 425px; height: 418px;" />
+</a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -1090,12 +1169,12 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="basic-edge-filtering">
-<h3>Basic edge filtering<a class="headerlink" href="#basic-edge-filtering" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="basic-edge-filtering">
+<h3>Basic edge filtering<a class="headerlink" href="#basic-edge-filtering" title="Link to this heading">#</a></h3>
 <p>For images, edges are boundaries between light and dark values. The detection of edges can be useful on its own, or it can be used as preliminary step in other algorithms (which we’ll see later).</p>
-<div class="section" id="difference-filters-in-2d">
-<h4>Difference filters in 2D<a class="headerlink" href="#difference-filters-in-2d" title="Permalink to this headline">¶</a></h4>
+<section id="difference-filters-in-2d">
+<h4>Difference filters in 2D<a class="headerlink" href="#difference-filters-in-2d" title="Link to this heading">#</a></h4>
 <p>For images, you can think of an edge as points where the gradient is large in one direction. We can approximate gradients with difference filters.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1113,14 +1192,15 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_98_0.png" src="../_images/1_image_filters_98_0.png" />
+<a class="reference internal image-reference" href="../_images/2bfd88cf84a07294d1ebeda495a1bb65e693e8376a3f297961fff6b528796cdb.png"><img alt="../_images/2bfd88cf84a07294d1ebeda495a1bb65e693e8376a3f297961fff6b528796cdb.png" src="../_images/2bfd88cf84a07294d1ebeda495a1bb65e693e8376a3f297961fff6b528796cdb.png" style="width: 417px; height: 415px;" />
+</a>
 </div>
 </div>
-</div>
-</div>
-</div>
-<div class="section" id="span-style-color-cornflowerblue-exercise-span">
-<h2><span style="color:cornflowerblue">Exercise:</span><a class="headerlink" href="#span-style-color-cornflowerblue-exercise-span" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+</section>
+<section id="exercise">
+<h2><span style="color:cornflowerblue">Exercise:</span><a class="headerlink" href="#exercise" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Add a horizontal kernel to the above example to also compute the horizontal gradient, <span class="math notranslate nohighlight">\(g_y\)</span></p></li>
 <li><p>Compute the magnitude of the image gradient at each point: <span class="math notranslate nohighlight">\(\left|g\right| = \sqrt{g_x^2 + g_y^2}\)</span></p></li>
@@ -1137,8 +1217,8 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 </div>
 </div>
 </div>
-<div class="section" id="sobel-edge-filter">
-<h3>Sobel edge filter<a class="headerlink" href="#sobel-edge-filter" title="Permalink to this headline">¶</a></h3>
+<section id="sobel-edge-filter">
+<h3>Sobel edge filter<a class="headerlink" href="#sobel-edge-filter" title="Link to this heading">#</a></h3>
 <p>The Sobel filter, the most commonly used edge filter, should look pretty similar to what you developed above. Take a look at the vertical and horizontal components of the Sobel kernel to see how they differ from your earlier implementation:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.sobel_v">http://scikit-image.org/docs/dev/api/skimage.filters.html#skimage.filters.sobel_v</a></p></li>
@@ -1151,7 +1231,8 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_105_0.png" src="../_images/1_image_filters_105_0.png" />
+<a class="reference internal image-reference" href="../_images/7fc026d44533c40f0812a7846b8bed3da12187e97bdcb9cce412399cf8e8fb11.png"><img alt="../_images/7fc026d44533c40f0812a7846b8bed3da12187e97bdcb9cce412399cf8e8fb11.png" src="../_images/7fc026d44533c40f0812a7846b8bed3da12187e97bdcb9cce412399cf8e8fb11.png" style="width: 813px; height: 395px;" />
+</a>
 </div>
 </div>
 <p>Notice that the size of the output matches the input, and the edges aren’t preferentially shifted to a corner of the image. Furthermore, the weights used in the Sobel filter produce diagonal edges with reponses that are comparable to horizontal or vertical edges.</p>
@@ -1164,7 +1245,8 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_107_0.png" src="../_images/1_image_filters_107_0.png" />
+<a class="reference internal image-reference" href="../_images/0cc6c40d8b35a2048d60d6015e4a18a3a23bedc8995b1ccf160acfc2084aaeea.png"><img alt="../_images/0cc6c40d8b35a2048d60d6015e4a18a3a23bedc8995b1ccf160acfc2084aaeea.png" src="../_images/0cc6c40d8b35a2048d60d6015e4a18a3a23bedc8995b1ccf160acfc2084aaeea.png" style="width: 822px; height: 398px;" />
+</a>
 </div>
 </div>
 <p>Smoothing is often used as a preprocessing step in preparation for feature detection and image-enhancement operations because sharp features can distort results.</p>
@@ -1178,7 +1260,8 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_109_0.png" src="../_images/1_image_filters_109_0.png" />
+<a class="reference internal image-reference" href="../_images/b35761b5c32489e7613864542e95178e3440524aa516295f08ae0fa978dd5ec7.png"><img alt="../_images/b35761b5c32489e7613864542e95178e3440524aa516295f08ae0fa978dd5ec7.png" src="../_images/b35761b5c32489e7613864542e95178e3440524aa516295f08ae0fa978dd5ec7.png" style="width: 822px; height: 417px;" />
+</a>
 </div>
 </div>
 <p>Notice how the edges look more continuous in the smoothed image.</p>
@@ -1191,7 +1274,8 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_112_0.png" src="../_images/1_image_filters_112_0.png" />
+<a class="reference internal image-reference" href="../_images/3a99aa2855729a83ff8c884e9fcd862c602df4ed9c8eba381579042e8a0b3d11.png"><img alt="../_images/3a99aa2855729a83ff8c884e9fcd862c602df4ed9c8eba381579042e8a0b3d11.png" src="../_images/3a99aa2855729a83ff8c884e9fcd862c602df4ed9c8eba381579042e8a0b3d11.png" style="width: 836px; height: 417px;" />
+</a>
 </div>
 </div>
 <p>Can we use machine learning to find a 3x3 convolutional filter that recovers this target?</p>
@@ -1203,19 +1287,19 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">sklearn.linear_model.LogisticRegression</span></code> to learn the relationship between our pixel neighborhoods (of size 9) and the target.</p></li>
 <li><p>Look at your <code class="docutils literal notranslate"><span class="pre">model.coef_</span></code>. How do they compare to the Sobel coefficients?</p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 <hr class="docutils" />
-<div class="section" id="denoising-filters">
-<h2>Denoising filters<a class="headerlink" href="#denoising-filters" title="Permalink to this headline">¶</a></h2>
+<section id="denoising-filters">
+<h2>Denoising filters<a class="headerlink" href="#denoising-filters" title="Link to this heading">#</a></h2>
 <p>At this point, we make a distinction. The earlier filters were implemented as a <em>linear dot-product</em> of values in the filter kernel and values in the image. The following kernels implement an <em>arbitrary</em> function of the local image neighborhood. Denoising filters in particular are filters that preserve the sharpness of edges in the image.</p>
 <p>As you can see from our earlier examples, mean and Gaussian filters smooth an image rather uniformly, including the edges of objects in an image. When denoising, however, you typically want to preserve features and just remove noise. The distinction between noise and features can, of course, be highly situation-dependent and subjective.</p>
-<div class="section" id="median-filter">
-<h3>Median Filter<a class="headerlink" href="#median-filter" title="Permalink to this headline">¶</a></h3>
+<section id="median-filter">
+<h3>Median Filter<a class="headerlink" href="#median-filter" title="Link to this heading">#</a></h3>
 <p>The median filter is the classic edge-preserving filter. As the name implies, this filter takes a set of pixels (i.e. the pixels within a kernel or “structuring element”) and returns the median value within that neighborhood. Because regions near a sharp edge will have many dark values and many light values (but few values in between) the median at an edge will most likely be either light or dark, rather than some value in between. In that way, we don’t end up with edges that are smoothed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.morphology</span> <span class="kn">import</span> <span class="n">disk</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage.morphology</span><span class="w"> </span><span class="kn">import</span> <span class="n">disk</span>
 <span class="n">neighborhood</span> <span class="o">=</span> <span class="n">disk</span><span class="p">(</span><span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># &quot;selem&quot; is often the name used for &quot;structuring element&quot;</span>
 <span class="n">median</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">pixelated</span><span class="p">,</span> <span class="n">neighborhood</span><span class="p">)</span>
 <span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="s1">&#39;gaussian&#39;</span><span class="p">,</span> <span class="s1">&#39;median&#39;</span><span class="p">]</span>
@@ -1224,7 +1308,8 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_120_0.png" src="../_images/1_image_filters_120_0.png" />
+<a class="reference internal image-reference" href="../_images/6dd68bd6ec4def81b2740c6757f74fb353ce4ece2e79b6b884f0b4caf4058bcb.png"><img alt="../_images/6dd68bd6ec4def81b2740c6757f74fb353ce4ece2e79b6b884f0b4caf4058bcb.png" src="../_images/6dd68bd6ec4def81b2740c6757f74fb353ce4ece2e79b6b884f0b4caf4058bcb.png" style="width: 1209px; height: 406px;" />
+</a>
 </div>
 </div>
 <p>This difference is more noticeable with a more detailed image.</p>
@@ -1240,18 +1325,19 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_122_0.png" src="../_images/1_image_filters_122_0.png" />
+<a class="reference internal image-reference" href="../_images/03465168c91547506bc3f1b97e501bb4126ca1fdde577302133024d96e6fe5a9.png"><img alt="../_images/03465168c91547506bc3f1b97e501bb4126ca1fdde577302133024d96e6fe5a9.png" src="../_images/03465168c91547506bc3f1b97e501bb4126ca1fdde577302133024d96e6fe5a9.png" style="width: 1218px; height: 334px;" />
+</a>
 </div>
 </div>
 <p>Notice how the edges of coins are preserved after using the median filter.</p>
-</div>
-</div>
-<div class="section" id="further-reading">
-<h2>Further reading<a class="headerlink" href="#further-reading" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="further-reading">
+<h2>Further reading<a class="headerlink" href="#further-reading" title="Link to this heading">#</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">scikit-image</span></code> also provides more sophisticated denoising filters:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.restoration</span> <span class="kn">import</span> <span class="n">denoise_tv_bregman</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage.restoration</span><span class="w"> </span><span class="kn">import</span> <span class="n">denoise_tv_bregman</span>
 <span class="n">denoised</span> <span class="o">=</span> <span class="n">denoise_tv_bregman</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="n">d</span> <span class="o">=</span> <span class="n">disk</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="n">median</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">rank</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
@@ -1261,7 +1347,8 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/1_image_filters_126_0.png" src="../_images/1_image_filters_126_0.png" />
+<a class="reference internal image-reference" href="../_images/c6e86d116ce2e9f44d98cb0bfe6aaee207c7404bae594b1ccc2176c829d60865.png"><img alt="../_images/c6e86d116ce2e9f44d98cb0bfe6aaee207c7404bae594b1ccc2176c829d60865.png" src="../_images/c6e86d116ce2e9f44d98cb0bfe6aaee207c7404bae594b1ccc2176c829d60865.png" style="width: 1224px; height: 406px;" />
+</a>
 </div>
 </div>
 <ul class="simple">
@@ -1271,14 +1358,8 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
 </ul>
 <p>Take a look at this <a class="reference external" href="https://github.com/scikit-image/scikit-image/pull/2647">neat feature</a> merged last year:</p>
 <p><img alt="cycle spinning" src="../_images/cycle_spin.png" /></p>
-</div>
-</div>
-
-
-<script type="application/vnd.jupyter.widget-state+json">
-{"state": {"caec36769b354e739224e70380095931": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "b803ff07164d42ae962c91272603409c": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "dfa065ea832c43d484a8705370c32726": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "i", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_caec36769b354e739224e70380095931", "max": 97, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_b803ff07164d42ae962c91272603409c", "value": 0}}, "27c59ec4cab24c5585fe5d44307a4165": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "593e9c793d73475990f0034b006ae9f2": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_dfa065ea832c43d484a8705370c32726", "IPY_MODEL_d57f929707674f08b4dfd72fb380c6b6"], "layout": "IPY_MODEL_27c59ec4cab24c5585fe5d44307a4165"}}, "19347e0af63642f0a30472a31125d76f": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d57f929707674f08b4dfd72fb380c6b6": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_19347e0af63642f0a30472a31125d76f", "msg_id": "", "outputs": []}}, "86d4ffb5805a4430ac9d5be0ff31c934": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "afae0f8f5ea64f50bf9777bec471754c": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "4ed1a468688c4b0c9ea949fd9693b27f": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "i", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_86d4ffb5805a4430ac9d5be0ff31c934", "max": 89, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_afae0f8f5ea64f50bf9777bec471754c", "value": 0}}, "2c5bd279f15a4d1b98da5f4f480c3392": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "635da38ea77840608e3b8eb39148c968": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_4ed1a468688c4b0c9ea949fd9693b27f", "IPY_MODEL_d5e0fe4c2598405ab44b8fdc601d55c1"], "layout": "IPY_MODEL_2c5bd279f15a4d1b98da5f4f480c3392"}}, "c44bba5b81bb42a89ee2e534fece5a8e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d5e0fe4c2598405ab44b8fdc601d55c1": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_c44bba5b81bb42a89ee2e534fece5a8e", "msg_id": "", "outputs": []}}, "6d69e0dba05640bfb20a1a884a3bceba": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "2b39db82bbd6491cb1bb0aaf891a3510": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "89b06e7e6b3f4201a4cbfeb8444b1223": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "i", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_6d69e0dba05640bfb20a1a884a3bceba", "max": 99, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_2b39db82bbd6491cb1bb0aaf891a3510", "value": 0}}, "4df5243316624abd94e0764b4fe34b20": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "e47cb70045904c6f9088fdd943a044ab": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_89b06e7e6b3f4201a4cbfeb8444b1223", "IPY_MODEL_bb7d9ece50854227a300a7c108166b8f"], "layout": "IPY_MODEL_4df5243316624abd94e0764b4fe34b20"}}, "7ff14c7c84ea4b509163c6e2671e206e": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "bb7d9ece50854227a300a7c108166b8f": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_7ff14c7c84ea4b509163c6e2671e206e", "msg_id": "", "outputs": []}}, "e4db30cdac9a421a88697ee700216d19": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "75168b6cbe364f34b39142ca2daae93d": {"model_name": "SliderStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "SliderStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": "", "handle_color": null}}, "d2bcec48b2184adaba2e43423d81852b": {"model_name": "IntSliderModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "IntSliderModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "IntSliderView", "continuous_update": true, "description": "i_step", "description_tooltip": null, "disabled": false, "layout": "IPY_MODEL_e4db30cdac9a421a88697ee700216d19", "max": 48, "min": 0, "orientation": "horizontal", "readout": true, "readout_format": "d", "step": 1, "style": "IPY_MODEL_75168b6cbe364f34b39142ca2daae93d", "value": 0}}, "1fedb690c3b04ddfbed18b23796a46aa": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "89b85e8f01484a92bead31f985195ae3": {"model_name": "VBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": ["widget-interact"], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "VBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "VBoxView", "box_style": "", "children": ["IPY_MODEL_d2bcec48b2184adaba2e43423d81852b", "IPY_MODEL_348679f09f4c4bd0a44615387c02b922"], "layout": "IPY_MODEL_1fedb690c3b04ddfbed18b23796a46aa"}}, "bb483aabba914405ae780a8fe1e6d5df": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "348679f09f4c4bd0a44615387c02b922": {"model_name": "OutputModel", "model_module": "@jupyter-widgets/output", "model_module_version": "1.0.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/output", "_model_module_version": "1.0.0", "_model_name": "OutputModel", "_view_count": null, "_view_module": "@jupyter-widgets/output", "_view_module_version": "1.0.0", "_view_name": "OutputView", "layout": "IPY_MODEL_bb483aabba914405ae780a8fe1e6d5df", "msg_id": "", "outputs": [{"output_type": "display_data", "metadata": {"image/png": {"width": 585, "height": 284}, "needs_background": "light"}, "data": {"text/plain": "<Figure size 720x360 with 2 Axes>", "image/png": "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\n"}}]}}}, "version_major": 2, "version_minor": 0}
-</script>
-
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -1292,7 +1373,7 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./lectures"
         },
         predefinedOutput: true
@@ -1300,36 +1381,133 @@ k_{r, c} = \frac{1}{2\pi \sigma^2} \exp{\left(-\frac{r^2 + c^2}{2\sigma^2}\right
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-        
-        <div class='prev-next-bottom'>
-            
-    <a class='left-prev' id="prev-link" href="00_images_are_arrays.html" title="previous page">Images are numpy arrays</a>
-    <a class='right-next' id="next-link" href="3_morphological_operations.html" title="next page">Morphological operations</a>
 
-        </div>
-        
-        </div>
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By The scikit-image contributors<br/>
-        
-            &copy; Copyright 2020.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
-
-
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="00_images_are_arrays.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Images are numpy arrays</p>
       </div>
-    </div>
-  
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+    </a>
+    <a class="right-next"
+       href="3_morphological_operations.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Morphological operations</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-filtering-theory">Image filtering theory</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#local-filtering">Local filtering</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-difference-filter">A difference filter</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#commutativity-and-assortativity-of-filters">Commutativity and assortativity of filters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#local-filtering-of-images">Local filtering of images</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-mean-filter">The mean filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#downsampled-image">Downsampled image</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mean-filter-on-a-real-image">Mean filter on a real image</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#essential-filters">Essential filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-filter">Gaussian filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-edge-filtering">Basic edge filtering</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#difference-filters-in-2d">Difference filters in 2D</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise"><span style="color:cornflowerblue">Exercise:</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sobel-edge-filter">Sobel edge filter</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#denoising-filters">Denoising filters</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#median-filter">Median Filter</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#further-reading">Further reading</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
+  <div class="footer-item">
+    
+<p class="component-author">
+By The scikit-image contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

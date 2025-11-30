@@ -1,0 +1,929 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Some aspects of performance in image processing &#8212; Image analysis in Python</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_customize.css?v=612cbb98" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=11a7e8a3" />
+    <link rel="stylesheet" type="text/css" href="../_static/output_cells.css?v=17928027" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=1d895f2e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/badge_only.css?v=a4c9184c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=13a9ecda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/7_performance';</script>
+    <script src="../_static/docversions.js?v=00a78bfa"></script>
+    <script src="../_static/underscore.js?v=ff3b9a9a"></script>
+    <script src="../_static/random.js?v=6d4713dd"></script>
+    <script src="../_static/searchtools.js?v=4653291c"></script>
+    <script src="../_static/jquery-1.11.1.js?v=b05730fb"></script>
+    <script src="../_static/underscore-1.3.1.js?v=ae82f386"></script>
+    <script src="../_static/doctools.js?v=13a9ecda"></script>
+    <script src="../_static/websupport.js?v=ec85a7bc"></script>
+    <script src="../_static/jquery.js?v=804ff984"></script>
+    <script src="../_static/js/modernizr.min.js?v=3ff6d828"></script>
+    <script src="../_static/js/theme.js?v=babe0fed"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="00_images_are_arrays.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Image analysis in Python - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Image analysis in Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="00_images_are_arrays.html">
+                    Images are numpy arrays
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1_image_filters.html">Image filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_morphological_operations.html">Morphological operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_segmentation.html">Segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="three_dimensional_image_processing.html">Introduction to three-dimensional image processing</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/7_performance.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Some aspects of performance in image processing</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-computing-times-and-profiling">Measuring computing times and profiling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelizing-execution-by-chunking-the-image-array">Parallelizing execution by chunking the image array</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-the-algorithm">Changing the algorithm</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="some-aspects-of-performance-in-image-processing">
+<h1>Some aspects of performance in image processing<a class="headerlink" href="#some-aspects-of-performance-in-image-processing" title="Link to this heading">#</a></h1>
+<p>Image processing on scientific data can take a long time, especially in settings where a series of images are acquired (time series for example). It is sometimes desirable to reduce the run-time of a given image processing pipeline, for example to make real-time image processing possible.</p>
+<p>In this tutorial, we cover several aspects of this specific task.</p>
+<section id="measuring-computing-times-and-profiling">
+<h2>Measuring computing times and profiling<a class="headerlink" href="#measuring-computing-times-and-profiling" title="Link to this heading">#</a></h2>
+<p>If you want to optimize execution time, you first need to measure it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">eagle</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2019, 1826)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x10b512510&gt;
+</pre></div>
+</div>
+<img alt="../_images/3cb7edee7ef9de4f70d2a72a5c395757978a055ff4939d623d01b82a9f917010.png" src="../_images/3cb7edee7ef9de4f70d2a72a5c395757978a055ff4939d623d01b82a9f917010.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%timeit</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">filters</span>
+<span class="n">img_median</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">footprint</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.6 s ± 1.51 ms per loop (mean ± std. dev. of 7 runs, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The %%timeit magic has many options (see <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit">https://ipython.readthedocs.io/en/stable/interactive/magics.html#magic-timeit</a>). It is also possible to use the <code class="docutils literal notranslate"><span class="pre">timeit</span></code> module.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">filters</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">img_median</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">footprint</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">))</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t2</span> <span class="o">-</span> <span class="n">t1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.6030170917510986
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now we know the time taken by a given function, but we don’t know why it should take a long time to execute. We can use Python’s line profile to dive into the inner code of a function, and to identify which lines of the function take longer to execute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">color</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">rgb2gray</span><span class="p">((</span><span class="n">data</span><span class="o">.</span><span class="n">retina</span><span class="p">()[</span><span class="mi">300</span><span class="p">:</span><span class="o">-</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">:</span><span class="o">-</span><span class="mi">300</span><span class="p">]))</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">hessian</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x10e977260&gt;
+</pre></div>
+</div>
+<img alt="../_images/4c328733fca6775e72230d863e49b51c42d9526ce5c4c6b5d18b6f2019314508.png" src="../_images/4c328733fca6775e72230d863e49b51c42d9526ce5c4c6b5d18b6f2019314508.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">line_profiler</span><span class="w"> </span><span class="kn">import</span> <span class="n">LineProfiler</span><span class="p">,</span> <span class="n">show_func</span>
+<span class="n">profile</span> <span class="o">=</span> <span class="n">LineProfiler</span><span class="p">()</span>
+<span class="n">profile</span><span class="o">.</span><span class="n">add_function</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">hessian</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">out</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">runcall</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">hessian</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">profile</span><span class="o">.</span><span class="n">print_stats</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Timer unit: 1e-09 s
+
+Total time: 1.23014 s
+File: /Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/filters/ridges.py
+Function: hessian at line 307
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+   307                                           def hessian(
+   308                                               image,
+   309                                               sigmas=range(1, 10, 2),
+   310                                               scale_range=None,
+   311                                               scale_step=None,
+   312                                               alpha=0.5,
+   313                                               beta=0.5,
+   314                                               gamma=15,
+   315                                               black_ridges=True,
+   316                                               mode=&#39;reflect&#39;,
+   317                                               cval=0,
+   318                                           ):
+   319                                               &quot;&quot;&quot;Filter an image with the Hybrid Hessian filter.
+   320                                           
+   321                                               This filter can be used to detect continuous edges, e.g. vessels,
+   322                                               wrinkles, rivers. It can be used to calculate the fraction of the whole
+   323                                               image containing such objects.
+   324                                           
+   325                                               Defined only for 2-D and 3-D images. Almost equal to Frangi filter, but
+   326                                               uses alternative method of smoothing. Refer to [1]_ to find the differences
+   327                                               between Frangi and Hessian filters.
+   328                                           
+   329                                               Parameters
+   330                                               ----------
+   331                                               image : (M, N[, P]) ndarray
+   332                                                   Array with input image data.
+   333                                               sigmas : iterable of floats, optional
+   334                                                   Sigmas used as scales of filter, i.e.,
+   335                                                   np.arange(scale_range[0], scale_range[1], scale_step)
+   336                                               scale_range : 2-tuple of floats, optional
+   337                                                   The range of sigmas used.
+   338                                               scale_step : float, optional
+   339                                                   Step size between sigmas.
+   340                                               beta : float, optional
+   341                                                   Frangi correction constant that adjusts the filter&#39;s
+   342                                                   sensitivity to deviation from a blob-like structure.
+   343                                               gamma : float, optional
+   344                                                   Frangi correction constant that adjusts the filter&#39;s
+   345                                                   sensitivity to areas of high variance/texture/structure.
+   346                                               black_ridges : boolean, optional
+   347                                                   When True (the default), the filter detects black ridges; when
+   348                                                   False, it detects white ridges.
+   349                                               mode : {&#39;constant&#39;, &#39;reflect&#39;, &#39;wrap&#39;, &#39;nearest&#39;, &#39;mirror&#39;}, optional
+   350                                                   How to handle values outside the image borders.
+   351                                               cval : float, optional
+   352                                                   Used in conjunction with mode &#39;constant&#39;, the value outside
+   353                                                   the image boundaries.
+   354                                           
+   355                                               Returns
+   356                                               -------
+   357                                               out : (M, N[, P]) ndarray
+   358                                                   Filtered image (maximum of pixels across all scales).
+   359                                           
+   360                                               Notes
+   361                                               -----
+   362                                               Written by Marc Schrijver (November 2001)
+   363                                               Re-Written by D. J. Kroon University of Twente (May 2009) [2]_
+   364                                           
+   365                                               See also
+   366                                               --------
+   367                                               meijering
+   368                                               sato
+   369                                               frangi
+   370                                           
+   371                                               References
+   372                                               ----------
+   373                                               .. [1] Ng, C. C., Yap, M. H., Costen, N., &amp; Li, B. (2014,). Automatic
+   374                                                   wrinkle detection using hybrid Hessian filter. In Asian Conference on
+   375                                                   Computer Vision (pp. 609-622). Springer International Publishing.
+   376                                                   :DOI:`10.1007/978-3-319-16811-1_40`
+   377                                               .. [2] Kroon, D. J.: Hessian based Frangi vesselness filter.
+   378                                               &quot;&quot;&quot;
+   379         2 1228535000.0 6.14e+08     99.9      filtered = frangi(
+   380         1       1000.0   1000.0      0.0          image,
+   381         1       1000.0   1000.0      0.0          sigmas=sigmas,
+   382         1       1000.0   1000.0      0.0          scale_range=scale_range,
+   383         1       1000.0   1000.0      0.0          scale_step=scale_step,
+   384         1          0.0      0.0      0.0          alpha=alpha,
+   385         1          0.0      0.0      0.0          beta=beta,
+   386         1       1000.0   1000.0      0.0          gamma=gamma,
+   387         1       1000.0   1000.0      0.0          black_ridges=black_ridges,
+   388         1       1000.0   1000.0      0.0          mode=mode,
+   389         1       1000.0   1000.0      0.0          cval=cval,
+   390                                               )
+   391                                           
+   392         1    1600000.0  1.6e+06      0.1      filtered[filtered &lt;= 0] = 1
+   393         1       1000.0   1000.0      0.0      return filtered
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise</strong>: what is the function taking the largest part of the execution time inside <code class="docutils literal notranslate"><span class="pre">hessian</span></code>? Add this function to the line profiler and line-profile this other function while executing <code class="docutils literal notranslate"><span class="pre">hessian</span></code>.</p>
+<p>It is of course possible to apply the line profiler to your own functions. This can be useful when defining for example an image processing pipeline with a succession of operations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">load_ext</span> line_profiler
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.filters</span><span class="w"> </span><span class="kn">import</span> <span class="n">threshold_otsu</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.segmentation</span><span class="w"> </span><span class="kn">import</span> <span class="n">clear_border</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">label</span><span class="p">,</span> <span class="n">regionprops</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.morphology</span><span class="w"> </span><span class="kn">import</span> <span class="n">closing</span><span class="p">,</span> <span class="n">square</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.color</span><span class="w"> </span><span class="kn">import</span> <span class="n">label2rgb</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_labels</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="c1"># apply threshold</span>
+    <span class="n">thresh</span> <span class="o">=</span> <span class="n">threshold_otsu</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">bw</span> <span class="o">=</span> <span class="n">closing</span><span class="p">(</span><span class="n">image</span> <span class="o">&gt;</span> <span class="n">thresh</span><span class="p">,</span> <span class="n">square</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+    <span class="c1"># remove artifacts connected to image border</span>
+    <span class="n">cleared</span> <span class="o">=</span> <span class="n">clear_border</span><span class="p">(</span><span class="n">bw</span><span class="p">)</span>
+    <span class="c1"># label image regions</span>
+    <span class="n">label_image</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">cleared</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">label_image</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">coins</span><span class="p">()</span>
+
+<span class="n">labels</span> <span class="o">=</span> <span class="n">get_labels</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/vr/b3dbt6vd3pd73sjc_t9xj87r0000gn/T/ipykernel_88656/3843504062.py:11: FutureWarning: `square` is deprecated since version 0.25 and will be removed in version 0.27. Use `skimage.morphology.footprint_rectangle` instead.
+  bw = closing(image &gt; thresh, square(5))
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x10e2a42c0&gt;
+</pre></div>
+</div>
+<img alt="../_images/00eff4ab75fd951ea018a55bd58875a550e54eec24191821a777fd75f2608d05.png" src="../_images/00eff4ab75fd951ea018a55bd58875a550e54eec24191821a777fd75f2608d05.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">lprun</span> -f get_labels get_labels(img)
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/vr/b3dbt6vd3pd73sjc_t9xj87r0000gn/T/ipykernel_88656/3843504062.py:11: FutureWarning: `square` is deprecated since version 0.25 and will be removed in version 0.27. Use `skimage.morphology.footprint_rectangle` instead.
+  bw = closing(image &gt; thresh, square(5))
+</pre></div>
+</div>
+</div>
+</div>
+<p>scikit-image uses a lot of cython code, and it is also possible to profile cython code. Please see <a class="reference external" href="https://cython.readthedocs.io/en/latest/src/tutorial/profiling_tutorial.html">https://cython.readthedocs.io/en/latest/src/tutorial/profiling_tutorial.html</a> for more information.</p>
+</section>
+<section id="parallelizing-execution-by-chunking-the-image-array">
+<h2>Parallelizing execution by chunking the image array<a class="headerlink" href="#parallelizing-execution-by-chunking-the-image-array" title="Link to this heading">#</a></h2>
+<p>One way to speed up the execution is to use the different CPU cores. Most scikit-image functions use only one core, so the other cores are not working. If we have several images, we can use different cores for the different images (using for example <code class="docutils literal notranslate"><span class="pre">joblib.Parallel</span></code> or <code class="docutils literal notranslate"><span class="pre">dask</span></code>). But we can also divide the image into different sub-images and execute the function on the different sub-images. This is done by <code class="docutils literal notranslate"><span class="pre">skimage.util.apply_parallel</span></code>.</p>
+<p><strong>Warning</strong>: most functions have boundary effects. Therefore you must use some overlap between the different sub-images in order to avoid artifacts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">img</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">eagle</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2019, 1826)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%timeit</span> -n 1 -r 1
+<span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.59 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
+<span class="n">joblib</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+</pre></div>
+</div>
+</div>
+</div>
+<p>We need to install the optional dependency dask which is used by <code class="docutils literal notranslate"><span class="pre">apply_parallel</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>dask
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: dask in /Users/mb312/.virtualenvs/test/lib/python3.12/site-packages (2025.11.0)
+Requirement already satisfied: click&gt;=8.1 in /Users/mb312/.virtualenvs/test/lib/python3.12/site-packages (from dask) (8.3.1)
+Requirement already satisfied: cloudpickle&gt;=3.0.0 in /Users/mb312/.virtualenvs/test/lib/python3.12/site-packages (from dask) (3.1.2)
+Requirement already satisfied: fsspec&gt;=2021.09.0 in /Users/mb312/.virtualenvs/test/lib/python3.12/site-packages (from dask) (2025.10.0)
+Requirement already satisfied: packaging&gt;=20.0 in /Users/mb312/.virtualenvs/test/lib/python3.12/site-packages (from dask) (25.0)
+Requirement already satisfied: partd&gt;=1.4.0 in /Users/mb312/.virtualenvs/test/lib/python3.12/site-packages (from dask) (1.4.2)
+Requirement already satisfied: pyyaml&gt;=5.3.1 in /Users/mb312/.virtualenvs/test/lib/python3.12/site-packages (from dask) (6.0.3)
+Requirement already satisfied: toolz&gt;=0.10.0 in /Users/mb312/.virtualenvs/test/lib/python3.12/site-packages (from dask) (1.1.0)
+Requirement already satisfied: locket in /Users/mb312/.virtualenvs/test/lib/python3.12/site-packages (from partd&gt;=1.4.0-&gt;dask) (1.0.0)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%timeit</span> -n 1 -r 1
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">util</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">apply_parallel</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">median</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">extra_arguments</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">))])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.89 s ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%timeit</span> -n 1 -r 1
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">util</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">apply_parallel</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">median</span><span class="p">,</span> <span class="n">img</span><span class="p">,</span> <span class="n">chunks</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">extra_arguments</span><span class="o">=</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="mi">11</span><span class="p">,</span> <span class="mi">11</span><span class="p">))])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>940 ms ± 0 ns per loop (mean ± std. dev. of 1 run, 1 loop each)
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Exercise</strong>: try different sizes of chunks and compare the execution times.</p>
+</section>
+<section id="changing-the-algorithm">
+<h2>Changing the algorithm<a class="headerlink" href="#changing-the-algorithm" title="Link to this heading">#</a></h2>
+<p>Often, the biggest performance gains are obtained by using a different algorithm. There is often a tradeoff between execution time and algorithm specificity, as exemplified by the example below about denoising. (Example adapted from <a class="reference external" href="https://scikit-image.org/docs/stable/auto_examples/filters/plot_denoise.html#sphx-glr-auto-examples-filters-plot-denoise-py">https://scikit-image.org/docs/stable/auto_examples/filters/plot_denoise.html#sphx-glr-auto-examples-filters-plot-denoise-py</a>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.restoration</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span><span class="n">denoise_tv_chambolle</span><span class="p">,</span> <span class="n">denoise_bilateral</span><span class="p">,</span>
+                                 <span class="n">denoise_wavelet</span><span class="p">,</span> <span class="n">denoise_nl_means</span><span class="p">,</span> <span class="n">estimate_sigma</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span><span class="p">,</span> <span class="n">img_as_float</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">random_noise</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+
+<span class="n">original</span> <span class="o">=</span> <span class="n">img_as_float</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">chelsea</span><span class="p">()[</span><span class="mi">100</span><span class="p">:</span><span class="mi">250</span><span class="p">,</span> <span class="mi">50</span><span class="p">:</span><span class="mi">300</span><span class="p">])</span>
+
+<span class="n">sigma</span> <span class="o">=</span> <span class="mf">0.155</span>
+<span class="n">noisy</span> <span class="o">=</span> <span class="n">random_noise</span><span class="p">(</span><span class="n">original</span><span class="p">,</span> <span class="n">var</span><span class="o">=</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">img_tv</span> <span class="o">=</span> <span class="n">denoise_tv_chambolle</span><span class="p">(</span><span class="n">noisy</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">channel_axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;TV: </span><span class="si">{</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="si">}</span><span class="s2"> s&quot;</span> <span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">img_nlmeans</span> <span class="o">=</span> <span class="n">denoise_nl_means</span><span class="p">(</span><span class="n">noisy</span><span class="p">,</span>
+                <span class="n">channel_axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Non-local means: </span><span class="si">{</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="n">img_bil</span> <span class="o">=</span> <span class="n">denoise_bilateral</span><span class="p">(</span><span class="n">noisy</span><span class="p">,</span> <span class="n">sigma_color</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">sigma_spatial</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
+                <span class="n">channel_axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bilateral: </span><span class="si">{</span><span class="n">t1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+                       <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">gray</span><span class="p">()</span>
+
+<span class="c1"># Estimate the average noise standard deviation across color channels.</span>
+<span class="n">sigma_est</span> <span class="o">=</span> <span class="n">estimate_sigma</span><span class="p">(</span><span class="n">noisy</span><span class="p">,</span> <span class="n">channel_axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">average_sigmas</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># Due to clipping in random_noise, the estimate will be a bit smaller than the</span>
+<span class="c1"># specified sigma.</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Estimated Gaussian noise standard deviation = </span><span class="si">{</span><span class="n">sigma_est</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">noisy</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Noisy&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_tv</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;TV&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_nlmeans</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Non-local means&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_bil</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Bilateral&#39;</span><span class="p">)</span>
+
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TV: 0.04751110076904297 s
+Non-local means: 0.1944582462310791 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Bilateral: 1.6891570091247559 s
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Estimated Gaussian noise standard deviation = 0.148683259938031
+</pre></div>
+</div>
+<img alt="../_images/5177db472ef44d9a5daef19d9393a12a59a7afe650cc03aa4efa537f3f2af077.png" src="../_images/5177db472ef44d9a5daef19d9393a12a59a7afe650cc03aa4efa537f3f2af077.png" />
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./lectures"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#measuring-computing-times-and-profiling">Measuring computing times and profiling</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parallelizing-execution-by-chunking-the-image-array">Parallelizing execution by chunking the image array</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#changing-the-algorithm">Changing the algorithm</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The scikit-image contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

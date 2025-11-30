@@ -1,285 +1,378 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Images are numpy arrays &#8212; Image analysis in Python</title>
-    
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    
-      
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_customize.css?v=612cbb98" />
+    <link rel="stylesheet" type="text/css" href="../_static/basic.css?v=11a7e8a3" />
+    <link rel="stylesheet" type="text/css" href="../_static/output_cells.css?v=17928027" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=db26dd79" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=1d895f2e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/badge_only.css?v=a4c9184c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_customize.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/basic.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/output_cells.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/badge_only.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
-    
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
-
-    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/docversions.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/underscore-1.3.1.js"></script>
-    <script src="../_static/searchtools.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/random.js"></script>
-    <script src="../_static/jquery-1.11.1.js"></script>
-    <script src="../_static/websupport.js"></script>
-    <script src="../_static/js/theme.js"></script>
-    <script src="../_static/js/modernizr.min.js"></script>
-    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
-    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
-    <script >
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=13a9ecda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'lectures/00_images_are_arrays';</script>
+    <script src="../_static/docversions.js?v=00a78bfa"></script>
+    <script src="../_static/underscore.js?v=ff3b9a9a"></script>
+    <script src="../_static/random.js?v=6d4713dd"></script>
+    <script src="../_static/searchtools.js?v=4653291c"></script>
+    <script src="../_static/jquery-1.11.1.js?v=b05730fb"></script>
+    <script src="../_static/underscore-1.3.1.js?v=ae82f386"></script>
+    <script src="../_static/doctools.js?v=13a9ecda"></script>
+    <script src="../_static/websupport.js?v=ec85a7bc"></script>
+    <script src="../_static/jquery.js?v=804ff984"></script>
+    <script src="../_static/js/modernizr.min.js?v=3ff6d828"></script>
+    <script src="../_static/js/theme.js?v=babe0fed"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Image filtering" href="1_image_filters.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
     
-        <div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="#">
+  
+  
+  
+  
+  
+    
+    
       
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Image analysis in Python</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Image analysis in Python - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Image analysis in Python - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1 current active">
+                <a class="reference internal" href="#">
+                    Images are numpy arrays
+                </a>
+            </li>
+        </ul>
         <ul class="nav bd-sidenav">
- <li class="toctree-l1 current">
-  <a class="reference internal" href="#">
-   Images are numpy arrays
-  </a>
- </li>
-</ul>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="1_image_filters.html">
-   Image filtering
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="3_morphological_operations.html">
-   Morphological operations
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="4_segmentation.html">
-   Segmentation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="three_dimensional_image_processing.html">
-   Introduction to three-dimensional image processing
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="1_image_filters.html">Image filtering</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3_morphological_operations.html">Morphological operations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4_segmentation.html">Segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="three_dimensional_image_processing.html">Introduction to three-dimensional image processing</a></li>
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-<div class="navbar_extra_footer">
-  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-</div>
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/lectures/00_images_are_arrays.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+</nav></div>
     </div>
-</div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
 
-            <!-- Source interaction buttons -->
 
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/lectures/00_images_are_arrays.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
         
         
-        
-        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
     </div>
-</div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
 
-        </div>
+<div class="article-header-buttons">
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#other-shapes-and-their-meanings">
-   Other shapes, and their meanings
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#displaying-images-using-matplotlib">
-   Displaying images using matplotlib
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-types-and-image-values">
-   Data types and image values
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#image-i-o">
-   Image I/O
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#aside-enumerate">
-     Aside:
-     <code class="docutils literal notranslate">
-      <span class="pre">
-       enumerate
-      </span>
-     </code>
-    </a>
-   </li>
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/lectures/00_images_are_arrays.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#span-class-exercize-exercise-draw-the-letter-h-span">
-   <span class="exercize">
-    Exercise: draw the letter H
-   </span>
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#span-class-exercize-exercise-visualizing-rgb-channels-span">
-   <span class="exercize">
-    Exercise: visualizing RGB channels
-   </span>
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#exercise-convert-to-grayscale-black-and-white">
-   Exercise: Convert to grayscale (“black and white”)
-  </a>
- </li>
-</ul>
+</div>
 
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Images are numpy arrays</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-shapes-and-their-meanings">Other shapes, and their meanings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#displaying-images-using-matplotlib">Displaying images using matplotlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types-and-image-values">Data types and image values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-i-o">Image I/O</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aside-enumerate">Aside: <code class="docutils literal notranslate"><span class="pre">enumerate</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-draw-the-letter-h"><span class="exercize">Exercise: draw the letter H</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-visualizing-rgb-channels"><span class="exercize">Exercise: visualizing RGB channels</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-convert-to-grayscale-black-and-white">Exercise: Convert to grayscale (“black and white”)</a></li>
+</ul>
             </nav>
         </div>
     </div>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
-              <div>
+
+              
                 
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <div style='font-size: 200%; line-height: 2;'>
 To participate, you'll need to git clone (or download the .zip from GitHub):
 <p>https://github.com/scikit-image/skimage-tutorials</p>
@@ -288,16 +381,14 @@ To participate, you'll need to git clone (or download the .zip from GitHub):
 <pre>git clone --depth=1 https://github.com/scikit-image/skimage-tutorials</pre>
 <div style='font-size: 200%; line-height: 1.5;'>
 If you have already cloned the material, please issue `git pull` now and reload the notebook to ensure that you have the latest updates.
-</div><div class="cell tag_remove-input tag_remove-output docutils container">
-</div>
-<div class="section" id="images-are-numpy-arrays">
-<h1>Images are numpy arrays<a class="headerlink" href="#images-are-numpy-arrays" title="Permalink to this headline">¶</a></h1>
+</div><section class="tex2jax_ignore mathjax_ignore" id="images-are-numpy-arrays">
+<h1>Images are numpy arrays<a class="headerlink" href="#images-are-numpy-arrays" title="Link to this heading">#</a></h1>
 <p>Images are represented in <code class="docutils literal notranslate"><span class="pre">scikit-image</span></code> using standard <code class="docutils literal notranslate"><span class="pre">numpy</span></code> arrays.  This allows maximum inter-operability with other libraries in the scientific Python ecosystem, such as <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> and <code class="docutils literal notranslate"><span class="pre">scipy</span></code>.</p>
 <p>Let’s see how to build a grayscale image as a 2D array:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
 
 <span class="n">random_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">([</span><span class="mi">500</span><span class="p">,</span> <span class="mi">500</span><span class="p">])</span>
 
@@ -307,13 +398,14 @@ If you have already cloned the material, please issue `git pull` now and reload 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/00_images_are_arrays_4_0.png" src="../_images/00_images_are_arrays_4_0.png" />
+<a class="reference internal image-reference" href="../_images/736d3aebe078c09e9ea35fc8fe93c0d42111c8ff4a8ce8a467d64d0102e06fa8.png"><img alt="../_images/736d3aebe078c09e9ea35fc8fe93c0d42111c8ff4a8ce8a467d64d0102e06fa8.png" src="../_images/736d3aebe078c09e9ea35fc8fe93c0d42111c8ff4a8ce8a467d64d0102e06fa8.png" style="width: 501px; height: 418px;" />
+</a>
 </div>
 </div>
 <p>The same holds for “real-world” images:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span>
 
 <span class="n">coins</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">coins</span><span class="p">()</span>
 
@@ -331,7 +423,8 @@ dtype: uint8
 shape: (303, 384)
 </pre></div>
 </div>
-<img alt="../_images/00_images_are_arrays_6_1.png" src="../_images/00_images_are_arrays_6_1.png" />
+<a class="reference internal image-reference" href="../_images/6d1335896796c490731a58863ef6fdc6c01a08a08378ea2f08e1ed364daf4561.png"><img alt="../_images/6d1335896796c490731a58863ef6fdc6c01a08a08378ea2f08e1ed364daf4561.png" src="../_images/6d1335896796c490731a58863ef6fdc6c01a08a08378ea2f08e1ed364daf4561.png" style="width: 524px; height: 418px;" />
+</a>
 </div>
 </div>
 <p>A color image is a 3D array, where the last dimension has size 3 and represents the red, green, and blue channels:</p>
@@ -350,7 +443,8 @@ shape: (303, 384)
 Values min/max: 0 231
 </pre></div>
 </div>
-<img alt="../_images/00_images_are_arrays_8_1.png" src="../_images/00_images_are_arrays_8_1.png" />
+<a class="reference internal image-reference" href="../_images/440a29ec247e5bb65942a9bacb76a50dcbead4c364ea1a6c3ffaf5851a4cf1a4.png"><img alt="../_images/440a29ec247e5bb65942a9bacb76a50dcbead4c364ea1a6c3ffaf5851a4cf1a4.png" src="../_images/440a29ec247e5bb65942a9bacb76a50dcbead4c364ea1a6c3ffaf5851a4cf1a4.png" style="width: 552px; height: 378px;" />
+</a>
 </div>
 </div>
 <p>These are <em>just NumPy arrays</em>. E.g., we can make a red square by using standard array slicing and manipulation:</p>
@@ -362,39 +456,41 @@ Values min/max: 0 231
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/00_images_are_arrays_10_0.png" src="../_images/00_images_are_arrays_10_0.png" />
+<a class="reference internal image-reference" href="../_images/6c9d1898758c4e6cc6de1415e198586fb095a0e023d0824b4eafbec36cebb4b2.png"><img alt="../_images/6c9d1898758c4e6cc6de1415e198586fb095a0e023d0824b4eafbec36cebb4b2.png" src="../_images/6c9d1898758c4e6cc6de1415e198586fb095a0e023d0824b4eafbec36cebb4b2.png" style="width: 552px; height: 378px;" />
+</a>
 </div>
 </div>
 <p>Images can also include transparent regions by adding a 4th dimension, called an <em>alpha layer</em>.</p>
-<div class="section" id="other-shapes-and-their-meanings">
-<h2>Other shapes, and their meanings<a class="headerlink" href="#other-shapes-and-their-meanings" title="Permalink to this headline">¶</a></h2>
-<table class="colwidths-auto table">
+<section id="other-shapes-and-their-meanings">
+<h2>Other shapes, and their meanings<a class="headerlink" href="#other-shapes-and-their-meanings" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="text-align:left head"><p>Image type</p></th>
-<th class="text-align:left head"><p>Coordinates</p></th>
+<tr class="row-odd"><th class="head text-left"><p>Image type</p></th>
+<th class="head text-left"><p>Coordinates</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td class="text-align:left"><p>2D grayscale</p></td>
-<td class="text-align:left"><p>(row, column)</p></td>
+<tr class="row-even"><td class="text-left"><p>2D grayscale</p></td>
+<td class="text-left"><p>(row, column)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>2D multichannel</p></td>
-<td class="text-align:left"><p>(row, column, channel)</p></td>
+<tr class="row-odd"><td class="text-left"><p>2D multichannel</p></td>
+<td class="text-left"><p>(row, column, channel)</p></td>
 </tr>
-<tr class="row-even"><td class="text-align:left"><p>3D grayscale (or volumetric)</p></td>
-<td class="text-align:left"><p>(plane, row, column)</p></td>
+<tr class="row-even"><td class="text-left"><p>3D grayscale (or volumetric)</p></td>
+<td class="text-left"><p>(plane, row, column)</p></td>
 </tr>
-<tr class="row-odd"><td class="text-align:left"><p>3D multichannel</p></td>
-<td class="text-align:left"><p>(plane, row, column, channel)</p></td>
+<tr class="row-odd"><td class="text-left"><p>3D multichannel</p></td>
+<td class="text-left"><p>(plane, row, column, channel)</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="section" id="displaying-images-using-matplotlib">
-<h2>Displaying images using matplotlib<a class="headerlink" href="#displaying-images-using-matplotlib" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="displaying-images-using-matplotlib">
+<h2>Displaying images using matplotlib<a class="headerlink" href="#displaying-images-using-matplotlib" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">data</span>
 
 <span class="n">img0</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">chelsea</span><span class="p">()</span>
 <span class="n">img1</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">rocket</span><span class="p">()</span>
@@ -404,7 +500,7 @@ Values min/max: 0 231
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="n">ax0</span><span class="p">,</span> <span class="n">ax1</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
 
@@ -424,13 +520,14 @@ Values min/max: 0 231
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/00_images_are_arrays_15_0.png" src="../_images/00_images_are_arrays_15_0.png" />
+<a class="reference internal image-reference" href="../_images/6696ffb83fbe80bdfadda515b2778d53c525e24ac684a36e02f6d8ebbd318075.png"><img alt="../_images/6696ffb83fbe80bdfadda515b2778d53c525e24ac684a36e02f6d8ebbd318075.png" src="../_images/6696ffb83fbe80bdfadda515b2778d53c525e24ac684a36e02f6d8ebbd318075.png" style="width: 1570px; height: 586px;" />
+</a>
 </div>
 </div>
 <p>For more on plotting, see the <a class="reference external" href="https://matplotlib.org/gallery/index.html#images-contours-and-fields">Matplotlib documentation</a> and <a class="reference external" href="https://matplotlib.org/api/pyplot_summary.html">pyplot API</a>.</p>
-</div>
-<div class="section" id="data-types-and-image-values">
-<h2>Data types and image values<a class="headerlink" href="#data-types-and-image-values" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="data-types-and-image-values">
+<h2>Data types and image values<a class="headerlink" href="#data-types-and-image-values" title="Link to this heading">#</a></h2>
 <p>In literature, one finds different conventions for representing image values:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>  <span class="mi">0</span> <span class="o">-</span> <span class="mi">255</span>   <span class="n">where</span>  <span class="mi">0</span> <span class="ow">is</span> <span class="n">black</span><span class="p">,</span> <span class="mi">255</span> <span class="ow">is</span> <span class="n">white</span>
   <span class="mi">0</span> <span class="o">-</span> <span class="mi">1</span>     <span class="n">where</span>  <span class="mi">0</span> <span class="ow">is</span> <span class="n">black</span><span class="p">,</span> <span class="mi">1</span> <span class="ow">is</span> <span class="n">white</span>
@@ -458,7 +555,8 @@ data-type of the array.</p>
 Linear1: uint8 0 255
 </pre></div>
 </div>
-<img alt="../_images/00_images_are_arrays_18_1.png" src="../_images/00_images_are_arrays_18_1.png" />
+<a class="reference internal image-reference" href="../_images/2d1231e8e08a12712ddb707e6f0d5cad9fa0f018f4351adf4af93dcfd7eb2973.png"><img alt="../_images/2d1231e8e08a12712ddb707e6f0d5cad9fa0f018f4351adf4af93dcfd7eb2973.png" src="../_images/2d1231e8e08a12712ddb707e6f0d5cad9fa0f018f4351adf4af93dcfd7eb2973.png" style="width: 1209px; height: 572px;" />
+</a>
 </div>
 </div>
 <p>The library is designed in such a way that any data-type is allowed as input,
@@ -467,7 +565,7 @@ as long as the range is correct (0-1 for floating point images, 0-255 for unsign
 <p>You can convert images between different representations by using <code class="docutils literal notranslate"><span class="pre">img_as_float</span></code>, <code class="docutils literal notranslate"><span class="pre">img_as_ubyte</span></code>, etc.:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">img_as_float</span><span class="p">,</span> <span class="n">img_as_ubyte</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">img_as_float</span><span class="p">,</span> <span class="n">img_as_ubyte</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">chelsea</span><span class="p">()</span>
 
@@ -491,21 +589,21 @@ type, min, max: float64 0.0 0.9058823529411765
 </div>
 </div>
 <p>Your code would then typically look like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_function</span><span class="p">(</span><span class="n">any_image</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">my_function</span><span class="p">(</span><span class="n">any_image</span><span class="p">):</span>
    <span class="n">float_image</span> <span class="o">=</span> <span class="n">img_as_float</span><span class="p">(</span><span class="n">any_image</span><span class="p">)</span>
    <span class="c1"># Proceed, knowing image is in [0, 1]</span>
 </pre></div>
 </div>
 <p>We recommend using the floating point representation, given that
 <code class="docutils literal notranslate"><span class="pre">scikit-image</span></code> mostly uses that format internally.</p>
-</div>
-<div class="section" id="image-i-o">
-<h2>Image I/O<a class="headerlink" href="#image-i-o" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="image-i-o">
+<h2>Image I/O<a class="headerlink" href="#image-i-o" title="Link to this heading">#</a></h2>
 <p>Mostly, we won’t be using input images from the scikit-image example data sets.  Those images are typically stored in JPEG or PNG format.  Since scikit-image operates on NumPy arrays, <em>any</em> image reader library that provides arrays will do.  Options include imageio, matplotlib, pillow, etc.</p>
 <p>scikit-image conveniently wraps many of these in the <code class="docutils literal notranslate"><span class="pre">io</span></code> submodule, and will use whichever of the libraries mentioned above are installed:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">io</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">io</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../images/balloon.jpg&#39;</span><span class="p">)</span>
 
@@ -525,7 +623,8 @@ uint8
 0 255
 </pre></div>
 </div>
-<img alt="../_images/00_images_are_arrays_24_1.png" src="../_images/00_images_are_arrays_24_1.png" />
+<a class="reference internal image-reference" href="../_images/ef5a1747adc259022ae6db7d6627171473606f82ebe6c2da68ccf0104a268a1d.png"><img alt="../_images/ef5a1747adc259022ae6db7d6627171473606f82ebe6c2da68ccf0104a268a1d.png" src="../_images/ef5a1747adc259022ae6db7d6627171473606f82ebe6c2da68ccf0104a268a1d.png" style="width: 333px; height: 418px;" />
+</a>
 </div>
 </div>
 <p>We also have the ability to load multiple images, or multi-layer TIFF images:</p>
@@ -575,7 +674,7 @@ uint8
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 
 <span class="n">f</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">ic</span><span class="p">)</span> <span class="o">//</span> <span class="mi">3</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
@@ -595,11 +694,66 @@ uint8
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/00_images_are_arrays_27_0.png" src="../_images/00_images_are_arrays_27_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+/Users/mb312/.virtualenvs/test/lib/python3.12/site-packages/skimage/io/collection.py:316: FutureWarning: The plugin infrastructure in `skimage.io` is deprecated since version 0.25 and will be removed in 0.27 (or later). To avoid this warning, please do not pass additional keyword arguments for plugins (`**plugin_args`). Instead, use `imageio` or other I/O packages directly. See also `skimage.io.imread`.
+  self.data[idx] = self.load_func(fname, **kwargs)
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../_images/6aaef806aac0cf325ac45b4d2235190d16c8db07ec3c658dca3041a991002d28.png"><img alt="../_images/6aaef806aac0cf325ac45b4d2235190d16c8db07ec3c658dca3041a991002d28.png" src="../_images/6aaef806aac0cf325ac45b4d2235190d16c8db07ec3c658dca3041a991002d28.png" style="width: 1970px; height: 488px;" />
+</a>
 </div>
 </div>
-<div class="section" id="aside-enumerate">
-<h3>Aside: <code class="docutils literal notranslate"><span class="pre">enumerate</span></code><a class="headerlink" href="#aside-enumerate" title="Permalink to this headline">¶</a></h3>
+<section id="aside-enumerate">
+<h3>Aside: <code class="docutils literal notranslate"><span class="pre">enumerate</span></code><a class="headerlink" href="#aside-enumerate" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">enumerate</span></code> gives us each element in a container, along with its position.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -623,16 +777,16 @@ The animal in position 2 is leopard
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="section" id="span-class-exercize-exercise-draw-the-letter-h-span">
-<h2><span class="exercize">Exercise: draw the letter H</span><a class="headerlink" href="#span-class-exercize-exercise-draw-the-letter-h-span" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="exercise-draw-the-letter-h">
+<h2><span class="exercize">Exercise: draw the letter H</span><a class="headerlink" href="#exercise-draw-the-letter-h" title="Link to this heading">#</a></h2>
 <p>Define a function that takes as input an RGB image and a pair of coordinates (row, column), and returns a copy with a green letter H overlaid at those coordinates. The coordinates point to the top-left corner of the H.</p>
 <p>The arms and strut of the H should have a width of 3 pixels, and the H itself should have a height of 24 pixels and width of 20 pixels.</p>
 <p>Start with the following template:</p>
 <div class="cell tag_hide-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">draw_H</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">draw_H</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">coords</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)):</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">image</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
     
     <span class="o">...</span>
@@ -652,9 +806,9 @@ The animal in position 2 is leopard
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="span-class-exercize-exercise-visualizing-rgb-channels-span">
-<h2><span class="exercize">Exercise: visualizing RGB channels</span><a class="headerlink" href="#span-class-exercize-exercise-visualizing-rgb-channels-span" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="exercise-visualizing-rgb-channels">
+<h2><span class="exercize">Exercise: visualizing RGB channels</span><a class="headerlink" href="#exercise-visualizing-rgb-channels" title="Link to this heading">#</a></h2>
 <p>Display the different color channels of the image along (each as a gray-scale image).  Start with the following template:</p>
 <div class="cell tag_raises-exception tag_remove-output docutils container">
 <div class="cell_input docutils container">
@@ -697,19 +851,19 @@ The animal in position 2 is leopard
 <p>Now, take a look at the following R, G, and B channels.  How would their combination look? (Write some code to confirm your intuition.)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">draw</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">draw</span>
 
 <span class="n">red</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
 <span class="n">green</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
 <span class="n">blue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">))</span>
 
-<span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">red</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">green</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">r</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">disk</span><span class="p">(</span><span class="n">center</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">radius</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">blue</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="n">f</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
@@ -720,20 +874,13 @@ The animal in position 2 is leopard
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-18-4feb18b15cc3&gt;:7: FutureWarning: `draw.circle` is deprecated in favor of `draw.disk`.`draw.circle` will be removed in version 0.19
-  r, c = draw.circle(100, 100, 100)
-&lt;ipython-input-18-4feb18b15cc3&gt;:10: FutureWarning: `draw.circle` is deprecated in favor of `draw.disk`.`draw.circle` will be removed in version 0.19
-  r, c = draw.circle(100, 200, 100)
-&lt;ipython-input-18-4feb18b15cc3&gt;:13: FutureWarning: `draw.circle` is deprecated in favor of `draw.disk`.`draw.circle` will be removed in version 0.19
-  r, c = draw.circle(200, 150, 100)
-</pre></div>
-</div>
-<img alt="../_images/00_images_are_arrays_38_1.png" src="../_images/00_images_are_arrays_38_1.png" />
+<a class="reference internal image-reference" href="../_images/c3813eb2791df64a15f3739d27d02e4d096f749ca9066ebadae32043719d17cc.png"><img alt="../_images/c3813eb2791df64a15f3739d27d02e4d096f749ca9066ebadae32043719d17cc.png" src="../_images/c3813eb2791df64a15f3739d27d02e4d096f749ca9066ebadae32043719d17cc.png" style="width: 515px; height: 165px;" />
+</a>
 </div>
 </div>
-</div>
-<div class="section" id="exercise-convert-to-grayscale-black-and-white">
-<h2>Exercise: Convert to grayscale (“black and white”)<a class="headerlink" href="#exercise-convert-to-grayscale-black-and-white" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="exercise-convert-to-grayscale-black-and-white">
+<h2>Exercise: Convert to grayscale (“black and white”)<a class="headerlink" href="#exercise-convert-to-grayscale-black-and-white" title="Link to this heading">#</a></h2>
 <p>The <em>relative luminance</em> of an image is the intensity of light coming from each point. Different colors contribute differently to the luminance: it’s very hard to have a bright, pure blue, for example. So, starting from an RGB image, the luminance is given by:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -744,7 +891,7 @@ Y = 0.2126R + 0.7152G + 0.0722B
 <p>Change the coefficients to 1/3 (i.e., take the mean of the red, green, and blue channels, to see how that approach compares with <code class="docutils literal notranslate"><span class="pre">rgb2gray</span></code>).</p>
 <div class="cell tag_raises-exception tag_remove-output docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">color</span><span class="p">,</span> <span class="n">img_as_float</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage</span><span class="w"> </span><span class="kn">import</span> <span class="n">color</span><span class="p">,</span> <span class="n">img_as_float</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="n">img_as_float</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="s1">&#39;../images/balloon.jpg&#39;</span><span class="p">))</span>
 
@@ -764,10 +911,10 @@ Y = 0.2126R + 0.7152G + 0.0722B
 </div>
 </div>
 </div>
+</section>
 <div class="toctree-wrapper compound">
 </div>
-</div>
-</div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -781,7 +928,7 @@ Y = 0.2126R + 0.7152G + 0.0722B
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./lectures"
         },
         predefinedOutput: true
@@ -789,35 +936,103 @@ Y = 0.2126R + 0.7152G + 0.0722B
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-        
-        <div class='prev-next-bottom'>
-            
-    <a class='right-next' id="next-link" href="1_image_filters.html" title="next page">Image filtering</a>
 
-        </div>
-        
-        </div>
-    </div>
-    <footer class="footer mt-5 mt-md-0">
-    <div class="container">
-      <p>
-        
-          By The scikit-image contributors<br/>
-        
-            &copy; Copyright 2020.<br/>
-      </p>
-    </div>
-  </footer>
-</main>
-
-
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="right-next"
+       href="1_image_filters.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Image filtering</p>
       </div>
-    </div>
-  
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-shapes-and-their-meanings">Other shapes, and their meanings</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#displaying-images-using-matplotlib">Displaying images using matplotlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-types-and-image-values">Data types and image values</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#image-i-o">Image I/O</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aside-enumerate">Aside: <code class="docutils literal notranslate"><span class="pre">enumerate</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-draw-the-letter-h"><span class="exercize">Exercise: draw the letter H</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-visualizing-rgb-channels"><span class="exercize">Exercise: visualizing RGB channels</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#exercise-convert-to-grayscale-black-and-white">Exercise: Convert to grayscale (“black and white”)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
+  <div class="footer-item">
+    
+<p class="component-author">
+By The scikit-image contributors
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
