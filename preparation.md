@@ -72,4 +72,9 @@ On my computer, I see (but your version numbers may differ):
 [✓] scikit-learn  0.19.1
 ```
 
-**If you do not have a working setup, please contact the instructors.**
+**If you are in a workshop, and you do not have a working setup, please contact
+the instructors.**
+
+## Next
+
+See the [guide to this repository](repo_guide).
