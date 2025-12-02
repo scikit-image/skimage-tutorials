@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_customize.css?v=612cbb98" />
@@ -80,6 +80,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Image filtering" href="1_image_filters.html" />
+    <link rel="prev" title="Scikit-image tutorials" href="../index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -142,8 +143,6 @@
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -162,7 +161,7 @@
     
   
 
-<a class="navbar-brand logo" href="#">
+<a class="navbar-brand logo" href="../index.html">
   
   
   
@@ -193,13 +192,14 @@
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
-                    Images are numpy arrays
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    Scikit-image tutorials
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Images are numpy arrays</a></li>
 <li class="toctree-l1"><a class="reference internal" href="1_image_filters.html">Image filtering</a></li>
 <li class="toctree-l1"><a class="reference internal" href="3_morphological_operations.html">Morphological operations</a></li>
 <li class="toctree-l1"><a class="reference internal" href="4_segmentation.html">Segmentation</a></li>
@@ -373,15 +373,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div style='font-size: 200%; line-height: 2;'>
-To participate, you'll need to git clone (or download the .zip from GitHub):
-<p>https://github.com/scikit-image/skimage-tutorials</p>
-</div>
-<p>You can do that in git using:</p>
-<pre>git clone --depth=1 https://github.com/scikit-image/skimage-tutorials</pre>
-<div style='font-size: 200%; line-height: 1.5;'>
-If you have already cloned the material, please issue `git pull` now and reload the notebook to ensure that you have the latest updates.
-</div><section class="tex2jax_ignore mathjax_ignore" id="images-are-numpy-arrays">
+  <section class="tex2jax_ignore mathjax_ignore" id="images-are-numpy-arrays">
 <h1>Images are numpy arrays<a class="headerlink" href="#images-are-numpy-arrays" title="Link to this heading">#</a></h1>
 <p>Images are represented in <code class="docutils literal notranslate"><span class="pre">scikit-image</span></code> using standard <code class="docutils literal notranslate"><span class="pre">numpy</span></code> arrays.  This allows maximum inter-operability with other libraries in the scientific Python ecosystem, such as <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> and <code class="docutils literal notranslate"><span class="pre">scipy</span></code>.</p>
 <p>Let’s see how to build a grayscale image as a 2D array:</p>
@@ -912,8 +904,6 @@ Y = 0.2126R + 0.7152G + 0.0722B
 </div>
 </div>
 </section>
-<div class="toctree-wrapper compound">
-</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -946,6 +936,15 @@ Y = 0.2126R + 0.7152G + 0.0722B
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Scikit-image tutorials</p>
+      </div>
+    </a>
     <a class="right-next"
        href="1_image_filters.html"
        title="next page">
