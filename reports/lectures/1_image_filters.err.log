@@ -1,0 +1,63 @@
+Traceback (most recent call last):
+  File "/Volumes/zorg/mb312/.virtualenvs/skimage-tutorials/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 154, in wrapped
+    asyncio.get_running_loop()
+RuntimeError: no running event loop
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Volumes/zorg/mb312/.virtualenvs/skimage-tutorials/lib/python3.12/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Volumes/zorg/mb312/.virtualenvs/skimage-tutorials/lib/python3.12/site-packages/nbclient/client.py", line 1319, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/zorg/mb312/.virtualenvs/skimage-tutorials/lib/python3.12/site-packages/jupyter_core/utils/__init__.py", line 158, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 685, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Volumes/zorg/mb312/.virtualenvs/skimage-tutorials/lib/python3.12/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/Volumes/zorg/mb312/.virtualenvs/skimage-tutorials/lib/python3.12/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Volumes/zorg/mb312/.virtualenvs/skimage-tutorials/lib/python3.12/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+def convolve_demo(signal, kernel):
+    ksize = len(kernel)
+    convolved = np.correlate(signal, kernel)
+    def filter_step(i):
+        fig, ax = plt.subplots()
+        ax.plot(signal, label='signal')
+        ax.plot(convolved[:i+1], label='convolved')
+        ax.legend()
+        ax.scatter(np.arange(i, i+ksize),
+                   signal[i : i+ksize])
+        ax.scatter(i, convolved[i])
+    return filter_step
+
+from ipywidgets import interact, widgets
+
+i_slider = widgets.IntSlider(min=0, max=len(noisy_signal) - 3,
+                             value=0)
+
+interact(convolve_demo(noisy_signal, mean_kernel3),
+         i=i_slider);
+------------------
+
+
+[31m---------------------------------------------------------------------------[39m
+[31mModuleNotFoundError[39m                       Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[8][39m[32m, line 14[39m
+[32m     11[39m         ax.scatter(i, convolved[i])
+[32m     12[39m     [38;5;28;01mreturn[39;00m filter_step
+[32m---> [39m[32m14[39m [38;5;28;01mfrom[39;00m[38;5;250m [39m[34;01mipywidgets[39;00m[38;5;250m [39m[38;5;28;01mimport[39;00m interact, widgets
+[32m     16[39m i_slider = widgets.IntSlider([38;5;28mmin[39m=[32m0[39m, [38;5;28mmax[39m=[38;5;28mlen[39m(noisy_signal) - [32m3[39m,
+[32m     17[39m                              value=[32m0[39m)
+[32m     19[39m interact(convolve_demo(noisy_signal, mean_kernel3),
+[32m     20[39m          i=i_slider);
+
+[31mModuleNotFoundError[39m: No module named 'ipywidgets'
+

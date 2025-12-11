@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_customize.css?v=612cbb98" />
@@ -434,7 +434,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/05a23ec2af1c245f21f2d7e299609c6432f6a9f4ea3d3dd5015eb07e5b93b7a2.png" src="../_images/05a23ec2af1c245f21f2d7e299609c6432f6a9f4ea3d3dd5015eb07e5b93b7a2.png" />
+<img alt="../_images/738e11acdd92373e3055a5f493a5c8170b7f9ffaf0179423d6daacb09b816eb0.png" src="../_images/738e11acdd92373e3055a5f493a5c8170b7f9ffaf0179423d6daacb09b816eb0.png" />
 </div>
 </div>
 </section>
@@ -462,7 +462,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/899030c46c888beb432a997a7f839af0c268d032e5a21a435183784390b75ef5.png" src="../_images/899030c46c888beb432a997a7f839af0c268d032e5a21a435183784390b75ef5.png" />
+<img alt="../_images/8ddf3d0ebeee7951a1ee262a362d8f3703e6801ea95f640404a9315f6e11899e.png" src="../_images/8ddf3d0ebeee7951a1ee262a362d8f3703e6801ea95f640404a9315f6e11899e.png" />
 </div>
 </div>
 <p>Now we find the local maxima (peaks) and dilate them.</p>
@@ -480,11 +480,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/vr/b3dbt6vd3pd73sjc_t9xj87r0000gn/T/ipykernel_88653/388424161.py:5: FutureWarning: `square` is deprecated since version 0.25 and will be removed in version 0.27. Use `skimage.morphology.footprint_rectangle` instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/hd/rfxyn9gx4bl39bvwzrgn3rtr0000gn/T/ipykernel_98283/388424161.py:5: FutureWarning: `square` is deprecated since version 0.25 and will be removed in version 0.27. Use `skimage.morphology.footprint_rectangle` instead.
   peak_mask = skimage.morphology.dilation(peak_mask, footprint=skimage.morphology.square(11))
 </pre></div>
 </div>
-<img alt="../_images/a3fb63438779a05d4dd9b26a3d6cacd88852122e8f1ca865eb31cd83ba2e9bae.png" src="../_images/a3fb63438779a05d4dd9b26a3d6cacd88852122e8f1ca865eb31cd83ba2e9bae.png" />
+<img alt="../_images/bfa00ba06ce5fa9264b99537a08df6dc273db33981eae111a8d822432971bc0c.png" src="../_images/bfa00ba06ce5fa9264b99537a08df6dc273db33981eae111a8d822432971bc0c.png" />
 </div>
 </div>
 <p>Now we have a nice marker inside each coin. We’ve used the min distance parameter of <code class="docutils literal notranslate"><span class="pre">peak_local_max</span></code> in combination with the large smoothing kernel
@@ -513,7 +513,7 @@ to reduce the chance of having multiple markers in a coin.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/564f342eb4d428b087e21d87b567ca2e8307e467df495af4621a29bc2da2e597.png" src="../_images/564f342eb4d428b087e21d87b567ca2e8307e467df495af4621a29bc2da2e597.png" />
+<img alt="../_images/8a3911cbf62b6c37eb38e94ab398077410935c191bd6ea8c3ad1378458f57a3c.png" src="../_images/8a3911cbf62b6c37eb38e94ab398077410935c191bd6ea8c3ad1378458f57a3c.png" />
 </div>
 </div>
 <p>Check that it looks OK on the original image - all background markers (green) are between coins and foreground markers are inside coins.</p>
@@ -528,7 +528,7 @@ to reduce the chance of having multiple markers in a coin.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/8616b05ab3fdcf5aaf1d36ebb95ddb8a6dabbbc137d033939f75ec749b20384e.png" src="../_images/8616b05ab3fdcf5aaf1d36ebb95ddb8a6dabbbc137d033939f75ec749b20384e.png" />
+<img alt="../_images/8b551735454f6bd5fda9ab3bff1843b61d253c8e641d3fce287d1250d0a9f2fa.png" src="../_images/8b551735454f6bd5fda9ab3bff1843b61d253c8e641d3fce287d1250d0a9f2fa.png" />
 </div>
 </div>
 <p>Finally we apply a watershed</p>
@@ -544,7 +544,7 @@ to reduce the chance of having multiple markers in a coin.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/a96f4b3b96bc799fc192a503b3fa05cba13c21ddc643416b630a763ea981eafe.png" src="../_images/a96f4b3b96bc799fc192a503b3fa05cba13c21ddc643416b630a763ea981eafe.png" />
+<img alt="../_images/a8b9d444e4f167b1df8632f8dc7ef2ad3427b603e73d0eb95735fcfea93dae0c.png" src="../_images/a8b9d444e4f167b1df8632f8dc7ef2ad3427b603e73d0eb95735fcfea93dae0c.png" />
 </div>
 </div>
 </section>
